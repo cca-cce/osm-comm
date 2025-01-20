@@ -1,0 +1,17 @@
+# r files
+.RData
+.Rhistory
+
+# folder content
+log/*
+qmd/*
+src/*
+tmp/*
+vid/*
+
+# keep empty dir
+!log/.gitkeep
+!src/.gitkeep
+!tmp/.gitkeep
+
+
