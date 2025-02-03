@@ -14,6 +14,15 @@
 
 ## simm71 lectures
 
+- natural language processing 1
+- computer vision 1
+
+## scom lectures
+
+- skoc26
+- skoc50
+- skoc24
+
 ---
 
 - [internal repo](https://github.com/cca-cce/osm-comm/)
