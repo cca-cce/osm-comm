@@ -6,6 +6,10 @@
 
 # open science methods, communication science
 
+## skoc62 workshops
+
+- [workshops 1-4](web/edu/skoc62/)
+
 ## simp59 lectures
 
 - [lecture 1, basic data transformations](web/edu/simp59-01tra.html)
@@ -14,12 +18,12 @@
 
 ## simm71 lectures
 
-- natural language processing 1
+- natural language processing
   - https://colab.research.google.com/github/cca-cce/osm-cca/blob/main/jnb/simm71/nlp1_lab.ipynb
   - https://colab.research.google.com/github/cca-cce/osm-cca/blob/main/jnb/simm71/nlp2_lab.ipynb
   - https://colab.research.google.com/github/cca-cce/osm-cca/blob/main/jnb/simm71/nlp3_lab.ipynb
 
-- computer vision 1
+- computer vision
   - https://colab.research.google.com/github/cca-cce/osm-cca/blob/main/jnb/simm71/cv1_lab.ipynb
   - https://colab.research.google.com/github/cca-cce/osm-cca/blob/main/jnb/simm71/cv2_lab.ipynb
   - https://colab.research.google.com/github/cca-cce/osm-cca/blob/main/jnb/simm71/cv3_lab.ipynb
