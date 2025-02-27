@@ -1,0 +1,38 @@
+
+dataviz/docs/aesthetic-mapping.html 
+dataviz/docs/coordinate-systems-axes.html 
+dataviz/docs/color-basics.html 
+dataviz/docs/visualizing-amounts.html 
+dataviz/docs/histograms-density-plots.html 
+dataviz/docs/ecdf-qq.html 
+dataviz/docs/boxplots-violins.html 
+dataviz/docs/visualizing-proportions.html 
+dataviz/docs/visualizing-associations.html 
+dataviz/docs/time-series.html 
+dataviz/docs/visualizing-trends.html 
+dataviz/docs/geospatial-data.html 
+dataviz/docs/visualizing-uncertainty.html 
+
+
+### simp59 pres (250225)
+# find dataviz slide title candidates..
+for file in \
+  dataviz/aesthetic_mapping.Rmd \
+  dataviz/coordinate_systems_axes.Rmd \
+  dataviz/color_basics.Rmd \
+  dataviz/visualizing_amounts.Rmd \
+  dataviz/visualizing_distributions_I.Rmd \
+  dataviz/visualizing_distributions_II.Rmd \
+  dataviz/boxplots_violins.Rmd \
+  dataviz/visualizing_proportions.Rmd \
+  dataviz/visualizing_associations.Rmd \
+  dataviz/time_series.Rmd \
+  dataviz/visualizing_trends.Rmd \
+  dataviz/geospatial_data.Rmd \
+  dataviz/visualizing_uncertainty.Rmd
+do
+  echo "Processing $file"
+  grep -E '^## ' "$file"           
+done                                       
+
+
