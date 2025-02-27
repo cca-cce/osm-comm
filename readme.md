@@ -15,7 +15,14 @@
 ## simm71 lectures
 
 - natural language processing 1
+  - https://colab.research.google.com/github/cca-cce/osm-cca/blob/main/jnb/simm71/nlp1_lab.ipynb
+  - https://colab.research.google.com/github/cca-cce/osm-cca/blob/main/jnb/simm71/nlp2_lab.ipynb
+  - https://colab.research.google.com/github/cca-cce/osm-cca/blob/main/jnb/simm71/nlp3_lab.ipynb
+
 - computer vision 1
+  - https://colab.research.google.com/github/cca-cce/osm-cca/blob/main/jnb/simm71/cv1_lab.ipynb
+  - https://colab.research.google.com/github/cca-cce/osm-cca/blob/main/jnb/simm71/cv2_lab.ipynb
+  - https://colab.research.google.com/github/cca-cce/osm-cca/blob/main/jnb/simm71/cv3_lab.ipynb
 
 ## scom lectures
 
