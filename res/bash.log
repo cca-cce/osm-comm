@@ -1,0 +1,10 @@
+ 4034  2025-04-25 05:48:55 grep -E '^## ' qmd/edu/ssk001f-methods.qmd | grep -E -v 'hidd' | head -n20 | sed -E 's/\{.*//g'
+ 4035  2025-04-25 07:28:29 some | grep gith
+ 4036  2025-04-25 07:28:43 bash ~/dev/bash/src/github-gpt.sh "cca-cce" "edu, ssk001f"
+ 4037  2025-04-25 07:31:12 ls -lh res/
+ 4038  2025-04-25 07:34:20 cd res/
+ 4039  2025-04-25 07:34:25 split -b 20M DataSet_Misinfo_FAKE.csv FAKE_part_ && split -b 20M DataSet_Misinfo_TRUE.csv TRUE_part_
+ 4040  2025-04-25 07:34:29 ls -lh
+ 4041  2025-04-25 07:34:44 #cat FAKE_part_* > DataSet_Misinfo_FAKE_recombined.csv && cat TRUE_part_* > DataSet_Misinfo_TRUE_recombined.csv
+ 4042  2025-04-25 07:35:02 rm DataSet_Misinfo_*
+ 4043  2025-04-25 07:35:17 some | tail > bash.log
