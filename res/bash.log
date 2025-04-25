@@ -8,3 +8,23 @@
  4041  2025-04-25 07:34:44 #cat FAKE_part_* > DataSet_Misinfo_FAKE_recombined.csv && cat TRUE_part_* > DataSet_Misinfo_TRUE_recombined.csv
  4042  2025-04-25 07:35:02 rm DataSet_Misinfo_*
  4043  2025-04-25 07:35:17 some | tail > bash.log
+ 4045  2025-04-25 07:35:28 bash ~/dev/bash/src/github-gpt.sh "cca-cce" "edu, ssk001f"
+ 4046  2025-04-25 07:36:45 ls -l res/
+ 4047  2025-04-25 07:39:53 pip install git-filter-repo
+ 4048  2025-04-25 07:40:21 git filter-repo --path res/DataSet_Misinfo_FAKE.csv --path res/DataSet_Misinfo_TRUE.csv --invert-paths
+ 4049  2025-04-25 07:45:18 git filter-repo --force --path res/DataSet_Misinfo_FAKE.csv --path res/DataSet_Misinfo_TRUE.csv --invert-paths
+ 4050  2025-04-25 07:46:26 cat ~/dev/bash/src/github-gpt.sh
+ 4051  2025-04-25 07:48:51 key_path=/home/sol-nhl/doc/env/git/cca-cce/github_resn_id_ed25519
+ 4052  2025-04-25 07:49:03 eval "$(ssh-agent -s)"
+ 4053  2025-04-25 07:49:21 ssh-add "$key_path"
+ 4054  2025-04-25 07:50:28 git push origin --force
+ 4055  2025-04-25 07:51:15 git push --set-upstream origin main
+ 4056  2025-04-25 07:52:35 git branch -vv
+ 4057  2025-04-25 07:52:51 git push --force
+ 4058  2025-04-25 07:55:00 git remote -v
+ 4059  2025-04-25 07:55:15 git remote add origin git@github.com:cca-cce/osm-comm.git
+ 4060  2025-04-25 07:55:17 git remote -v
+ 4061  2025-04-25 07:55:27 git push --set-upstream origin main
+ 4062  2025-04-25 07:58:36 git push --force
+ 4063  2025-04-25 07:59:40 ssh-agent -k
+ 4064  2025-04-25 08:00:05 some | tail -n20 >> res/bash.log 
