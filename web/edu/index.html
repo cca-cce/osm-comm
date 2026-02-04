@@ -1,65 +1,134 @@
-<!DOCTYPE html><html><head><meta charset='utf-8'><title>Index</title></head><body>
-<div><a href='https://cca-cce.github.io/osm-comm/web/edu/index.html'>https://cca-cce.github.io/osm-comm/web/edu/index.html</a></div>
-<h2>komb27</h2>
-<p><a href="komb27-info.html">komb27-info.html</a></p>
-<h2>komc36</h2>
-<p><a href="komc36-iaui.html">komc36-iaui.html</a></p>
-<h2>komc36/2023</h2>
-<p><a href="komc36/2023/komc36-iaui.html">komc36-iaui.html</a></p>
-<h2>komc36/2024</h2>
-<p><a href="komc36/2024/komc36-iaui.html">komc36-iaui.html</a></p>
-<h2>simp59</h2>
-<p><a href="simp59-01tra.html">simp59-01tra.html</a></p>
-<p><a href="simp59-01viz.html">simp59-01viz.html</a></p>
-<p><a href="simp59-02tmp.html">simp59-02tmp.html</a></p>
-<p><a href="simp59-02viz.html">simp59-02viz.html</a></p>
-<p><a href="simp59-lec1-nlp.html">simp59-lec1-nlp.html</a></p>
-<p><a href="simp59-lec2-nlp.html">simp59-lec2-nlp.html</a></p>
-<h2>simp59/2025</h2>
-<p><a href="simp59/2025/simp59-01tra.html">simp59-01tra.html</a></p>
-<p><a href="simp59/2025/simp59-01viz.html">simp59-01viz.html</a></p>
-<p><a href="simp59/2025/simp59-02tmp.html">simp59-02tmp.html</a></p>
-<p><a href="simp59/2025/simp59-02viz.html">simp59-02viz.html</a></p>
-<h2>skda50</h2>
-<p><a href="skda50-komb27.html">skda50-komb27.html</a></p>
-<h2>skoc24</h2>
-<p><a href="skoc24-webtext.html">skoc24-webtext.html</a></p>
-<h2>skoc26</h2>
-<p><a href="skoc26-digital.html">skoc26-digital.html</a></p>
-<p><a href="skoc26-module2.html">skoc26-module2.html</a></p>
-<p><a href="skoc26-wsexam.html">skoc26-wsexam.html</a></p>
-<h2>skoc39</h2>
-<p><a href="skoc39-analysis.html">skoc39-analysis.html</a></p>
-<p><a href="skoc39-collection.html">skoc39-collection.html</a></p>
-<h2>skoc39/2024</h2>
-<p><a href="skoc39/2024/skoc39-analysis.html">skoc39-analysis.html</a></p>
-<p><a href="skoc39/2024/skoc39-collection.html">skoc39-collection.html</a></p>
-<h2>skoc42</h2>
-<p><a href="skoc42-intro.html">skoc42-intro.html</a></p>
-<p><a href="skoc42-mod2-lec1.html">skoc42-mod2-lec1.html</a></p>
-<p><a href="skoc42-mod2-lec2.html">skoc42-mod2-lec2.html</a></p>
-<p><a href="skoc42-mod2-lec3.html">skoc42-mod2-lec3.html</a></p>
-<p><a href="skoc42-mod2-ws1.html">skoc42-mod2-ws1.html</a></p>
-<h2>skoc50</h2>
-<p><a href="skoc50-intro.html">skoc50-intro.html</a></p>
-<h2>skoc50/2025</h2>
-<p><a href="skoc50/2025/skoc50-intro.html">skoc50-intro.html</a></p>
-<h2>skoc62/2025</h2>
-<p><a href="skoc62/2025/index.html">index.html</a></p>
-<p><a href="skoc62/2025/workshop-1.html">workshop-1.html</a></p>
-<p><a href="skoc62/2025/workshop-2.html">workshop-2.html</a></p>
-<p><a href="skoc62/2025/workshop-3.html">workshop-3.html</a></p>
-<p><a href="skoc62/2025/workshop-4.html">workshop-4.html</a></p>
-<h2>skod52</h2>
-<p><a href="skod52-cca01.html">skod52-cca01.html</a></p>
-<p><a href="skod52-cca02.html">skod52-cca02.html</a></p>
-<p><a href="skod52-module3.html">skod52-module3.html</a></p>
-<h2>skpm20</h2>
-<p><a href="skpm20-lecture-lab1.html">skpm20-lecture-lab1.html</a></p>
-<h2>smmx21</h2>
-<p><a href="smmx21-exps.html">smmx21-exps.html</a></p>
-<h2>smmx21/2025</h2>
-<p><a href="smmx21/2025/smmx21-exps.html">smmx21-exps.html</a></p>
-<h2>ssk001f</h2>
-<p><a href="ssk001f-methods.html">ssk001f-methods.html</a></p>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <title>Course Index</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; padding: 20px; color: #333; }
+        header { margin-bottom: 20px; border-bottom: 2px solid #eee; padding-bottom: 10px; }
+        
+        /* The Magic: 5-column layout that wraps items vertically */
+        .column-container {
+            column-count: 5;
+            column-gap: 30px;
+            column-rule: 1px solid #f0f0f0; /* Optional vertical line between columns */
+        }
+
+        .group-box {
+            break-inside: avoid; /* Prevents a group from being split across two columns */
+            margin-bottom: 20px;
+            display: inline-block; /* Helps with browser compatibility for column-break */
+            width: 100%;
+        }
+
+        h2 { 
+            font-size: 1.1em; 
+            margin: 0 0 8px 0; 
+            color: #d32f2f; 
+            border-bottom: 1px solid #ffcdd2;
+        }
+
+        .item { 
+            font-size: 0.85em; 
+            margin: 3px 0; 
+            white-space: nowrap; 
+            overflow: hidden; 
+            text-overflow: ellipsis; 
+        }
+
+        a { text-decoration: none; color: #0066cc; }
+        a:hover { color: #004488; text-decoration: underline; }
+    </style>
+</head>
+<body>
+<header>
+    <a href='https://cca-cce.github.io/osm-comm/web/edu/index.html'>https://cca-cce.github.io/osm-comm/web/edu/index.html</a>
+</header>
+
+<div class="column-container">
+<div class='group-box'><h2>komb27</h2>
+<div class='item'><a href="komb27-info.html" title="komb27-info.html">komb27-info.html</a></div>
+</div>
+<div class='group-box'><h2>komc36</h2>
+<div class='item'><a href="komc36-iaui.html" title="komc36-iaui.html">komc36-iaui.html</a></div>
+</div>
+<div class='group-box'><h2>komc36/2023</h2>
+<div class='item'><a href="komc36/2023/komc36-iaui.html" title="komc36-iaui.html">komc36-iaui.html</a></div>
+</div>
+<div class='group-box'><h2>komc36/2024</h2>
+<div class='item'><a href="komc36/2024/komc36-iaui.html" title="komc36-iaui.html">komc36-iaui.html</a></div>
+</div>
+<div class='group-box'><h2>simp59</h2>
+<div class='item'><a href="simp59-01tra.html" title="simp59-01tra.html">simp59-01tra.html</a></div>
+<div class='item'><a href="simp59-01viz.html" title="simp59-01viz.html">simp59-01viz.html</a></div>
+<div class='item'><a href="simp59-02tmp.html" title="simp59-02tmp.html">simp59-02tmp.html</a></div>
+<div class='item'><a href="simp59-02viz.html" title="simp59-02viz.html">simp59-02viz.html</a></div>
+<div class='item'><a href="simp59-lec1-nlp.html" title="simp59-lec1-nlp.html">simp59-lec1-nlp.html</a></div>
+<div class='item'><a href="simp59-lec2-nlp.html" title="simp59-lec2-nlp.html">simp59-lec2-nlp.html</a></div>
+</div>
+<div class='group-box'><h2>simp59/2025</h2>
+<div class='item'><a href="simp59/2025/simp59-01tra.html" title="simp59-01tra.html">simp59-01tra.html</a></div>
+<div class='item'><a href="simp59/2025/simp59-01viz.html" title="simp59-01viz.html">simp59-01viz.html</a></div>
+<div class='item'><a href="simp59/2025/simp59-02tmp.html" title="simp59-02tmp.html">simp59-02tmp.html</a></div>
+<div class='item'><a href="simp59/2025/simp59-02viz.html" title="simp59-02viz.html">simp59-02viz.html</a></div>
+</div>
+<div class='group-box'><h2>skda50</h2>
+<div class='item'><a href="skda50-komb27.html" title="skda50-komb27.html">skda50-komb27.html</a></div>
+</div>
+<div class='group-box'><h2>skoc24</h2>
+<div class='item'><a href="skoc24-webtext.html" title="skoc24-webtext.html">skoc24-webtext.html</a></div>
+</div>
+<div class='group-box'><h2>skoc26</h2>
+<div class='item'><a href="skoc26-digital.html" title="skoc26-digital.html">skoc26-digital.html</a></div>
+<div class='item'><a href="skoc26-module2.html" title="skoc26-module2.html">skoc26-module2.html</a></div>
+<div class='item'><a href="skoc26-wsexam.html" title="skoc26-wsexam.html">skoc26-wsexam.html</a></div>
+</div>
+<div class='group-box'><h2>skoc39</h2>
+<div class='item'><a href="skoc39-analysis.html" title="skoc39-analysis.html">skoc39-analysis.html</a></div>
+<div class='item'><a href="skoc39-collection.html" title="skoc39-collection.html">skoc39-collection.html</a></div>
+</div>
+<div class='group-box'><h2>skoc39/2024</h2>
+<div class='item'><a href="skoc39/2024/skoc39-analysis.html" title="skoc39-analysis.html">skoc39-analysis.html</a></div>
+<div class='item'><a href="skoc39/2024/skoc39-collection.html" title="skoc39-collection.html">skoc39-collection.html</a></div>
+</div>
+<div class='group-box'><h2>skoc42</h2>
+<div class='item'><a href="skoc42-intro.html" title="skoc42-intro.html">skoc42-intro.html</a></div>
+<div class='item'><a href="skoc42-mod2-lec1.html" title="skoc42-mod2-lec1.html">skoc42-mod2-lec1.html</a></div>
+<div class='item'><a href="skoc42-mod2-lec2.html" title="skoc42-mod2-lec2.html">skoc42-mod2-lec2.html</a></div>
+<div class='item'><a href="skoc42-mod2-lec3.html" title="skoc42-mod2-lec3.html">skoc42-mod2-lec3.html</a></div>
+<div class='item'><a href="skoc42-mod2-ws1.html" title="skoc42-mod2-ws1.html">skoc42-mod2-ws1.html</a></div>
+</div>
+<div class='group-box'><h2>skoc50</h2>
+<div class='item'><a href="skoc50-intro.html" title="skoc50-intro.html">skoc50-intro.html</a></div>
+</div>
+<div class='group-box'><h2>skoc50/2025</h2>
+<div class='item'><a href="skoc50/2025/skoc50-intro.html" title="skoc50-intro.html">skoc50-intro.html</a></div>
+</div>
+<div class='group-box'><h2>skoc62/2025</h2>
+<div class='item'><a href="skoc62/2025/index.html" title="index.html">index.html</a></div>
+<div class='item'><a href="skoc62/2025/workshop-1.html" title="workshop-1.html">workshop-1.html</a></div>
+<div class='item'><a href="skoc62/2025/workshop-2.html" title="workshop-2.html">workshop-2.html</a></div>
+<div class='item'><a href="skoc62/2025/workshop-3.html" title="workshop-3.html">workshop-3.html</a></div>
+<div class='item'><a href="skoc62/2025/workshop-4.html" title="workshop-4.html">workshop-4.html</a></div>
+</div>
+<div class='group-box'><h2>skod52</h2>
+<div class='item'><a href="skod52-cca01.html" title="skod52-cca01.html">skod52-cca01.html</a></div>
+<div class='item'><a href="skod52-cca02.html" title="skod52-cca02.html">skod52-cca02.html</a></div>
+<div class='item'><a href="skod52-module3.html" title="skod52-module3.html">skod52-module3.html</a></div>
+</div>
+<div class='group-box'><h2>skpm20</h2>
+<div class='item'><a href="skpm20-lecture-lab1.html" title="skpm20-lecture-lab1.html">skpm20-lecture-lab1.html</a></div>
+<div class='item'><a href="skpm20-lecture-lab2.html" title="skpm20-lecture-lab2.html">skpm20-lecture-lab2.html</a></div>
+<div class='item'><a href="skpm20-lecture-lab3.html" title="skpm20-lecture-lab3.html">skpm20-lecture-lab3.html</a></div>
+</div>
+<div class='group-box'><h2>smmx21</h2>
+<div class='item'><a href="smmx21-exps.html" title="smmx21-exps.html">smmx21-exps.html</a></div>
+</div>
+<div class='group-box'><h2>smmx21/2025</h2>
+<div class='item'><a href="smmx21/2025/smmx21-exps.html" title="smmx21-exps.html">smmx21-exps.html</a></div>
+</div>
+<div class='group-box'><h2>ssk001f</h2>
+<div class='item'><a href="ssk001f-methods.html" title="ssk001f-methods.html">ssk001f-methods.html</a></div>
+</div>
+</div>
 </body></html>
