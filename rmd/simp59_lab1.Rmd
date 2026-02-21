@@ -1,0 +1,362 @@
+---
+title: "SIMP59 Lab 1: Text Tokenization and Sentiment Analysis"
+output: html_document
+---
+
+## Text Tokenization
+
+### 1) Setup
+
+This section reads `.txt` files from `text-data/` and builds three tidy data frames:
+`df_texts`, `df_sentences`, and `df_tokens`.
+
+```{r p1_setup, message=FALSE, warning=FALSE}
+required_pkgs <- c(
+  "dplyr", "tidyr", "readr", "purrr", "stringr",
+  "tidytext", "ggplot2", "textstem", "wordcloud", "RColorBrewer"
+)
+
+missing_pkgs <- required_pkgs[
+  !vapply(required_pkgs, requireNamespace, quietly = TRUE, FUN.VALUE = logical(1))
+]
+
+if (length(missing_pkgs) > 0) {
+  stop(
+    paste("Missing required packages:", paste(missing_pkgs, collapse = ", ")),
+    call. = FALSE
+  )
+}
+
+library(dplyr)
+library(tidyr)
+library(readr)
+library(purrr)
+library(stringr)
+library(tidytext)
+library(ggplot2)
+library(textstem)
+
+dir_input <- "text-data"
+dir_output <- "output"
+dir.create(dir_output, showWarnings = FALSE, recursive = TRUE)
+
+txt_files <- list.files(
+  path = dir_input,
+  pattern = "\\.txt$",
+  full.names = TRUE
+)
+
+if (length(txt_files) == 0) {
+  stop("No .txt files found in text-data/.", call. = FALSE)
+}
+```
+
+### 2) Import Raw Text Files to `df_texts`
+
+Each file becomes one row with `filename` and full `text_data`.
+
+```{r p1_df_texts}
+df_texts <- tibble(file_path = txt_files) %>%
+  mutate(
+    filename = basename(file_path),
+    text_data = map_chr(file_path, readr::read_file)
+  ) %>%
+  select(filename, text_data)
+
+df_texts %>% slice_head(n = 5)
+```
+
+### 3) Split into Sentences: `df_sentences`
+
+Split each document into sentences and number them per file.
+
+```{r p1_df_sentences}
+df_sentences <- df_texts %>%
+  unnest_tokens(
+    output = sentence_text,
+    input = text_data,
+    token = "sentences",
+    to_lower = FALSE
+  ) %>%
+  group_by(filename) %>%
+  mutate(sentence_number = row_number()) %>%
+  ungroup() %>%
+  select(filename, sentence_number, sentence_text)
+
+df_sentences %>% slice_head(n = 10)
+```
+
+### 4) Tokenize and Normalize: `df_tokens`
+
+Tokens are lowercased, stripped to alphabetic terms, stopwords are removed,
+then lemmatized to base forms with `textstem`.
+
+```{r p1_df_tokens}
+token_normalizer <- function(x) {
+  textstem::lemmatize_words(x)
+}
+
+df_tokens <- df_sentences %>%
+  unnest_tokens(
+    output = token_text,
+    input = sentence_text,
+    token = "words",
+    to_lower = TRUE
+  ) %>%
+  filter(str_detect(token_text, "^[a-z]+$")) %>%
+  anti_join(tidytext::stop_words, by = c("token_text" = "word")) %>%
+  mutate(token_text = token_normalizer(token_text)) %>%
+  filter(str_detect(token_text, "^[a-z]+$"), nchar(token_text) > 2) %>%
+  group_by(filename, sentence_number) %>%
+  mutate(token_number = row_number()) %>%
+  ungroup() %>%
+  select(filename, sentence_number, token_number, token_text)
+
+df_tokens %>% slice_head(n = 15)
+```
+
+### 5) Save Data Frames as TSV
+
+Write each tidy data frame to disk as a tab-separated file.
+
+```{r p1_save_tsv}
+readr::write_tsv(df_texts, file.path(dir_output, "df_texts.tsv"))
+readr::write_tsv(df_sentences, file.path(dir_output, "df_sentences.tsv"))
+readr::write_tsv(df_tokens, file.path(dir_output, "df_tokens.tsv"))
+
+tibble(
+  output_file = c("df_texts.tsv", "df_sentences.tsv", "df_tokens.tsv"),
+  path = file.path(dir_output, output_file)
+)
+```
+
+### 6) Horizontal Frequency Bar Plot per Filename
+
+Compute token frequency by file and show top content terms.
+
+```{r p1_bar_plot, fig.width=14, fig.height=10}
+df_token_freq <- df_tokens %>%
+  count(filename, token_text, sort = TRUE)
+
+df_top_tokens <- df_token_freq %>%
+  group_by(filename) %>%
+  slice_max(n, n = 15, with_ties = FALSE) %>%
+  ungroup()
+
+p_freq <- ggplot(
+  df_top_tokens,
+  aes(
+    x = tidytext::reorder_within(token_text, n, filename),
+    y = n,
+    fill = filename
+  )
+) +
+  geom_col(show.legend = FALSE) +
+  coord_flip() +
+  facet_wrap(~ filename, scales = "free_y") +
+  tidytext::scale_x_reordered() +
+  labs(
+    title = "Top Token Frequencies by Filename",
+    x = "Token",
+    y = "Frequency"
+  )
+
+p_freq
+
+ggsave(
+  filename = file.path(dir_output, "token_frequency_by_filename.png"),
+  plot = p_freq,
+  width = 14,
+  height = 10,
+  dpi = 300
+)
+```
+
+### 7) Word Cloud Across All Filenames
+
+Aggregate all tokens and display one global word cloud.
+
+```{r p1_wordcloud_plot, fig.width=12, fig.height=8}
+df_wordcloud <- df_tokens %>%
+  count(token_text, sort = TRUE)
+
+set.seed(123)
+wordcloud::wordcloud(
+  words = df_wordcloud$token_text,
+  freq = df_wordcloud$n,
+  max.words = 200,
+  random.order = FALSE,
+  colors = RColorBrewer::brewer.pal(8, "Dark2"),
+  scale = c(4, 0.8)
+)
+
+png(
+  filename = file.path(dir_output, "wordcloud_all_filenames.png"),
+  width = 1600,
+  height = 1000,
+  res = 150
+)
+wordcloud::wordcloud(
+  words = df_wordcloud$token_text,
+  freq = df_wordcloud$n,
+  max.words = 200,
+  random.order = FALSE,
+  colors = RColorBrewer::brewer.pal(8, "Dark2"),
+  scale = c(4, 0.8)
+)
+dev.off()
+```
+
+## Sentiment Analysis
+
+### 1) Setup and Load `df_tokens`
+
+Load the token-level data from `output/df_tokens.tsv`.
+
+```{r p2_setup, message=FALSE, warning=FALSE}
+required_pkgs <- c("dplyr", "readr", "tidyr", "ggplot2", "syuzhet")
+
+missing_pkgs <- required_pkgs[
+  !vapply(required_pkgs, requireNamespace, quietly = TRUE, FUN.VALUE = logical(1))
+]
+
+if (length(missing_pkgs) > 0) {
+  stop(
+    paste("Missing required packages:", paste(missing_pkgs, collapse = ", ")),
+    call. = FALSE
+  )
+}
+
+library(dplyr)
+library(readr)
+library(tidyr)
+library(ggplot2)
+library(syuzhet)
+
+dir_output <- "output"
+tokens_path <- file.path(dir_output, "df_tokens.tsv")
+
+if (!file.exists(tokens_path)) {
+  stop("Missing input file: output/df_tokens.tsv", call. = FALSE)
+}
+
+df_tokens <- readr::read_tsv(tokens_path, show_col_types = FALSE)
+
+df_tokens %>% slice_head(n = 10)
+```
+
+### 2) Load AFINN Dictionary
+
+Use AFINN scores for token-level sentiment values.
+
+```{r p2_afinn_dict}
+afinn <- syuzhet::get_sentiment_dictionary("afinn") %>%
+  tibble::as_tibble() %>%
+  rename(token_text = word, afinn_value = value)
+
+afinn %>% slice_head(n = 10)
+```
+
+### 3) Sentiment per Sentence (`sentence_number`)
+
+Join tokens to AFINN and sum sentiment values within each sentence.
+
+```{r p2_sentence_sentiment}
+df_sentence_scored <- df_tokens %>%
+  inner_join(afinn, by = "token_text")
+
+df_sentence_sentiment <- df_tokens %>%
+  distinct(filename, sentence_number) %>%
+  left_join(
+    df_sentence_scored %>%
+      group_by(filename, sentence_number) %>%
+      summarize(
+        sentence_sentiment = sum(afinn_value),
+        scored_tokens = n(),
+        .groups = "drop"
+      ),
+    by = c("filename", "sentence_number")
+  ) %>%
+  mutate(
+    sentence_sentiment = replace_na(sentence_sentiment, 0),
+    scored_tokens = replace_na(scored_tokens, 0)
+  ) %>%
+  arrange(filename, sentence_number)
+
+df_sentence_sentiment %>% slice_head(n = 12)
+```
+
+### 4) Visualize Sentence Sentiment per Filename
+
+Plot sentence-level sentiment trajectories for each text file.
+
+```{r p2_sentence_plot, fig.width=13, fig.height=9}
+ggplot(df_sentence_sentiment, aes(x = sentence_number, y = sentence_sentiment)) +
+  geom_hline(yintercept = 0, linetype = "dashed", color = "gray50") +
+  geom_line(color = "#1f77b4", linewidth = 0.4) +
+  facet_wrap(~ filename, scales = "free_x") +
+  labs(
+    title = "AFINN Sentiment by Sentence Number",
+    x = "Sentence Number",
+    y = "Sentence Sentiment (sum of AFINN scores)"
+  )
+```
+
+### 5) Overall Sentiment per Filename (`df_sentiment`)
+
+Aggregate sentiment by file and build `df_sentiment`.
+
+```{r p2_overall_sentiment}
+df_sentiment <- df_sentence_sentiment %>%
+  group_by(filename) %>%
+  summarize(
+    total_sentiment = sum(sentence_sentiment),
+    mean_sentence_sentiment = mean(sentence_sentiment),
+    positive_sentences = sum(sentence_sentiment > 0),
+    negative_sentences = sum(sentence_sentiment < 0),
+    neutral_sentences = sum(sentence_sentiment == 0),
+    n_sentences = n(),
+    .groups = "drop"
+  ) %>%
+  left_join(
+    df_tokens %>%
+      count(filename, name = "n_tokens"),
+    by = "filename"
+  ) %>%
+  mutate(sentiment_per_100_tokens = 100 * total_sentiment / n_tokens) %>%
+  arrange(desc(total_sentiment))
+
+df_sentiment
+```
+
+### 6) Visualize Overall Sentiment per Filename
+
+Compare total sentiment across all text files.
+
+```{r p2_overall_plot, fig.width=10, fig.height=6}
+ggplot(
+  df_sentiment,
+  aes(x = reorder(filename, total_sentiment), y = total_sentiment, fill = total_sentiment > 0)
+) +
+  geom_col(show.legend = FALSE) +
+  coord_flip() +
+  labs(
+    title = "Overall AFINN Sentiment by Filename",
+    x = "Filename",
+    y = "Total Sentiment"
+  )
+```
+
+### 7) Save Sentiment Data Frames as TSV
+
+Save sentence-level and file-level sentiment outputs.
+
+```{r p2_save_tsv}
+readr::write_tsv(df_sentence_sentiment, file.path(dir_output, "df_sentence_sentiment.tsv"))
+readr::write_tsv(df_sentiment, file.path(dir_output, "df_sentiment.tsv"))
+
+tibble::tibble(
+  output_file = c("df_sentence_sentiment.tsv", "df_sentiment.tsv"),
+  path = file.path(dir_output, output_file)
+)
+```
