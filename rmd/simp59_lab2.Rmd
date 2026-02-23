@@ -1,0 +1,797 @@
+---
+title: "Matrix Representation of Texts"
+output: html_document
+---
+
+## Part 1: Minimal Text Matrices (Counts and TF-IDF)
+
+
+This notebook builds a tiny synthetic text dataset and shows how text can be represented as matrices.
+
+```{r p1_setup, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(tidytext)
+library(knitr)
+```
+
+### 1) Create a minimal tidy text dataframe
+
+`df_texts` contains a document index and three short synthetic headlines. Some words recur across documents so we can later see how TF-IDF differs from raw counts.
+
+```{r p1_create-df-texts}
+df_texts <- tibble(
+  doc_id = paste0("doc_", 1:3),
+  headline = c(
+    "City council approves new park plan",
+    "New park plan faces budget debate",
+    "Budget debate grows as city park opens"
+  )
+)
+
+df_texts
+```
+
+### 2) Tokenize into `df_tokens`
+
+We split each headline into word tokens. This is the standard tidy representation: one row per token occurrence.
+
+```{r p1_tokenize}
+df_tokens <- df_texts %>%
+  unnest_tokens(output = token, input = headline)
+
+df_tokens
+```
+
+### 3) Visualize token frequencies by headline
+
+We count token frequency inside each document and plot horizontal bars.
+
+```{r p1_token-frequency-plot, fig.width=10, fig.height=5}
+token_freq <- df_tokens %>%
+  count(doc_id, token, sort = TRUE)
+
+token_freq %>%
+  ggplot(aes(
+    x = tidytext::reorder_within(token, n, doc_id),
+    y = n,
+    fill = doc_id
+  )) +
+  geom_col(show.legend = FALSE) +
+  coord_flip() +
+  tidytext::scale_x_reordered() +
+  facet_wrap(~doc_id, scales = "free_y") +
+  labs(
+    title = "Token Frequencies per Headline",
+    x = "Token",
+    y = "Raw count"
+  )
+```
+
+### 4) Build a count DTM: `dtm_counts`
+
+A document-term matrix (DTM) stores term frequencies in matrix form. Here we display terms as rows and documents as columns.
+
+```{r p1_dtm-counts}
+df_text <- df_texts
+
+dtm_counts_long <- df_tokens %>%
+  count(doc_id, token, name = "count") %>%
+  rename(document = doc_id, term = token)
+
+dtm_counts <- dtm_counts_long %>%
+  pivot_wider(
+    names_from = document,
+    values_from = count,
+    values_fill = 0
+  ) %>%
+  arrange(term)
+
+readr::write_tsv(dtm_counts, "df_dtm.tsv")
+
+kable(dtm_counts, caption = "DTM with raw counts (terms as rows, documents as columns)")
+```
+
+Raw counts are easy to interpret, but common terms can dominate even if they are not distinctive for a specific document.
+
+### 5) Convert counts to TF-IDF: `dtm_tfidf`
+
+We compute:
+
+- `tf` (term frequency): term count divided by total terms in a document.
+- `idf` (inverse document frequency): \(\log(N / df)\), where `N` is number of documents and `df` is the number of documents containing the term.
+- `tf_idf`: `tf * idf`.
+
+So, compared with raw counts, TF-IDF downweights terms that appear in many documents and upweights terms that are more document-specific.
+
+```{r p1_tfidf-long}
+dtm_tfidf_long <- dtm_counts_long %>%
+  bind_tf_idf(term = term, document = document, n = count)
+
+kable(
+  dtm_tfidf_long %>%
+    arrange(document, desc(tf_idf)) %>%
+    mutate(across(c(tf, idf, tf_idf), ~round(.x, 3))),
+  caption = "Per document-term pair with raw count, tf, idf, and tf-idf"
+)
+```
+
+```{r p1_dtm-tfidf-matrix}
+dtm_tfidf <- dtm_tfidf_long %>%
+  select(term, document, tf_idf) %>%
+  pivot_wider(
+    names_from = document,
+    values_from = tf_idf,
+    values_fill = 0
+  ) %>%
+  arrange(term)
+
+kable(
+  dtm_tfidf %>% mutate(across(-term, ~round(.x, 3))),
+  caption = "TF-IDF matrix (terms as rows, documents as columns)"
+)
+```
+
+### 6) Quick comparison: raw counts vs TF-IDF
+
+This table shows how the same term-document entries look under raw frequency and TF-IDF weighting.
+
+```{r p1_comparison}
+comparison <- dtm_tfidf_long %>%
+  select(document, term, raw_count = count, tf, idf, tf_idf) %>%
+  arrange(term, document) %>%
+  mutate(across(c(tf, idf, tf_idf), ~round(.x, 3)))
+
+kable(comparison, caption = "Raw count vs TF-IDF components")
+```
+
+This small example illustrates the core idea: matrix representations of text let us move from simple frequency counts to weighted features that better capture term distinctiveness.
+
+## Part 2: Corpus, DTM/TF-IDF, and 2-Topic LDA
+
+
+This notebook extends the minimal text example to two contrasting themes and compares matrix representations (raw counts vs TF-IDF) for topic modeling.
+
+```{r p2_setup, message=FALSE, warning=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE, error = FALSE)
+
+library(tidyverse)
+library(tm)
+library(tidytext)
+library(topicmodels)
+library(slam)
+library(knitr)
+
+required_pkgs <- c("tidyverse", "tm", "tidytext", "topicmodels", "slam", "knitr")
+missing_pkgs <- required_pkgs[!vapply(required_pkgs, requireNamespace, logical(1), quietly = TRUE)]
+if (length(missing_pkgs) > 0) {
+  stop(
+    paste0("[ISSUE] Missing required packages: ", paste(missing_pkgs, collapse = ", ")),
+    call. = FALSE
+  )
+}
+
+fail_with <- function(step, expr) {
+  tryCatch(
+    eval.parent(substitute(expr)),
+    error = function(e) {
+      msg <- paste0("[ISSUE] ", step, " failed: ", conditionMessage(e))
+      message(msg)
+      stop(msg, call. = FALSE)
+    }
+  )
+}
+```
+
+### 1) Extend `df_texts` with a contrasting topic
+
+The first three headlines are civic policy, and the next three are tech/business. Some words repeat within and across headlines (for example: `new`, `debate`, `ai`, and repeated `debate` inside one headline).
+
+```{r p2_create-df-texts}
+df_texts <- fail_with("Creating df_texts", {
+  tibble(
+    doc_id = paste0("doc_", 1:6),
+    theme = c(rep("civic", 3), rep("tech", 3)),
+    headline = c(
+      "City council approves new park plan",
+      "New park plan faces budget debate",
+      "Budget debate grows as city park opens",
+      "Tech firms race to launch new AI phone",
+      "New AI phone sparks privacy debate debate",
+      "Market analysts say tech stocks rise on AI"
+    )
+  )
+})
+
+df_texts
+```
+
+### 2) Read `df_texts` into a corpus and display corpus properties
+
+```{r p2_corpus}
+corpus <- fail_with("Creating corpus from df_texts", {
+  corp <- VCorpus(VectorSource(df_texts$headline))
+  names(corp) <- df_texts$doc_id
+  corp
+})
+
+corpus_properties <- tibble(
+  property = c("class", "documents", "total_characters", "average_characters"),
+  value = c(
+    class(corpus)[1],
+    length(corpus),
+    sum(nchar(vapply(corpus, content, FUN.VALUE = character(1)))),
+    round(mean(nchar(vapply(corpus, content, FUN.VALUE = character(1)))), 1)
+  )
+)
+
+corpus_docs <- tibble(
+  doc_id = names(corpus),
+  headline = vapply(corpus, content, FUN.VALUE = character(1)),
+  n_words = stringr::str_count(vapply(corpus, content, FUN.VALUE = character(1)), "\\S+")
+) %>%
+  left_join(df_texts %>% select(doc_id, theme), by = "doc_id")
+
+kable(corpus_properties, caption = "Corpus-level properties")
+kable(corpus_docs, caption = "Document-level corpus summary")
+```
+
+### 3) Cast corpus to raw count DTM and TF-IDF object
+
+```{r p2_dtm-objects}
+corpus_clean <- fail_with("Cleaning corpus text", {
+  corpus %>%
+    tm_map(content_transformer(tolower)) %>%
+    tm_map(removePunctuation) %>%
+    tm_map(removeNumbers) %>%
+    tm_map(removeWords, stopwords("en")) %>%
+    tm_map(stripWhitespace)
+})
+
+dtm_counts <- fail_with("Casting corpus to raw-count DTM", {
+  DocumentTermMatrix(corpus_clean, control = list(wordLengths = c(2, Inf)))
+})
+
+dtm_tfidf <- fail_with("Computing TF-IDF DTM", {
+  weightTfIdf(dtm_counts, normalize = TRUE)
+})
+
+dtm_properties <- function(x, object_name) {
+  d <- dim(x)
+  non_zero <- length(x$v)
+  tibble(
+    object = object_name,
+    class = class(x)[1],
+    documents = d[1],
+    terms = d[2],
+    non_zero_cells = non_zero,
+    sparsity = round(1 - non_zero / (d[1] * d[2]), 3),
+    weighting = paste(attr(x, "weighting"), collapse = " / ")
+  )
+}
+
+obj_props <- bind_rows(
+  dtm_properties(dtm_counts, "dtm_counts"),
+  dtm_properties(dtm_tfidf, "dtm_tfidf")
+)
+
+kable(obj_props, caption = "DTM object properties")
+```
+
+```{r p2_dtm-preview}
+counts_preview <- tidy(dtm_counts) %>%
+  arrange(document, desc(count))
+
+tfidf_preview <- tidy(dtm_tfidf) %>%
+  arrange(document, desc(count))
+
+kable(head(counts_preview, 18), caption = "Raw count DTM (long format preview)")
+kable(head(tfidf_preview, 18), caption = "TF-IDF DTM (long format preview)")
+```
+
+### 4) Fit LDA with `k = 2` on raw counts and TF-IDF representations
+
+`topicmodels::LDA()` requires term-frequency weighted input. Raw counts already satisfy this. For TF-IDF, we rescale TF-IDF weights to non-negative pseudo-count integers and cast back to a term-frequency DTM for a comparable 2-topic run.
+
+```{r p2_lda-models}
+set.seed(2026)
+
+lda_counts <- fail_with("Fitting LDA on dtm_counts", {
+  LDA(
+    dtm_counts,
+    k = 2,
+    method = "Gibbs",
+    control = list(seed = 2026, burnin = 500, iter = 2000, thin = 100)
+  )
+})
+
+dtm_tfidf_for_lda <- fail_with("Preparing TF-IDF representation for LDA", {
+  tfidf_mat <- as.matrix(dtm_tfidf)
+  if (!is.numeric(tfidf_mat)) stop("TF-IDF matrix is not numeric")
+  if (any(tfidf_mat < 0)) stop("TF-IDF matrix contains negative values")
+
+  scale_factor <- 1000
+  tfidf_scaled <- round(tfidf_mat * scale_factor)
+
+  if (all(tfidf_scaled == 0)) {
+    stop("Scaled TF-IDF matrix is all zeros; cannot fit LDA")
+  }
+
+  as.DocumentTermMatrix(
+    slam::as.simple_triplet_matrix(tfidf_scaled),
+    weighting = weightTf
+  )
+})
+
+lda_tfidf <- fail_with("Fitting LDA on TF-IDF-based representation", {
+  LDA(
+    dtm_tfidf_for_lda,
+    k = 2,
+    method = "Gibbs",
+    control = list(seed = 2026, burnin = 500, iter = 2000, thin = 100)
+  )
+})
+```
+
+### 5) Visualize how terms contribute to topics
+
+```{r p2_topic-terms, fig.width=11, fig.height=7}
+extract_top_terms <- function(model, model_name, top_n = 8) {
+  tidy(model, matrix = "beta") %>%
+    group_by(topic) %>%
+    slice_max(order_by = beta, n = top_n, with_ties = FALSE) %>%
+    ungroup() %>%
+    mutate(
+      model = model_name,
+      topic = paste0("Topic ", topic)
+    )
+}
+
+beta_terms <- bind_rows(
+  extract_top_terms(lda_counts, "Raw Count DTM"),
+  extract_top_terms(lda_tfidf, "TF-IDF-Based DTM")
+) %>%
+  mutate(term_plot = reorder_within(term, beta, interaction(model, topic)))
+
+beta_terms %>%
+  ggplot(aes(x = term_plot, y = beta, fill = topic)) +
+  geom_col(show.legend = FALSE) +
+  coord_flip() +
+  tidytext::scale_x_reordered() +
+  facet_grid(model ~ topic, scales = "free_y") +
+  labs(
+    title = "Top Term Contributions (Beta) by Topic",
+    x = "Term",
+    y = "Beta (term probability within topic)"
+  )
+```
+
+### 6) Visualize how headlines connect to topics
+
+```{r p2_doc-topic-connections, fig.width=11, fig.height=6}
+extract_doc_topics <- function(model, model_name) {
+  tidy(model, matrix = "gamma") %>%
+    mutate(model = model_name, topic = paste0("Topic ", topic))
+}
+
+doc_topics <- bind_rows(
+  extract_doc_topics(lda_counts, "Raw Count DTM"),
+  extract_doc_topics(lda_tfidf, "TF-IDF-Based DTM")
+) %>%
+  mutate(document = as.character(document)) %>%
+  left_join(df_texts, by = c("document" = "doc_id")) %>%
+  mutate(headline_short = stringr::str_trunc(headline, 42))
+
+if (any(is.na(doc_topics$headline_short))) {
+  stop("[ISSUE] Could not join topic assignments back to headlines", call. = FALSE)
+}
+
+doc_topics %>%
+  ggplot(aes(x = topic, y = forcats::fct_rev(headline_short), fill = gamma)) +
+  geom_tile(color = "white") +
+  geom_text(aes(label = sprintf("%.2f", gamma)), size = 3) +
+  facet_wrap(~model) +
+  scale_fill_gradient(low = "#e8eef5", high = "#1f5a8a") +
+  labs(
+    title = "Headline-to-Topic Connection Strength (Gamma)",
+    x = "Topic",
+    y = "Headline",
+    fill = "Gamma"
+  )
+```
+
+This notebook emphasizes matrix representations of minimal text data and how weighting choices (raw counts vs TF-IDF-based representation) affect topic interpretation.
+
+## Part 4: Corpus DTM and LDA Topic Tuning (text-data/*.txt)
+
+
+This notebook reads all `.txt` files in `text-data/` into a corpus, builds a count-based document-term matrix (DTM), tunes LDA topic count (`k = 1..10`) using coherence and confusion diagnostics, selects an optimal `k`, and interprets the best model.
+
+```{r p4_setup, message=FALSE, warning=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE, error = FALSE)
+
+library(tidyverse)
+library(tm)
+library(topicmodels)
+library(tidytext)
+library(readr)
+library(knitr)
+
+required_pkgs <- c("tidyverse", "tm", "topicmodels", "tidytext", "readr", "knitr")
+missing_pkgs <- required_pkgs[!vapply(required_pkgs, requireNamespace, logical(1), quietly = TRUE)]
+if (length(missing_pkgs) > 0) {
+  stop(
+    paste0("[ISSUE] Missing required packages: ", paste(missing_pkgs, collapse = ", ")),
+    call. = FALSE
+  )
+}
+```
+
+### 1) Read all text files to `df_texts` and a corpus object
+
+```{r p4_read-text-files}
+text_files <- sort(list.files("text-data", pattern = "\\.txt$", full.names = TRUE))
+if (length(text_files) == 0) {
+  stop("[ISSUE] No .txt files found in text-data/", call. = FALSE)
+}
+
+df_texts <- tibble(
+  doc_id = basename(text_files),
+  text = vapply(text_files, readr::read_file, FUN.VALUE = character(1))
+)
+
+corpus <- VCorpus(VectorSource(df_texts$text))
+names(corpus) <- df_texts$doc_id
+
+corpus_props <- tibble(
+  property = c("documents", "total_characters", "avg_characters", "total_words", "avg_words"),
+  value = c(
+    length(corpus),
+    sum(nchar(df_texts$text)),
+    round(mean(nchar(df_texts$text)), 1),
+    sum(stringr::str_count(df_texts$text, "\\S+")),
+    round(mean(stringr::str_count(df_texts$text, "\\S+")), 1)
+  )
+)
+
+corpus_preview <- df_texts %>%
+  transmute(
+    doc_id,
+    text_preview = stringr::str_trunc(stringr::str_squish(text), 140)
+  )
+
+kable(corpus_props, caption = "Corpus properties")
+kable(corpus_preview, caption = "Document previews")
+```
+
+Interpretation: this corpus contains multiple ESG-related documents with substantial shared vocabulary, which is suitable for topic modeling.
+
+### 2) Cast corpus to count DTM
+
+```{r p4_build-dtm-counts}
+corpus_clean <- corpus %>%
+  tm_map(content_transformer(tolower)) %>%
+  tm_map(removePunctuation) %>%
+  tm_map(removeNumbers) %>%
+  tm_map(removeWords, stopwords("en")) %>%
+  tm_map(stripWhitespace)
+
+dtm_counts <- DocumentTermMatrix(
+  corpus_clean,
+  control = list(
+    wordLengths = c(3, Inf),
+    bounds = list(global = c(2, Inf))
+  )
+)
+
+non_empty_docs <- slam::row_sums(dtm_counts) > 0
+if (!all(non_empty_docs)) {
+  removed_docs <- Docs(dtm_counts)[!non_empty_docs]
+  message("[ISSUE] Removing empty documents after preprocessing: ", paste(removed_docs, collapse = ", "))
+  dtm_counts <- dtm_counts[non_empty_docs, ]
+}
+
+if (nrow(dtm_counts) < 2 || ncol(dtm_counts) < 10) {
+  stop(
+    paste0(
+      "[ISSUE] DTM too small for requested topic sweep. Dims = ",
+      nrow(dtm_counts), " docs x ", ncol(dtm_counts), " terms"
+    ),
+    call. = FALSE
+  )
+}
+
+dtm_props <- tibble(
+  property = c("documents", "terms", "non_zero_cells", "sparsity"),
+  value = c(
+    nrow(dtm_counts),
+    ncol(dtm_counts),
+    length(dtm_counts$v),
+    round(1 - length(dtm_counts$v) / (nrow(dtm_counts) * ncol(dtm_counts)), 3)
+  )
+)
+
+term_totals <- tidy(dtm_counts) %>%
+  group_by(term) %>%
+  summarise(total_count = sum(count), .groups = "drop") %>%
+  arrange(desc(total_count)) %>%
+  slice_head(n = 15)
+
+kable(dtm_props, caption = "Count DTM properties")
+kable(term_totals, caption = "Most frequent terms in the count DTM")
+```
+
+Interpretation: the DTM is sparse (as expected) but still dense enough in shared terms to support multi-topic modeling.
+
+### 3) Tune LDA over `k = 1..10` with coherence and confusion diagnostics
+
+- **Coherence (UMass)**: higher is better (less negative means better semantic co-occurrence among top topic terms).
+- **Topic confusion**: average cosine similarity among topic-term distributions. Lower is better because topics are more distinct.
+
+```{r p4_lda-tuning}
+compute_umass_coherence <- function(model, dtm_binary, top_n = 10) {
+  beta <- posterior(model)$terms
+  top_n <- min(top_n, ncol(beta))
+
+  topic_scores <- apply(beta, 1, function(topic_probs) {
+    top_terms <- names(sort(topic_probs, decreasing = TRUE))[1:top_n]
+    if (length(top_terms) < 2) return(NA_real_)
+
+    pairs <- combn(top_terms, 2, simplify = FALSE)
+    pair_scores <- map_dbl(pairs, function(p) {
+      wi <- p[1]
+      wj <- p[2]
+      d_wj <- sum(dtm_binary[, wj] > 0)
+      d_wi_wj <- sum(dtm_binary[, wi] > 0 & dtm_binary[, wj] > 0)
+      log((d_wi_wj + 1) / d_wj)
+    })
+
+    mean(pair_scores)
+  })
+
+  mean(topic_scores, na.rm = TRUE)
+}
+
+compute_topic_confusion <- function(model) {
+  beta <- posterior(model)$terms
+  k <- nrow(beta)
+  if (k < 2) return(NA_real_)
+
+  sims <- c()
+  for (i in seq_len(k - 1)) {
+    for (j in (i + 1):k) {
+      num <- sum(beta[i, ] * beta[j, ])
+      den <- sqrt(sum(beta[i, ]^2)) * sqrt(sum(beta[j, ]^2))
+      sims <- c(sims, ifelse(den == 0, NA_real_, num / den))
+    }
+  }
+
+  mean(sims, na.rm = TRUE)
+}
+
+normalize_metric <- function(x, higher_is_better = TRUE) {
+  rng <- range(x, na.rm = TRUE)
+  if (!all(is.finite(rng)) || diff(rng) == 0) {
+    return(rep(0.5, length(x)))
+  }
+  scaled <- (x - rng[1]) / diff(rng)
+  if (higher_is_better) scaled else 1 - scaled
+}
+
+k_grid <- 1:10
+lda_models <- setNames(vector("list", length(k_grid)), as.character(k_grid))
+
+dtm_binary <- as.matrix(dtm_counts)
+dtm_binary[dtm_binary > 0] <- 1
+
+tuning_results <- map_dfr(k_grid, function(k) {
+  fit <- tryCatch(
+    LDA(
+      dtm_counts,
+      k = k,
+      method = "Gibbs",
+      control = list(seed = 2026, burnin = 200, iter = 800, thin = 50)
+    ),
+    error = function(e) e
+  )
+
+  if (inherits(fit, "error")) {
+    tibble(
+      k = k,
+      coherence = NA_real_,
+      confusion = NA_real_,
+      issue = conditionMessage(fit)
+    )
+  } else {
+    lda_models[[as.character(k)]] <<- fit
+    tibble(
+      k = k,
+      coherence = compute_umass_coherence(fit, dtm_binary, top_n = 10),
+      confusion = compute_topic_confusion(fit),
+      issue = NA_character_
+    )
+  }
+})
+
+unexpected_issues <- tuning_results %>% filter(!is.na(issue), k != 1)
+if (nrow(unexpected_issues) > 0) {
+  stop(
+    paste0(
+      "[ISSUE] LDA failed for unexpected k values: ",
+      paste0(unexpected_issues$k, collapse = ", ")
+    ),
+    call. = FALSE
+  )
+}
+
+valid_rows <- tuning_results %>% filter(is.na(issue), !is.na(coherence), !is.na(confusion))
+if (nrow(valid_rows) == 0) {
+  stop("[ISSUE] No valid LDA models were fitted for k = 2..10", call. = FALSE)
+}
+
+tuning_results <- tuning_results %>%
+  mutate(
+    coherence_norm = NA_real_,
+    confusion_norm = NA_real_,
+    combined_score = NA_real_
+  )
+
+idx <- which(is.na(tuning_results$issue) & !is.na(tuning_results$coherence) & !is.na(tuning_results$confusion))
+
+coh_norm <- normalize_metric(tuning_results$coherence[idx], higher_is_better = TRUE)
+conf_norm <- normalize_metric(tuning_results$confusion[idx], higher_is_better = FALSE)
+
+tuning_results$coherence_norm[idx] <- coh_norm
+tuning_results$confusion_norm[idx] <- conf_norm
+tuning_results$combined_score[idx] <- (coh_norm + conf_norm) / 2
+
+best_k <- tuning_results %>%
+  filter(!is.na(combined_score)) %>%
+  arrange(desc(combined_score), desc(coherence), confusion) %>%
+  slice(1) %>%
+  pull(k)
+
+issue_log <- tuning_results %>%
+  filter(!is.na(issue)) %>%
+  select(k, issue)
+
+kable(
+  tuning_results %>% mutate(across(c(coherence, confusion, combined_score), ~round(.x, 4))),
+  caption = "LDA tuning diagnostics for k = 1..10"
+)
+
+if (nrow(issue_log) > 0) {
+  kable(issue_log, caption = "Reported issues during topic sweep")
+}
+```
+
+```{r p4_tuning-plots, fig.width=10, fig.height=5}
+metric_long <- tuning_results %>%
+  select(k, coherence, confusion) %>%
+  pivot_longer(cols = c(coherence, confusion), names_to = "metric", values_to = "value")
+
+metric_long %>%
+  ggplot(aes(x = k, y = value, color = metric)) +
+  geom_line(linewidth = 0.9, na.rm = TRUE) +
+  geom_point(size = 2, na.rm = TRUE) +
+  geom_vline(xintercept = best_k, linetype = "dashed", color = "#1f5a8a") +
+  facet_wrap(~metric, scales = "free_y", ncol = 2) +
+  scale_x_continuous(breaks = 1:10) +
+  labs(
+    title = "Coherence and Confusion across Topic Counts",
+    subtitle = paste0("Dashed line marks selected k = ", best_k),
+    x = "Number of topics (k)",
+    y = "Metric value",
+    color = "Metric"
+  )
+```
+
+```{r p4_combined-score-plot, fig.width=8, fig.height=4}
+tuning_results %>%
+  filter(!is.na(combined_score)) %>%
+  ggplot(aes(x = factor(k), y = combined_score, fill = k == best_k)) +
+  geom_col(show.legend = FALSE) +
+  labs(
+    title = "Combined Selection Score (higher is better)",
+    subtitle = paste0("Optimal k = ", best_k),
+    x = "k",
+    y = "Combined score"
+  ) +
+  scale_fill_manual(values = c("TRUE" = "#1f5a8a", "FALSE" = "#a9c5dd"))
+```
+
+Interpretation: based on stronger coherence and lower topic confusion jointly, the selected topic count is **`r best_k`**.
+
+### 4) Fit/interpret the best topic model
+
+```{r p4_best-model-objects}
+best_model <- lda_models[[as.character(best_k)]]
+if (is.null(best_model)) {
+  stop(paste0("[ISSUE] Could not retrieve fitted model for best_k = ", best_k), call. = FALSE)
+}
+
+doc_lookup <- tibble(
+  document = as.character(seq_along(Docs(dtm_counts))),
+  doc_id = Docs(dtm_counts)
+)
+
+beta_tbl <- tidy(best_model, matrix = "beta")
+gamma_tbl <- tidy(best_model, matrix = "gamma") %>%
+  mutate(document = as.character(document)) %>%
+  left_join(doc_lookup, by = "document") %>%
+  mutate(doc_id = if_else(is.na(doc_id), document, doc_id))
+
+if (any(is.na(gamma_tbl$doc_id))) {
+  stop("[ISSUE] Failed to map document-topic probabilities to document IDs", call. = FALSE)
+}
+```
+
+#### Top terms per topic
+
+```{r p4_top-terms-topic, fig.width=11, fig.height=7}
+top_terms_per_topic <- beta_tbl %>%
+  group_by(topic) %>%
+  slice_max(beta, n = 12, with_ties = FALSE) %>%
+  ungroup() %>%
+  arrange(topic, desc(beta))
+
+kable(
+  top_terms_per_topic %>% mutate(beta = round(beta, 4)),
+  caption = paste0("Top terms per topic for k = ", best_k)
+)
+
+top_terms_per_topic %>%
+  mutate(term_plot = reorder_within(term, beta, topic)) %>%
+  ggplot(aes(x = term_plot, y = beta, fill = factor(topic))) +
+  geom_col(show.legend = FALSE) +
+  coord_flip() +
+  tidytext::scale_x_reordered() +
+  facet_wrap(~topic, scales = "free_y") +
+  labs(
+    title = "Top Topic Terms (Beta)",
+    x = "Term",
+    y = "P(term | topic)"
+  )
+```
+
+Interpretation: each topic is defined by a characteristic high-probability term set, which provides semantic labels for the discovered themes.
+
+#### Top topics per document
+
+```{r p4_top-topics-docs, fig.width=10, fig.height=5}
+per_doc_top_topics <- gamma_tbl %>%
+  group_by(doc_id) %>%
+  slice_max(gamma, n = 3, with_ties = FALSE) %>%
+  ungroup() %>%
+  arrange(doc_id, desc(gamma))
+
+primary_topic_per_doc <- gamma_tbl %>%
+  group_by(doc_id) %>%
+  slice_max(gamma, n = 1, with_ties = FALSE) %>%
+  ungroup() %>%
+  arrange(desc(gamma))
+
+kable(
+  per_doc_top_topics %>% mutate(gamma = round(gamma, 4)),
+  caption = "Top topics per document (top 3 by gamma)"
+)
+
+kable(
+  primary_topic_per_doc %>% mutate(gamma = round(gamma, 4)),
+  caption = "Primary topic assignment per document"
+)
+
+gamma_tbl %>%
+  ggplot(aes(x = factor(topic), y = forcats::fct_rev(doc_id), fill = gamma)) +
+  geom_tile(color = "white") +
+  geom_text(aes(label = sprintf("%.2f", gamma)), size = 2.8) +
+  scale_fill_gradient(low = "#e8eef5", high = "#1f5a8a") +
+  labs(
+    title = "Document-to-Topic Probabilities (Gamma)",
+    subtitle = paste0("Best model with k = ", best_k),
+    x = "Topic",
+    y = "Document",
+    fill = "Gamma"
+  )
+```
+
+Interpretation: documents typically show one dominant topic with smaller secondary mixtures, which is expected for report sections that each emphasize a main theme but share ESG vocabulary.
