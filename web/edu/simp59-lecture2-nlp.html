@@ -1043,8 +1043,12 @@ nils.holmberg@iko.lu.se
 
 <section id="presentation" class="slide level2">
 <h2>Presentation</h2>
+<p><br></p>
 <ul>
 <li>Nils Holmberg</li>
+</ul>
+<p><br></p>
+<ul>
 <li>Computational <br>content analysis</li>
 <li>Cognitive <br>communication effects</li>
 </ul>
@@ -1073,25 +1077,23 @@ nils.holmberg@iko.lu.se
 <div class="columns">
 <div class="column" style="width:45%;">
 <ul>
-<li>Data analysis framework</li>
-<li>Data types</li>
-<li>Data frames</li>
-<li>Data structures</li>
-<li><code>Selecting data</code></li>
-<li>Importing data</li>
-<li>Subsetting data</li>
+<li><code>Word frequency, TF-IDF</code></li>
+<li>Relative frequency</li>
+<li>Important terms</li>
+<li><code>Document-term matrix, DTM</code></li>
+<li>Bag-of-words</li>
+<li>Word embeddings</li>
 </ul>
 </div><div class="column" style="width:10%;">
 
 </div><div class="column" style="width:45%;">
 <ul>
-<li>Research questions</li>
-<li><code>Transforming data</code></li>
-<li>Adding data</li>
-<li>Grouping data</li>
-<li>Reshaping data</li>
-<li>Exporting data frames</li>
-<li>Visualizing data</li>
+<li><code>Topic modeling</code></li>
+<li>Minimal example</li>
+<li>Contrasting topics</li>
+<li><code>Scale up, Intro lab 2</code></li>
+<li>Example text corpus</li>
+<li>Visualizing topics</li>
 </ul>
 </div></div>
 </div>
@@ -1523,7 +1525,7 @@ Document-term <br>matrix, DTM
 </div>
 </section>
 <section id="definition-of-a-text-matrix" class="slide level2">
-<h2>1. Definition of a Text Matrix</h2>
+<h2>Definition of a Text Matrix</h2>
 <p><br></p>
 <div style="font-size: 80%;">
 <div class="columns">
@@ -1573,7 +1575,7 @@ Document-term <br>matrix, DTM
 </div>
 </section>
 <section id="simple-bag-of-words-model" class="slide level2">
-<h2>2. Simple Bag-of-Words Model</h2>
+<h2>Simple Bag-of-Words Model</h2>
 <p><br></p>
 <div style="font-size: 80%;">
 <div class="columns">
@@ -1623,7 +1625,7 @@ Document-term <br>matrix, DTM
 </div>
 </section>
 <section id="document-term-matrix-dtm" class="slide level2">
-<h2>3. Document-Term Matrix (DTM)</h2>
+<h2>Document-Term Matrix (DTM)</h2>
 <p><br></p>
 <div style="font-size: 80%;">
 <div class="columns">
@@ -1676,7 +1678,7 @@ Document-term <br>matrix, DTM
 </div>
 </section>
 <section id="term-document-matrix-tdm" class="slide level2">
-<h2>4. Term-Document Matrix (TDM)</h2>
+<h2>Term-Document Matrix (TDM)</h2>
 <p><br></p>
 <div style="font-size: 80%;">
 <div class="columns">
@@ -1733,7 +1735,7 @@ Document-term <br>matrix, DTM
 </div>
 </section>
 <section id="binary-matrix-presenceabsence" class="slide level2">
-<h2>5. Binary Matrix (Presence/Absence)</h2>
+<h2>Binary Matrix (Presence/Absence)</h2>
 <p><br></p>
 <div style="font-size: 80%;">
 <div class="columns">
@@ -1783,7 +1785,7 @@ Document-term <br>matrix, DTM
 </div>
 </section>
 <section id="tf-idf-matrix" class="slide level2">
-<h2>6. TF-IDF Matrix</h2>
+<h2>TF-IDF Matrix</h2>
 <p><br></p>
 <div style="font-size: 80%;">
 <div class="columns">
@@ -1833,7 +1835,7 @@ Document-term <br>matrix, DTM
 </div>
 </section>
 <section id="co-occurrence-matrix" class="slide level2">
-<h2>7. Co-Occurrence Matrix</h2>
+<h2>Co-Occurrence Matrix</h2>
 <p><br></p>
 <div style="font-size: 80%;">
 <div class="columns">
@@ -1889,7 +1891,7 @@ Document-term <br>matrix, DTM
 </div>
 </section>
 <section id="embedding-matrix" class="slide level2">
-<h2>8. Embedding Matrix</h2>
+<h2>Embedding Matrix</h2>
 <p><br></p>
 <div style="font-size: 80%;">
 <div class="columns">
@@ -1945,7 +1947,7 @@ Document-term <br>matrix, DTM
 </div>
 </section>
 <section id="why-use-a-matrix" class="slide level2">
-<h2>9. Why Use a Matrix?</h2>
+<h2>Why Use a Matrix?</h2>
 <p><br></p>
 <div style="font-size: 80%;">
 <div class="columns">
@@ -2827,7 +2829,7 @@ Topic modeling
 <section id="section-3" class="slide level2 center" data-background-color="#ccc">
 <h2></h2>
 <div class="intermission-slide">
-Scale up, <br>Topic modeling
+Scale up, <br>Intro lab 2
 </div>
 </section>
 <section id="corpus-dtm-and-lda-topic-tuning" class="slide level2">
@@ -2941,59 +2943,7 @@ Scale up, <br>Topic modeling
 </div>
 </div>
 </section>
-<section id="read-text-files-into-a-corpus-2" class="slide level2">
-<h2>Read Text Files into a Corpus</h2>
-<p><br></p>
-<div style="font-size: 80%;">
-<div class="cell">
-<div class="cell-output-display">
-<table class="caption-top">
-<caption>Corpus preview</caption>
-<colgroup>
-<col style="width: 33%">
-<col style="width: 66%">
-</colgroup>
-<thead>
-<tr class="header">
-<th style="text-align: left;">doc_id</th>
-<th style="text-align: left;">text_preview</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">equinor01-protecting-the-environment.txt</td>
-<td style="text-align: left;">Protecting the environment Home&gt;Sustainability&gt;Protecting the environment Being a large offshore oil and gas operator and a growing offsh…</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">equinor02-health-safety-and-security.txt</td>
-<td style="text-align: left;">Health, safety and security Home&gt;Sustainability&gt;Health, safety and security Safety: Our vision is zero harm The safety and security of ou…</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">equinor03-human-rights.txt</td>
-<td style="text-align: left;">Home&gt;Sustainability&gt;Human rights Human rights Our policy Our priority areasOur approach to due diligenceSearch ENNO Menu ReportingThe Nor…</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">equinor04-governance-and-transparency.txt</td>
-<td style="text-align: left;">Governance and transparency Home&gt;Sustainability&gt;Governance and transparency Embedding sustainability in governance and risk management At…</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">equinor05-our-transition-ambitions.txt</td>
-<td style="text-align: left;">Home&gt;Sustainability&gt;Energy transition plan Energy Transition PlanSearch ENNO Menu Plan &amp; strategy Ambitions People &amp; nature Downloads Our…</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">equinor06-a-just-energy-transition.txt</td>
-<td style="text-align: left;">Photo: Einar Aslaksen Home&gt;Sustainability&gt;Just transition Equinor’s commitment to a just energy transition As part of the company’s strat…</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">equinor07-environmental-social-and-governance-esg-reporting-centre.txt</td>
-<td style="text-align: left;">Environmental, social and governance (ESG) reporting centre Home&gt;Sustainability&gt;Reporting The reporting centre brings together our key re…</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</div>
-</section>
+
 <section id="cast-file-corpus-to-count-dtm" class="slide level2">
 <h2>Cast File Corpus to Count DTM</h2>
 <p><br></p>
@@ -3011,6 +2961,8 @@ Scale up, <br>Topic modeling
 <h2>Cast File Corpus to Count DTM</h2>
 <p><br></p>
 <div style="font-size: 80%;">
+<div class="columns">
+<div class="column" style="width:45%;">
 <div class="cell">
 <div class="cell-output-display">
 <table class="caption-top">
@@ -3041,6 +2993,11 @@ Scale up, <br>Topic modeling
 </tbody>
 </table>
 </div>
+</div>
+</div><div class="column" style="width:10%;">
+
+</div><div class="column" style="width:45%;">
+<div class="cell">
 <div class="cell-output-display">
 <table class="caption-top">
 <caption>Most frequent terms</caption>
@@ -3083,6 +3040,7 @@ Scale up, <br>Topic modeling
 </table>
 </div>
 </div>
+</div></div>
 </div>
 </section>
 <section id="tune-number-of-topics" class="slide level2">
@@ -3241,7 +3199,7 @@ Scale up, <br>Topic modeling
 <p><br></p>
 <p><strong>Lecture 2 (feb 25), Lab 2 (feb 27)</strong></p>
 <ul>
-<li>Lecture notes: <a href="https://cca-cce.github.io/osm-comm/web/edu/simp59-lecture1-nlp.html" target="_blank">https://cca-cce.github.io/osm-comm/web/edu/simp59-lecture1-nlp.html</a></li>
+<li>Lecture notes: <a href="https://cca-cce.github.io/osm-comm/web/edu/simp59-lecture2-nlp.html" target="_blank">https://cca-cce.github.io/osm-comm/web/edu/simp59-lecture2-nlp.html</a></li>
 <li>Lab notebook: <a href="https://canvas.education.lu.se/courses/38911">check canvas page!</a></li>
 </ul>
 <p><strong>References</strong></p>
