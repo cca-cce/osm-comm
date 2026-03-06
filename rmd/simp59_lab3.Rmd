@@ -1,0 +1,197 @@
+---
+title: "WVS Wave 7 Data Analysis Notebook"
+output: html_document
+---
+
+This notebook documents a complete analysis workflow using a cleaned TSV file loaded from GitHub.
+The goal is to inspect country coverage, clean special missing-value codes, and analyze patterns
+in life satisfaction by age, country, sex, and confidence in parliament.
+
+## 1. Load Libraries and Data
+
+In the next chunk, we load the required packages and read the TSV file from a public URL that contains only the relevant variables used in this analysis.
+
+```{r setup}
+library(dplyr)
+library(ggplot2)
+library(tidyr)
+library(forcats)
+
+data_url <- "https://raw.githubusercontent.com/cca-cce/osm-comm/refs/heads/main/csv/WVS_Cross-National_Wave_7_csv_v6_0.tsv"
+wvs_small <- read.delim(data_url, sep = "\t", stringsAsFactors = FALSE, check.names = FALSE)
+
+glimpse(wvs_small)
+summary(wvs_small)
+```
+
+## 2. Data Cleaning and Feature Engineering
+
+In the next chunk, we convert `country` to a factor, replace negative survey codes with `NA`, and create analysis-friendly variables for age class and sex labels.
+
+```{r clean-data}
+wvs_clean <- wvs_small %>%
+  mutate(
+    country = as.factor(country),
+    age = ifelse(age < 0, NA, age),
+    sex = ifelse(sex < 0, NA, sex),
+    life_sat = ifelse(life_sat < 0, NA, life_sat),
+    trust_people = ifelse(trust_people < 0, NA, trust_people),
+    conf_parliament = ifelse(conf_parliament < 0, NA, conf_parliament),
+    age_class = case_when(
+      is.na(age) ~ NA_character_,
+      age >= 16 & age <= 25 ~ "Young",
+      age >= 55 ~ "Old",
+      TRUE ~ "Middle"
+    ),
+    age_class = factor(age_class, levels = c("Young", "Middle", "Old")),
+    sex_label = case_when(
+      sex == 1 ~ "Male",
+      sex == 2 ~ "Female",
+      TRUE ~ NA_character_
+    )
+  )
+
+summary(wvs_clean)
+```
+
+This cleaning step creates a consistent base table for the rest of the notebook, ensuring that missing data does not bias means and correlations.
+
+## 3. Country Coverage
+
+In the next chunk, we count observations per country and visualize the top 20 countries by sample size to understand the distribution of cases.
+
+```{r country-coverage}
+country_table <- wvs_clean %>%
+  count(country, name = "observations") %>%
+  arrange(desc(observations))
+
+head(country_table, 10)
+
+country_table %>%
+  slice_head(n = 20) %>%
+  ggplot(aes(x = fct_reorder(country, observations), y = observations)) +
+  geom_col(fill = "#1f78b4") +
+  coord_flip() +
+  labs(
+    title = "Top 20 Countries by Number of Observations",
+    x = "Country",
+    y = "Observations"
+  ) +
+  theme_minimal()
+```
+
+The chart shows where most of the sample is concentrated, which is useful context when interpreting global averages.
+
+## 4. Life Satisfaction by Age Class (Global)
+
+In the next chunk, we compute and visualize mean life satisfaction for each age class across the full dataset.
+
+```{r life-sat-global}
+life_sat_table <- wvs_clean %>%
+  group_by(age_class) %>%
+  summarize(mean_life_sat_world = mean(life_sat, na.rm = TRUE), .groups = "drop")
+
+life_sat_table
+
+ggplot(life_sat_table, aes(x = age_class, y = mean_life_sat_world, fill = age_class)) +
+  geom_col(width = 0.7, alpha = 0.9, show.legend = FALSE) +
+  labs(
+    title = "Mean Life Satisfaction by Age Class (Global)",
+    x = "Age Class",
+    y = "Mean Life Satisfaction"
+  ) +
+  theme_minimal()
+```
+
+This summarizes the global age pattern and gives a baseline before country-specific comparison.
+
+## 5. Global vs USA Comparison
+
+In the next chunk, we calculate USA-specific age-class means, join them with global means, and plot both series together.
+
+```{r global-vs-usa}
+usa_life_sat_table <- wvs_clean %>%
+  filter(country == "USA") %>%
+  group_by(age_class) %>%
+  summarize(mean_life_sat_usa = mean(life_sat, na.rm = TRUE), .groups = "drop")
+
+life_sat_comparison <- left_join(life_sat_table, usa_life_sat_table, by = "age_class") %>%
+  rename(world = mean_life_sat_world, usa = mean_life_sat_usa)
+
+life_sat_comparison
+
+life_sat_comparison_long <- life_sat_comparison %>%
+  pivot_longer(cols = c(world, usa), names_to = "group", values_to = "mean_life_sat")
+
+ggplot(life_sat_comparison_long, aes(x = age_class, y = mean_life_sat, color = group, group = group)) +
+  geom_line(linewidth = 1) +
+  geom_point(size = 2.5) +
+  labs(
+    title = "Life Satisfaction by Age Class: World vs USA",
+    x = "Age Class",
+    y = "Mean Life Satisfaction",
+    color = "Group"
+  ) +
+  theme_minimal()
+```
+
+This comparison highlights whether the USA follows or diverges from the global age-related life satisfaction pattern.
+
+## 6. Gender Differences Across Age Classes
+
+In the next chunk, we estimate mean life satisfaction by age class and sex, then visualize group differences with side-by-side bars.
+
+```{r gender-differences}
+life_sat_gender_table <- wvs_clean %>%
+  filter(!is.na(sex_label), !is.na(age_class)) %>%
+  group_by(age_class, sex_label) %>%
+  summarize(mean_life_sat = mean(life_sat, na.rm = TRUE), .groups = "drop")
+
+life_sat_gender_table
+
+ggplot(life_sat_gender_table, aes(x = age_class, y = mean_life_sat, fill = sex_label)) +
+  geom_col(position = position_dodge(width = 0.75), width = 0.65) +
+  labs(
+    title = "Mean Life Satisfaction by Age Class and Sex",
+    x = "Age Class",
+    y = "Mean Life Satisfaction",
+    fill = "Sex"
+  ) +
+  theme_minimal()
+```
+
+This step extends the age analysis by adding a gender perspective within each age category.
+
+## 7. Correlation Between Life Satisfaction and Confidence in Parliament
+
+In the next chunk, we run a correlation test and create a scatterplot with a fitted linear trend line.
+
+```{r correlation-analysis}
+cor_result <- cor.test(wvs_clean$life_sat, wvs_clean$conf_parliament)
+cor_result
+
+ggplot(wvs_clean, aes(x = conf_parliament, y = life_sat)) +
+  geom_jitter(width = 0.15, height = 0.15, alpha = 0.08, color = "#4d4d4d") +
+  geom_smooth(method = "lm", se = FALSE, color = "#e31a1c", linewidth = 1) +
+  labs(
+    title = "Life Satisfaction vs Confidence in Parliament",
+    x = "Confidence in Parliament",
+    y = "Life Satisfaction"
+  ) +
+  theme_minimal()
+```
+
+The correlation output and fitted line provide a quick check of the strength and direction of association between political confidence and life satisfaction.
+
+## 8. Analysis Narrative Summary
+
+The notebook follows a standard analysis pipeline:
+1. Load a compact TSV containing only relevant variables.
+2. Clean negative response codes and derive age/sex categories.
+3. Describe sample structure by country.
+4. Estimate global life-satisfaction patterns by age.
+5. Compare global results with USA-specific estimates.
+6. Add gender-based differences within age classes.
+7. Evaluate linear association between life satisfaction and confidence in parliament.
+
+These steps produce an interpretable and reproducible workflow that can be extended for deeper country-level or subgroup analysis.
