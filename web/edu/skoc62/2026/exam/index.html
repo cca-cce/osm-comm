@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SKOC62 Exam Trainer</title>
+  <style>
+    :root {
+      --bg: #f3efe4;
+      --panel: rgba(255, 252, 245, 0.88);
+      --text: #1f1a17;
+      --muted: #6a625b;
+      --border: rgba(31, 26, 23, 0.12);
+      --shadow: 0 20px 60px rgba(52, 41, 31, 0.12);
+      --accent: #8b5e34;
+      --disabled: #c7c0b8;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      background:
+        radial-gradient(circle at top left, rgba(139, 94, 52, 0.16), transparent 30%),
+        radial-gradient(circle at bottom right, rgba(73, 112, 91, 0.14), transparent 32%),
+        linear-gradient(180deg, #f6f2e9 0%, #ece5d7 100%);
+      color: var(--text);
+      font-family: Georgia, "Times New Roman", serif;
+      padding: 24px;
+    }
+
+    .app {
+      width: min(980px, 100%);
+      padding: clamp(24px, 4vw, 48px);
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      background: var(--panel);
+      box-shadow: var(--shadow);
+      text-align: center;
+      backdrop-filter: blur(10px);
+    }
+
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 18px;
+      font-size: 0.95rem;
+      color: var(--muted);
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+    }
+
+    .meta span {
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.72);
+      border: 1px solid var(--border);
+    }
+
+    .question {
+      margin: 0 auto 20px;
+      max-width: 18ch;
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      line-height: 1.18;
+      font-weight: 700;
+    }
+
+    .answer {
+      margin: 0 auto;
+      max-width: 36ch;
+      font-size: clamp(1.25rem, 2vw, 1.7rem);
+      line-height: 1.5;
+      color: #2c241f;
+    }
+
+    .status {
+      min-height: 1.5em;
+      margin: 26px 0 14px;
+      font-size: 0.98rem;
+      color: var(--muted);
+    }
+
+    .controls {
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+      margin-top: 8px;
+    }
+
+    button {
+      border: 0;
+      border-radius: 18px;
+      background: #fff;
+      color: var(--text);
+      min-width: 84px;
+      height: 64px;
+      font-size: 1.8rem;
+      cursor: pointer;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+      transition: transform 120ms ease, background 120ms ease, opacity 120ms ease;
+    }
+
+    button:hover:not(:disabled) {
+      transform: translateY(-2px);
+      background: #fffaf3;
+    }
+
+    button:disabled {
+      cursor: not-allowed;
+      opacity: 0.45;
+      color: var(--disabled);
+      box-shadow: none;
+    }
+
+    .reset {
+      margin-top: 20px;
+      min-width: 160px;
+      height: 48px;
+      font-size: 1rem;
+      background: var(--accent);
+      color: #fffaf3;
+    }
+
+    .reset:hover:not(:disabled) {
+      background: #744b27;
+    }
+
+    @media (max-width: 640px) {
+      .controls {
+        gap: 10px;
+      }
+
+      button {
+        min-width: 72px;
+        height: 58px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="app">
+    <div class="meta">
+      <span id="meta-level">Level</span>
+      <span id="meta-theme">Theme</span>
+      <span id="meta-row">Row</span>
+      <span id="meta-progress">Used</span>
+    </div>
+
+    <h1 class="question" id="question">Laddar fraga...</h1>
+    <p class="answer" id="answer"></p>
+
+    <p class="status" id="status"></p>
+
+    <div class="controls">
+      <button id="down-btn" aria-label="Easier level">&darr;</button>
+      <button id="same-btn" aria-label="New question, same level">&rarr;</button>
+      <button id="up-btn" aria-label="Harder level">&uarr;</button>
+    </div>
+
+    <button class="reset" id="reset-btn" type="button">Reset session</button>
+  </main>
+
+  <script>
+    const DATA_URL = "qna.tsv";
+    const LEVELS = ["E", "C", "A"];
+    const STORAGE_KEY = "skoc62_exam_trainer_session";
+
+    const state = {
+      rows: [],
+      usedIds: [],
+      currentId: null
+    };
+
+    const els = {
+      level: document.getElementById("meta-level"),
+      theme: document.getElementById("meta-theme"),
+      row: document.getElementById("meta-row"),
+      progress: document.getElementById("meta-progress"),
+      question: document.getElementById("question"),
+      answer: document.getElementById("answer"),
+      status: document.getElementById("status"),
+      down: document.getElementById("down-btn"),
+      same: document.getElementById("same-btn"),
+      up: document.getElementById("up-btn"),
+      reset: document.getElementById("reset-btn")
+    };
+
+    function parseTsv(tsvText) {
+      const lines = tsvText.trim().split(/\r?\n/).filter(Boolean);
+      const headers = lines[0].split("\t");
+      return lines.slice(1).map((line) => {
+        const values = line.split("\t");
+        const row = Object.fromEntries(headers.map((header, index) => [header, values[index] ?? ""]));
+        row.row_index = Number(row.row_index);
+        row.theme = String(row.theme);
+        row.level = String(row.level);
+        return row;
+      });
+    }
+
+    function saveSession() {
+      sessionStorage.setItem(STORAGE_KEY, JSON.stringify({
+        usedIds: state.usedIds,
+        currentId: state.currentId
+      }));
+    }
+
+    function restoreSession() {
+      const raw = sessionStorage.getItem(STORAGE_KEY);
+      if (!raw) return;
+      try {
+        const parsed = JSON.parse(raw);
+        state.usedIds = Array.isArray(parsed.usedIds) ? parsed.usedIds : [];
+        state.currentId = Number.isInteger(parsed.currentId) ? parsed.currentId : null;
+      } catch {
+        state.usedIds = [];
+        state.currentId = null;
+      }
+    }
+
+    function currentRow() {
+      return state.rows.find((row) => row.row_index === state.currentId) ?? null;
+    }
+
+    function levelIndex(level) {
+      return LEVELS.indexOf(level);
+    }
+
+    function unusedRows(filterFn) {
+      return state.rows.filter((row) => !state.usedIds.includes(row.row_index) && filterFn(row));
+    }
+
+    function pickRandom(rows) {
+      if (!rows.length) return null;
+      const index = Math.floor(Math.random() * rows.length);
+      return rows[index];
+    }
+
+    function showStatus(message) {
+      els.status.textContent = message;
+    }
+
+    function renderCard(row) {
+      els.level.textContent = `Level ${row.level}`;
+      els.theme.textContent = `Theme ${row.theme}`;
+      els.row.textContent = `Row ${row.row_index}`;
+      els.progress.textContent = `Used ${state.usedIds.length} / ${state.rows.length}`;
+      els.question.textContent = row.question;
+      els.answer.textContent = row.answer;
+      updateButtons();
+    }
+
+    function updateButtons() {
+      const row = currentRow();
+      const currentLevel = row ? row.level : "E";
+      const idx = levelIndex(currentLevel);
+
+      els.down.disabled = idx <= 0;
+      els.up.disabled = idx >= LEVELS.length - 1;
+
+      const sameLevelDifferentTheme = row
+        ? unusedRows((candidate) => candidate.level === currentLevel && candidate.theme !== row.theme)
+        : [];
+      els.same.disabled = sameLevelDifferentTheme.length === 0;
+    }
+
+    function setCurrentRow(row, message = "") {
+      state.currentId = row.row_index;
+      if (!state.usedIds.includes(row.row_index)) {
+        state.usedIds.push(row.row_index);
+      }
+      saveSession();
+      renderCard(row);
+      showStatus(message);
+    }
+
+    function drawInitialRow() {
+      const existing = currentRow();
+      if (existing) {
+        renderCard(existing);
+        showStatus("Continuing current session.");
+        return;
+      }
+
+      const firstRow = pickRandom(unusedRows((row) => row.level === "E"));
+      if (!firstRow) {
+        els.question.textContent = "No questions available at level E.";
+        els.answer.textContent = "";
+        showStatus("Reset the session or check the data file.");
+        updateButtons();
+        return;
+      }
+
+      setCurrentRow(firstRow, "New session started at level E.");
+    }
+
+    function navigateSameLevelDifferentTheme() {
+      const row = currentRow();
+      if (!row) return;
+      const candidates = unusedRows((candidate) => candidate.level === row.level && candidate.theme !== row.theme);
+      const next = pickRandom(candidates);
+      if (!next) {
+        showStatus(`No unused ${row.level}-level question remains in a different theme. Try another level or reset.`);
+        updateButtons();
+        return;
+      }
+      setCurrentRow(next, `Moved to a new ${row.level}-level question from a different theme.`);
+    }
+
+    function navigateRelative(direction) {
+      const row = currentRow();
+      if (!row) return;
+      const currentIdx = levelIndex(row.level);
+      const nextIdx = currentIdx + direction;
+      if (nextIdx < 0 || nextIdx >= LEVELS.length) {
+        updateButtons();
+        return;
+      }
+
+      const targetLevel = LEVELS[nextIdx];
+      const candidates = unusedRows((candidate) => candidate.level === targetLevel);
+      const next = pickRandom(candidates);
+
+      if (!next) {
+        showStatus(`No unused questions remain at level ${targetLevel}. Reset the session to start over.`);
+        updateButtons();
+        return;
+      }
+
+      const directionLabel = direction > 0 ? "harder" : "easier";
+      setCurrentRow(next, `Moved one step ${directionLabel} to level ${targetLevel}.`);
+    }
+
+    function resetSession() {
+      state.usedIds = [];
+      state.currentId = null;
+      sessionStorage.removeItem(STORAGE_KEY);
+      drawInitialRow();
+    }
+
+    async function init() {
+      try {
+        const response = await fetch(DATA_URL, { cache: "no-store" });
+        if (!response.ok) {
+          throw new Error(`Could not load ${DATA_URL}`);
+        }
+
+        state.rows = parseTsv(await response.text());
+        restoreSession();
+
+        // Drop used ids that are no longer present in the file.
+        const validIds = new Set(state.rows.map((row) => row.row_index));
+        state.usedIds = state.usedIds.filter((id) => validIds.has(id));
+        if (!validIds.has(state.currentId)) {
+          state.currentId = null;
+        }
+
+        drawInitialRow();
+      } catch (error) {
+        els.question.textContent = "Could not load the question file.";
+        els.answer.textContent = "";
+        showStatus(error.message);
+        els.down.disabled = true;
+        els.same.disabled = true;
+        els.up.disabled = true;
+      }
+    }
+
+    els.same.addEventListener("click", navigateSameLevelDifferentTheme);
+    els.up.addEventListener("click", () => navigateRelative(1));
+    els.down.addEventListener("click", () => navigateRelative(-1));
+    els.reset.addEventListener("click", resetSession);
+
+    init();
+  </script>
+</body>
+</html>

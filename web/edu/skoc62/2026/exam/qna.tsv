@@ -1,0 +1,92 @@
+row_index	theme	level	question	answer
+1	1	E	Vad är en hypotes?	Ett testbart påstående om ett förväntat samband mellan variabler.
+2	1	E	Vad är skillnaden mellan oberoende och beroende variabel?	Den oberoende variabeln antas påverka den beroende variabeln som är utfallet man vill förklara.
+3	1	E	Vad är operationalisering?	Att översätta ett teoretiskt begrepp till mätbara variabler eller indikatorer.
+4	1	E	Vad är ett experiment?	En design där forskaren manipulerar en oberoende variabel för att studera dess effekt.
+5	1	E	Vad är en kontrollgrupp?	En grupp som inte får behandlingen och används som jämförelse.
+6	1	C	Motivera varför din design möjliggör (eller inte möjliggör) kausala slutsatser.	Kausalitet kräver att alternativa förklaringar kontrolleras exempelvis genom experiment eller statistisk kontroll.
+7	1	C	Hur relaterar regression till orsaksanalys?	Regression visar samband mellan variabler men ger inte automatiskt kausala slutsatser utan lämplig design.
+8	1	C	Hur hanterar du confounding variables?	Genom randomisering, kontrollvariabler, matchning eller statistisk kontroll.
+9	1	C	Hur säkerställs intern validitet i experiment?	Genom randomisering, kontrollgrupper och standardiserade procedurer.
+10	1	C	Hur kan en experimentell manipulation ifrågasättas?	Om manipulationen inte påverkar deltagarna som avsett eller upplevs orealistisk.
+11	1	A	Diskutera kausalitet i relation till din design och alternativa designval.	Kausalitet kräver tidsordning och kontroll över alternativa förklaringar och kan stärkas genom experimentella eller kvasi-experimentella designer.
+12	1	A	Hur kan experimentell design skapa artificiella effekter?	Laboratoriemiljöer kan påverka beteende så att resultaten inte speglar verkliga situationer.
+13	1	A	Hur relaterar din analys till orsaksanalysens logik?	Analysen undersöker om förändringar i en oberoende variabel systematiskt hänger ihop med förändringar i utfallet.
+14	1	A	Hur kan du försvara din design inför en kvalitativ forskare?	Genom att visa att designen möjliggör systematisk hypotesprövning och generalisering.
+15	1	A	Hur kan du kombinera kvalitativ och kvantitativ design?	Genom mixed methods där kvalitativa data ger djup och kvantitativa data ger generaliserbarhet.
+16	2	E	Vad är operationalisering?	Att göra ett abstrakt begrepp mätbart genom indikatorer eller variabler.
+17	2	E	Vad är en Likertskala?	En skala där respondenter anger graden av instämmande i ett påstående.
+18	2	E	Vad är en nominalskala?	En kategorisk variabel utan rangordning till exempel land eller kön.
+19	2	E	Vad är en ordinalskala?	En variabel med rangordning men utan lika avstånd mellan nivåerna.
+20	2	C	Hur har du operationaliserat ditt teoretiska fenomen?	Genom att välja indikatorer som representerar begreppet och mäta dem empiriskt.
+21	2	C	Hur påverkar operationalisering tolkningen?	Olika operationaliseringar kan ge olika resultat och därmed olika tolkningar.
+22	2	C	Hur påverkar operationalisering generaliserbarhet?	Om måttet inte fångar begreppet korrekt kan resultaten bli svåra att generalisera.
+23	2	C	Hur påverkar skalnivå val av analys?	Skalnivån avgör vilka statistiska metoder som kan användas.
+24	2	A	Hur påverkar ontologiska antaganden operationalisering?	Synen på vad som existerar påverkar hur begrepp definieras och mäts.
+25	2	A	Diskutera sambandet mellan teori och variabelkonstruktion.	Teorin avgör vilka variabler som behövs och hur de ska operationaliseras.
+26	2	A	Hur skulle resultaten förändras vid annan operationalisering?	Olika indikatorer kan mäta olika aspekter och därmed ge andra resultat.
+27	2	A	Hur kan operationalisering skapa systematiska bias?	Om måttet systematiskt över- eller underskattar fenomenet.
+28	3	E	Vad är reliabilitet?	Om en mätning ger samma resultat vid upprepade mätningar.
+29	3	E	Vad är validitet?	Om ett mått verkligen mäter det som det avser att mäta.
+30	3	E	Vad är intern validitet?	Hur väl studien visar att ett samband är kausalt.
+31	3	E	Vad är extern validitet?	Hur väl resultaten kan generaliseras till andra sammanhang.
+32	3	C	Hur säkerställer du begreppsvaliditet?	Genom etablerade mått och genom att testa om indikatorerna verkligen mäter begreppet.
+33	3	C	Hur kan mätfel uppstå?	Genom otydliga frågor, missförstånd eller tekniska problem.
+34	3	C	Hur kan man stärka reliabiliteten?	Genom standardiserad datainsamling och tydliga frågor.
+35	3	A	Identifiera och analysera den största validitetsrisken i din studie.	Till exempel selektionsbias eller mätfel som kan snedvrida resultaten.
+36	3	A	Hur kan intern och extern validitet stå i konflikt?	Strikt kontroll ökar intern validitet men kan minska realism och generaliserbarhet.
+37	3	A	Diskutera reliabilitetens begränsningar.	Ett mått kan vara konsekvent men ändå mäta fel sak.
+38	3	A	Hur kan begreppsvaliditet testas empiriskt?	Genom faktoranalyser eller jämförelser med andra etablerade mått.
+39	3	A	Hur påverkar confounding validity tolkningen?	Confounders kan skapa skenbara samband och leda till felaktiga slutsatser.
+40	4	E	Vad är en dubbel fråga i enkät?	En fråga som innehåller två frågor i en och därför är svår att besvara.
+41	4	E	Vad är en ledande enkätfråga?	En fråga som antyder vilket svar som förväntas.
+42	4	C	Hur konstruerar man en reliabel enkät?	Genom tydliga frågor konsekvent skala och pilotstudier.
+43	4	C	Hur påverkar frågeordning svarsmönster?	Tidiga frågor kan påverka hur respondenter tolkar senare frågor.
+44	4	C	Hur kan en enkät kritiseras metodologiskt?	Till exempel för bias otydliga frågor eller låg representativitet.
+45	4	A	Hur kan mätinstrumentets konstruktion påverka resultatet?	Formuleringar skalor och svarsalternativ kan påverka hur respondenter svarar.
+46	5	E	Vad är bortfall?	När personer i urvalet inte deltar eller inte svarar.
+47	5	E	Vad är skillnaden mellan population och urval?	Populationen är hela gruppen man vill studera medan urvalet är den del man undersöker.
+48	5	E	Vad är slumpmässigt urval?	När varje individ i populationen har samma sannolikhet att bli vald.
+49	5	E	Vad är en pilotstudie?	En mindre teststudie som genomförs innan huvudstudien.
+50	5	C	Hur kan bortfall påverka resultaten?	Systematiskt bortfall kan snedvrida resultaten.
+51	5	C	Hur kan representativitet bedömas?	Genom att jämföra urvalets egenskaper med populationens.
+52	5	C	Hur kan social önskvärdhet påverka svaren?	Respondenter kan ge svar som framställer dem i bättre dager.
+53	5	C	Hur kan en pilot förbättra en enkät?	Genom att identifiera otydliga frågor eller tekniska problem.
+54	5	A	Hur påverkar urvalets struktur generaliserbarhet?	Ett snedvridet eller begränsat urval minskar möjligheten att generalisera resultaten.
+55	6	E	Vad är medelvärde?	Medelvärdet är summan av alla observationer dividerad med antalet observationer.
+56	6	E	Vad är standardavvikelse?	Ett mått på hur mycket observationer i genomsnitt avviker från medelvärdet.
+57	6	E	Vad är korrelation?	Ett mått på styrkan och riktningen i sambandet mellan två variabler.
+58	6	E	Vad är deskriptiv statistik?	Statistiska metoder som används för att sammanfatta och beskriva data.
+59	7	E	Vad är signifikans?	En bedömning av om ett observerat resultat sannolikt beror på slumpen eller inte.
+60	7	E	Vad är ett p-värde?	Sannolikheten att observera ett lika extremt resultat om nollhypotesen är sann.
+61	7	E	Vad är inferentiell statistik?	Statistiska metoder som används för att dra slutsatser om en population baserat på ett urval.
+62	7	C	Vad är skillnaden mellan statistisk och praktisk signifikans?	Statistisk signifikans avser sannolikheten att resultatet beror på slumpen medan praktisk signifikans handlar om hur stor eller meningsfull effekten är.
+63	7	C	Hur kan regressionsanalys misstolkas?	Genom att tolka korrelation som kausalitet eller ignorera viktiga kontrollvariabler.
+64	7	C	Hur påverkar urvalets storlek statistisk styrka?	Större urval ökar sannolikheten att upptäcka verkliga effekter.
+65	7	A	Hur kan regressionsanalys användas och missbrukas?	Den kan användas för att analysera samband men missbrukas om modeller tolkas kausalt utan lämplig design eller kontrollvariabler.
+66	7	A	Hur kan statistisk signifikans dölja svaga effekter?	I stora urval kan mycket små och praktiskt irrelevanta effekter bli statistiskt signifikanta.
+67	6	A	Hur kan latent variabelanalys förbättra mätningen?	Genom att modellera underliggande konstruktioner baserat på flera indikatorer och därmed minska mätfel.
+68	7	A	Hur kan multivariat analys förändra tolkningen?	Genom att kontrollera för flera variabler samtidigt kan tidigare observerade samband försvinna eller förändras.
+69	7	A	Hur kan resultatens robusthet testas?	Genom känslighetsanalyser alternativa modelleringar och kontroll av antaganden.
+70	6	E	Vad är en frekvenstabell?	En tabell som visar hur många observationer som finns i varje kategori eller värde i en variabel.
+71	6	E	Vad visar ett histogram?	Ett histogram visar hur värden i en kvantitativ variabel är fördelade över olika intervall.
+72	6	E	Vad är medianvärdet?	Medianen är det mittersta värdet i en ordnad fördelning.
+73	6	E	Vad är typvärdet?	Typvärdet är det värde som förekommer oftast i en variabel.
+74	6	E	Vad är ett lådagram?	Ett diagram som visar median, kvartiler och eventuella extremvärden i en fördelning.
+75	6	C	Vad visar ett spridningsdiagram?	Ett spridningsdiagram visar relationen mellan två kvantitativa variabler genom att plotta observationer i ett koordinatsystem.
+76	6	C	Hur kan standardisering användas i dataanalys?	Genom att omvandla värden till en gemensam skala till exempel z-poäng så att variabler kan jämföras.
+77	6	C	Hur kan man konstruera ett index av flera variabler?	Genom att kombinera flera indikatorer till ett sammansatt mått till exempel genom att summera eller ta medelvärde.
+78	6	C	Vad är skillnaden mellan tvärsnittsdata och tidsseriedata?	Tvärsnittsdata mäter många enheter vid en tidpunkt medan tidsseriedata följer samma variabel över tid.
+79	6	A	Hur kan Ginikoefficienten användas för att analysera ojämlikhet?	Den mäter hur ojämnt en resurs är fördelad i en population där högre värde innebär större ojämlikhet.
+80	6	A	Hur kan transformation av variabler påverka analysresultat?	Genom att ändra skalan eller distributionen vilket kan göra samband tydligare eller uppfylla modellantaganden.
+81	6	A	Hur kan olika diagramtyper påverka tolkningen av data?	Olika visualiseringar kan framhäva olika aspekter av variation och samband och därmed påverka hur resultaten förstås.
+82	7	E	Vad är ett konfidensintervall?	Ett intervall som med en viss sannolikhet innehåller det sanna populationsvärdet.
+83	7	E	Vad innebär centrala gränsvärdessatsen?	Att medelvärdet av många slumpmässiga observationer tenderar att bli normalfördelat när urvalet är tillräckligt stort.
+84	7	E	Vad är ett urvalsfel?	Skillnaden mellan ett urvals resultat och det sanna värdet i populationen.
+85	7	C	Vad innebär ett chi²-test av oberoende?	Ett test som undersöker om två kategoriska variabler är statistiskt oberoende av varandra.
+86	7	C	Vad testar ett t-test av två medelvärden?	Om medelvärdena i två grupper skiljer sig mer än vad som kan förklaras av slumpen.
+87	7	C	Vad mäter Pearsons korrelationskoefficient r?	Styrkan och riktningen i ett linjärt samband mellan två kvantitativa variabler.
+88	7	A	Vad innebär ett typ I-fel i hypotesprövning?	Att man felaktigt förkastar en sann nollhypotes.
+89	7	A	Vad innebär ett typ II-fel i hypotesprövning?	Att man misslyckas med att förkasta en falsk nollhypotes.
+90	7	A	Hur kan multikollinearitet påverka regressionsanalys?	När oberoende variabler är starkt korrelerade vilket gör koefficienter instabila och svåra att tolka.
+91	7	A	Vad innebär residualanalys i regressionsmodeller?	Att analysera skillnaden mellan observerade och predicerade värden för att kontrollera modellens antaganden.
