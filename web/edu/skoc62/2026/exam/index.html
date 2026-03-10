@@ -378,6 +378,26 @@
     els.down.addEventListener("click", () => navigateRelative(-1));
     els.reset.addEventListener("click", resetSession);
 
+    window.addEventListener("keydown", (event) => {
+      if (event.target instanceof HTMLElement) {
+        const tag = event.target.tagName;
+        if (tag === "INPUT" || tag === "TEXTAREA" || event.target.isContentEditable) {
+          return;
+        }
+      }
+
+      if (event.key === "ArrowLeft" && !els.down.disabled) {
+        event.preventDefault();
+        els.down.click();
+      } else if (event.key === "ArrowRight" && !els.same.disabled) {
+        event.preventDefault();
+        els.same.click();
+      } else if (event.key === "ArrowUp" && !els.up.disabled) {
+        event.preventDefault();
+        els.up.click();
+      }
+    });
+
     init();
   </script>
 </body>
