@@ -386,10 +386,10 @@
         }
       }
 
-      if (event.key === "ArrowLeft" && !els.down.disabled) {
+      if (event.key === "ArrowDown" && !els.down.disabled) {
         event.preventDefault();
         els.down.click();
-      } else if (event.key === "ArrowRight" && !els.same.disabled) {
+      } else if (event.key === "ArrowLeft" && !els.same.disabled) {
         event.preventDefault();
         els.same.click();
       } else if (event.key === "ArrowUp" && !els.up.disabled) {
