@@ -1,0 +1,697 @@
+---
+title: "SIMP59 Lab 4: Relational Thinking, Joins, Reshaping, and Multivariate Visualization"
+output:
+  html_document:
+    df_print: paged
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  echo = TRUE,
+  message = FALSE,
+  warning = FALSE,
+  fig.width = 9,
+  fig.height = 5.5
+)
+```
+
+# Introduction
+
+In this lab, we move from small synthetic tables to a real survey dataset in order to practice relational data thinking in R. The main idea is that data analysis does not begin with plotting or modeling. It begins with understanding what our observations are, how tables are connected, and why some data structures are better for storage while others are better for analysis.
+
+In social science, we often receive survey data as one wide rectangular file where each row is a respondent and each column is a variable. That format is convenient, but it can hide relationships between entities such as respondents, countries, and survey items. This lab shows how normalization, joins, reshaping, and faceting can help us reason more clearly about data workflows.
+
+# Learning Objectives
+
+After completing this lab, you should be able to:
+
+- explain the difference between entities, relationships, and variables
+- identify primary keys and foreign keys in simple relational tables
+- use `inner_join()`, `left_join()`, and `full_join()` to combine tables
+- explain the difference between normalization and tidy data
+- reshape data using `pivot_longer()` and `pivot_wider()`
+- create multivariate visualizations with faceting in `ggplot2`
+- compute grouped summaries including `n`, means, standard deviations, standard errors, and confidence intervals
+- apply relational thinking to a real World Values Survey style dataset
+
+# Setup
+
+We begin by loading the packages used throughout the lab. The code is written in a tidyverse-oriented style because tidyverse functions make joins, reshaping, and grouped summaries especially readable.
+
+```{r libraries}
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+library(readr)
+library(forcats)
+library(stringr)
+
+set.seed(59)
+```
+
+Throughout the lab, pay attention to the difference between a table designed for *storage* and a table designed for *analysis*. Those two goals overlap, but they are not identical.
+
+# Part 1: Small Synthetic Examples of Entities, Relationships, and Joins
+
+We start with very small tables that can be inspected directly in the notebook. Small examples make it easier to see what a key is, what a relationship is, and why different joins keep different rows.
+
+## Entities and Relationships
+
+An **entity** is a thing we want to describe. In survey research, common entities include respondents, countries, and survey items. A **relationship** tells us how those entities connect to each other.
+
+In the next code chunk, we create three small tables:
+
+- `countries`: one row per country
+- `respondents`: one row per respondent
+- `responses`: multiple rows per respondent, because each respondent can answer several items
+
+```{r tiny-tables}
+# One row per country
+countries <- tibble(
+  country_id = c("SE", "DE", "BR", "JP"),
+  country_name = c("Sweden", "Germany", "Brazil", "Japan"),
+  region = c("Europe", "Europe", "Latin America", "Asia")
+)
+
+# One row per respondent
+respondents <- tibble(
+  respondent_id = 1:6,
+  country_id = c("SE", "SE", "DE", "BR", "BR", "XX"),
+  gender = c("Woman", "Man", "Woman", "Man", "Woman", "Man"),
+  age = c(22, 34, 45, 29, 51, 40)
+)
+
+# Several rows per respondent because each person can answer several items
+responses <- tibble(
+  respondent_id = c(1, 1, 2, 2, 3, 4, 4, 5, 7),
+  item_code = c("trust", "satisfaction", "trust", "satisfaction", "trust", "trust", "satisfaction", "trust", "trust"),
+  score = c(7, 8, 5, 6, 6, 4, 5, 7, 9)
+)
+
+countries
+respondents
+responses
+```
+
+These tables already contain several relational ideas:
+
+- `country_id` is the **primary key** of the `countries` table because each country appears once.
+- `respondent_id` is the **primary key** of the `respondents` table because each respondent appears once.
+- `country_id` inside `respondents` is a **foreign key** because it points to the `countries` table.
+- `respondent_id` inside `responses` is a **foreign key** because it points to the `respondents` table.
+- The relationship between `respondents` and `responses` is **one-to-many**: one respondent can have many responses.
+
+## Inner Join
+
+An `inner_join()` keeps only rows with matching keys in both tables. This is useful when you only want cases that can be linked successfully.
+
+```{r inner-join-demo}
+# Keep only respondents whose country_id matches a row in countries
+respondents_inner <- respondents %>%
+  inner_join(countries, by = "country_id")
+
+respondents_inner
+```
+
+Here, the respondent with `country_id == "XX"` disappears because there is no matching country row. The inner join is strict: unmatched rows are dropped.
+
+## Left Join
+
+A `left_join()` keeps all rows from the table on the left and adds information from the table on the right when matches exist. This is often the safest default in analysis because it preserves the original cases.
+
+```{r left-join-demo}
+# Keep all respondents, even if the country lookup is incomplete
+respondents_left <- respondents %>%
+  left_join(countries, by = "country_id")
+
+respondents_left
+```
+
+Now the unmatched respondent remains in the result, but the country information is missing. This is useful because it reveals a data quality problem instead of silently discarding the row.
+
+## Full Join
+
+A `full_join()` keeps all rows from both tables. This is useful when we want to inspect mismatches from either side.
+
+```{r full-join-demo}
+# Add an extra country that no respondent currently references
+countries_extra <- countries %>%
+  add_row(country_id = "ZA", country_name = "South Africa", region = "Africa")
+
+respondents_full <- respondents %>%
+  full_join(countries_extra, by = "country_id")
+
+respondents_full
+```
+
+The full join shows both kinds of mismatch:
+
+- respondent rows without a matching country
+- country rows without a matching respondent
+
+This is one reason joins are conceptually important. They do not only merge data. They also expose structure and inconsistency.
+
+## Joining Across More Than Two Tables
+
+Real workflows often require several joins in sequence. In the next step, we combine `responses` with respondent information and country information.
+
+```{r chained-joins}
+responses_joined <- responses %>%
+  left_join(respondents, by = "respondent_id") %>%
+  left_join(countries, by = "country_id")
+
+responses_joined
+```
+
+This joined table is more convenient for analysis because each response now carries respondent attributes and country attributes. At the same time, it is more redundant than the original normalized structure.
+
+# Part 2: Reshaping and Normalization Concepts
+
+## What Is Normalization?
+
+At a simple level, **normalization** means separating repeated information into smaller related tables. The main goal is to reduce redundancy and represent relationships more clearly. For example, a country name does not need to be repeated in every response row if a country table already stores it once.
+
+By contrast, **tidy data** is an analysis-oriented principle: each variable should form a column, each observation should form a row, and each observational unit should form a table. A normalized database and a tidy analysis table are not the same thing, although both aim to improve clarity.
+
+In practice:
+
+- normalization is useful for storage, consistency, and relational thinking
+- tidy data is useful for transformation, visualization, and modeling
+
+## From a Wide Survey Table to Relational Tables
+
+We now create a small wide survey table. This resembles the kind of rectangular file students often receive in applied social science work.
+
+```{r wide-survey-table}
+survey_wide <- tibble(
+  respondent_id = 1:5,
+  country_id = c("SE", "SE", "DE", "BR", "JP"),
+  gender = c("Woman", "Man", "Woman", "Man", "Woman"),
+  age = c(22, 34, 45, 29, 51),
+  trust = c(7, 5, 6, 4, 8),
+  satisfaction = c(8, 6, 7, 5, 7)
+)
+
+survey_wide
+```
+
+This table is not wrong. In fact, it is already tidy for many purposes because each row is one respondent and each column is one variable. But we can still normalize it further if we want to represent survey answers as a separate entity.
+
+## Pivoting to a Long Answer Table
+
+The code below uses `pivot_longer()` to turn the item columns into rows. This creates a more explicitly relational structure: one row per respondent-item combination.
+
+```{r pivot-longer-demo}
+survey_long <- survey_wide %>%
+  pivot_longer(
+    cols = c(trust, satisfaction),
+    names_to = "item_code",
+    values_to = "score"
+  )
+
+survey_long
+```
+
+This long table is useful because it lets us treat survey items as values in a column instead of keeping each item as a separate variable. That makes grouped summaries and faceted plots easier.
+
+## Splitting the Wide Table into Smaller Tables
+
+We can now normalize the wide table into separate entities:
+
+- a respondent table
+- an item lookup table
+- an answer table
+
+```{r normalization-demo}
+respondent_table <- survey_wide %>%
+  select(respondent_id, country_id, gender, age)
+
+item_lookup <- tibble(
+  item_code = c("trust", "satisfaction"),
+  item_label = c("Trust in other people", "Life satisfaction")
+)
+
+answer_table <- survey_long %>%
+  select(respondent_id, item_code, score)
+
+respondent_table
+item_lookup
+answer_table
+```
+
+The normalized design reduces repetition. Demographic information is stored once per respondent, and item information is stored once per item.
+
+## Joining the Tables Back Together
+
+Normalization is helpful conceptually, but analysis often requires a joined table again. We can reconstruct an analysis-ready table by joining the smaller tables.
+
+```{r join-back-demo}
+survey_analysis_ready <- answer_table %>%
+  left_join(respondent_table, by = "respondent_id") %>%
+  left_join(countries, by = "country_id") %>%
+  left_join(item_lookup, by = "item_code")
+
+survey_analysis_ready
+```
+
+This joined table is convenient for plotting and aggregation because each row now contains the answer, the respondent characteristics, the country, and the item label.
+
+## Reconstructing the Wide Format
+
+Finally, we can use `pivot_wider()` to return from long format to a wide respondent-level table.
+
+```{r pivot-wider-demo}
+survey_wide_again <- survey_long %>%
+  pivot_wider(
+    names_from = item_code,
+    values_from = score
+  )
+
+survey_wide_again
+```
+
+This is an important practical lesson: data work is not a one-way path. We often move between wide, long, normalized, and denormalized forms depending on the task at hand.
+
+# Part 3: Multivariate Visualization with Faceting
+
+Faceting allows us to compare subgroups across multiple dimensions without putting everything into one overloaded plot. It is especially useful when we want to compare similar relationships across countries, genders, or survey items.
+
+## Synthetic Data for Visualization
+
+We now create a slightly larger synthetic dataset with respondents from four countries, three education levels, and two items. The point is not realism, but practice.
+
+```{r synthetic-visual-data}
+n_synth <- 240
+
+synth_respondents <- tibble(
+  respondent_id = 1:n_synth,
+  country = sample(c("Sweden", "Germany", "Brazil", "Japan"), n_synth, replace = TRUE),
+  gender = sample(c("Woman", "Man"), n_synth, replace = TRUE),
+  education = sample(c("Low", "Medium", "High"), n_synth, replace = TRUE, prob = c(0.25, 0.45, 0.30))
+) %>%
+  mutate(
+    education = factor(education, levels = c("Low", "Medium", "High"))
+  )
+
+synth_scores <- synth_respondents %>%
+  crossing(item_code = c("trust", "satisfaction")) %>%
+  mutate(
+    base_score = case_when(
+      item_code == "trust" ~ 5.2,
+      item_code == "satisfaction" ~ 6.2
+    ),
+    country_effect = case_when(
+      country == "Sweden" ~ 0.8,
+      country == "Germany" ~ 0.4,
+      country == "Brazil" ~ -0.3,
+      country == "Japan" ~ 0.1
+    ),
+    gender_effect = if_else(gender == "Woman", 0.2, 0),
+    education_effect = case_when(
+      education == "Low" ~ -0.5,
+      education == "Medium" ~ 0,
+      education == "High" ~ 0.5
+    ),
+    item_effect = if_else(item_code == "satisfaction", 0.4, 0),
+    score = round(pmin(pmax(rnorm(n(), base_score + country_effect + gender_effect + education_effect + item_effect, 1.2), 1), 10), 1)
+  ) %>%
+  select(respondent_id, country, gender, education, item_code, score)
+
+head(synth_scores)
+```
+
+## Facet Plot 1: Response Distributions by Country and Gender
+
+Our first faceted plot shows score distributions across countries, with separate panels for gender. This type of plot helps us compare shapes, spread, and center across subgroups.
+
+```{r facet-plot-distribution}
+ggplot(synth_scores %>% filter(item_code == "trust"), aes(x = score, fill = country)) +
+  geom_histogram(binwidth = 1, color = "white", alpha = 0.8, show.legend = FALSE) +
+  facet_wrap(~ gender) +
+  scale_x_continuous(breaks = 1:10) +
+  labs(
+    title = "Synthetic Trust Scores by Country and Gender",
+    x = "Trust score",
+    y = "Count"
+  ) +
+  theme_minimal()
+```
+
+Faceting is useful here because it lets us compare countries within women and men separately, without mixing the two groups into a single panel.
+
+## Facet Plot 2: Mean Scores by Education Across Countries
+
+The next example uses aggregated data. We compute means, standard deviations, standard errors, and 95 percent confidence intervals. This lets us compare subgroup averages while also visualizing uncertainty.
+
+```{r synth-summary}
+synth_summary <- synth_scores %>%
+  group_by(country, gender, education, item_code) %>%
+  summarize(
+    n = n(),
+    mean_score = mean(score),
+    sd = sd(score),
+    sem = sd / sqrt(n),          # standard error of the mean
+    ci_low = mean_score - 1.96 * sem,
+    ci_high = mean_score + 1.96 * sem,
+    .groups = "drop"
+  )
+
+head(synth_summary)
+```
+
+The code above makes the formulas explicit:
+
+- `sem = sd / sqrt(n)` calculates the standard error of the mean
+- `mean +/- 1.96 * sem` gives an approximate 95 percent confidence interval under a normal approximation
+
+The standard error tells us how much the estimated mean would vary across repeated samples. The confidence interval adds a visual range around the mean estimate. Neither quantity proves a causal effect; they simply help us interpret descriptive estimates with more caution.
+
+```{r facet-plot-uncertainty}
+ggplot(synth_summary, aes(x = education, y = mean_score, color = gender, group = gender)) +
+  geom_point(position = position_dodge(width = 0.35), size = 2) +
+  geom_line(position = position_dodge(width = 0.35)) +
+  geom_errorbar(
+    aes(ymin = ci_low, ymax = ci_high),
+    width = 0.15,
+    position = position_dodge(width = 0.35)
+  ) +
+  facet_grid(item_code ~ country) +
+  labs(
+    title = "Mean Synthetic Scores by Education, Country, and Item",
+    x = "Education",
+    y = "Mean score",
+    color = "Gender"
+  ) +
+  theme_minimal()
+```
+
+This plot combines several dimensions at once:
+
+- x-axis: education
+- y-axis: mean score
+- color: gender
+- facets: item and country
+
+That is the core logic of multivariate visualization. We use aesthetic mappings and faceting to compare many subgroup patterns in a structured way.
+
+# Part 4: Applying Similar Ideas to a Real-World WVS-Style Dataset
+
+We now move from toy examples to a real survey file stored locally. Real survey data typically arrives as a wide rectangular dataset. That format is easy to distribute, but relational thinking still helps us organize the workflow.
+
+The local subset used in this lab contains these variables:
+
+- `country`
+- `age`
+- `sex`
+- `life_sat`
+- `trust_people`
+- `conf_parliament`
+
+If your teaching version uses a different file or different variable names, adapt the path and selected columns in the code below.
+
+## Reading the Data Safely
+
+```{r read-wvs}
+wvs_url <- "https://raw.githubusercontent.com/cca-cce/osm-comm/refs/heads/main/csv/WVS_Cross-National_Wave_7_csv_v6_0.tsv"
+
+wvs_raw <- read_tsv(wvs_url, show_col_types = FALSE)
+
+glimpse(wvs_raw)
+names(wvs_raw)
+head(wvs_raw)
+```
+
+This inspection step matters. Before we transform a real dataset, we need to confirm what the variables are called and what kind of values they contain.
+
+## Selecting a Manageable Subset
+
+To keep the example readable, we select a small set of variables and create an explicit respondent ID.
+
+```{r prepare-wvs}
+wvs_subset <- wvs_raw %>%
+  mutate(respondent_id = row_number()) %>%
+  select(
+    respondent_id,
+    country,
+    age,
+    sex,
+    life_sat,
+    trust_people,
+    conf_parliament
+  )
+
+glimpse(wvs_subset)
+head(wvs_subset)
+```
+
+At this point, the dataset is still a wide respondent-level file. That is perfectly normal for survey delivery. But we can still normalize part of it.
+
+## Cleaning Special Missing-Value Codes
+
+Many survey datasets use negative numbers for categories such as "don't know", "no answer", or "not applicable". These should usually be converted to `NA` before descriptive analysis.
+
+```{r clean-wvs}
+wvs_clean <- wvs_subset %>%
+  mutate(
+    country = as.factor(country),
+    age = if_else(age < 0, NA_real_, as.numeric(age)),
+    sex = if_else(sex < 0, NA_real_, as.numeric(sex)),
+    life_sat = if_else(life_sat < 0, NA_real_, as.numeric(life_sat)),
+    trust_people = if_else(trust_people < 0, NA_real_, as.numeric(trust_people)),
+    conf_parliament = if_else(conf_parliament < 0, NA_real_, as.numeric(conf_parliament)),
+    gender = case_when(
+      sex == 1 ~ "Male",
+      sex == 2 ~ "Female",
+      TRUE ~ NA_character_
+    ),
+    age_group = case_when(
+      is.na(age) ~ NA_character_,
+      age < 30 ~ "18-29",
+      age < 45 ~ "30-44",
+      age < 60 ~ "45-59",
+      TRUE ~ "60+"
+    ),
+    age_group = factor(age_group, levels = c("18-29", "30-44", "45-59", "60+"))
+  )
+
+summary(wvs_clean)
+```
+
+This cleaning step turns the file into a more analysis-ready table while keeping the original respondent-level structure.
+
+## Partial Normalization of the WVS Data
+
+We now build three smaller tables:
+
+- a respondent table
+- an item lookup table
+- a long answer table
+
+```{r normalize-wvs}
+wvs_respondents <- wvs_clean %>%
+  select(respondent_id, country, age, age_group, sex, gender)
+
+wvs_items <- tibble(
+  item_code = c("life_sat", "trust_people", "conf_parliament"),
+  item_label = c(
+    "Life satisfaction",
+    "Trust in other people",
+    "Confidence in parliament"
+  )
+)
+
+wvs_answers <- wvs_clean %>%
+  select(respondent_id, life_sat, trust_people, conf_parliament) %>%
+  pivot_longer(
+    cols = c(life_sat, trust_people, conf_parliament),
+    names_to = "item_code",
+    values_to = "score"
+  )
+
+head(wvs_respondents)
+head(wvs_items)
+head(wvs_answers)
+```
+
+The normalized form is useful because it treats survey items as a data entity in their own right. This makes it easier to summarize multiple items with the same code pattern.
+
+## Joining the Tables Back for Analysis
+
+```{r rejoin-wvs}
+wvs_analysis <- wvs_answers %>%
+  left_join(wvs_respondents, by = "respondent_id") %>%
+  left_join(wvs_items, by = "item_code")
+
+glimpse(wvs_analysis)
+head(wvs_analysis)
+```
+
+This rejoined table is now tidy in a way that is especially useful for plotting and grouped summaries: each row is one respondent-item observation.
+
+# Part 5: Aggregation, Uncertainty, and Confidence Visualization
+
+In this final analytic section, we compute descriptive summaries from the rejoined WVS-style data. The goal is not causal inference. The goal is to make careful descriptive comparisons across countries, genders, age groups, and survey items.
+
+## Choosing a Manageable Set of Countries
+
+For clear plots, it is often useful to focus on a modest number of countries with reasonably large sample sizes.
+
+```{r top-countries}
+top_countries <- wvs_clean %>%
+  count(country, sort = TRUE) %>%
+  slice_head(n = 8) %>%
+  pull(country)
+
+top_countries
+```
+
+## Grouped Summaries with Standard Errors and Confidence Intervals
+
+The next chunk computes the main descriptive quantities.
+
+```{r grouped-summary}
+wvs_summary <- wvs_analysis %>%
+  filter(
+    country %in% top_countries,
+    !is.na(gender),
+    !is.na(age_group),
+    !is.na(score)
+  ) %>%
+  group_by(country, gender, age_group, item_label) %>%
+  summarize(
+    n = n(),
+    mean_score = mean(score),
+    sd = sd(score),
+    sem = sd / sqrt(n),            # SEM formula
+    ci_low = mean_score - 1.96 * sem,
+    ci_high = mean_score + 1.96 * sem,
+    .groups = "drop"
+  )
+
+head(wvs_summary)
+```
+
+This code makes the formulas visible inside the workflow:
+
+- `n` is the subgroup sample size
+- `sd` is the standard deviation within the subgroup
+- `sem = sd / sqrt(n)` is the standard error of the mean
+- `ci_low` and `ci_high` define an approximate 95 percent confidence interval
+
+These intervals do not tell us that one group is "truly different" in a definitive sense. They are descriptive tools that remind us that subgroup means are estimates rather than exact population quantities.
+
+## Plot 1: Mean Scores by Country Faceted by Gender
+
+Our first substantive plot compares countries across the selected items and uses facets for gender.
+
+```{r plot-country-gender}
+country_gender_summary <- wvs_analysis %>%
+  filter(
+    country %in% top_countries,
+    !is.na(gender),
+    !is.na(score)
+  ) %>%
+  group_by(country, gender, item_label) %>%
+  summarize(
+    n = n(),
+    mean_score = mean(score),
+    sd = sd(score),
+    sem = sd / sqrt(n),
+    ci_low = mean_score - 1.96 * sem,
+    ci_high = mean_score + 1.96 * sem,
+    .groups = "drop"
+  )
+
+ggplot(
+  country_gender_summary,
+  aes(x = fct_reorder(country, mean_score), y = mean_score, color = item_label)
+) +
+  geom_point(position = position_dodge(width = 0.45), size = 2) +
+  geom_errorbar(
+    aes(ymin = ci_low, ymax = ci_high),
+    width = 0.2,
+    position = position_dodge(width = 0.45)
+  ) +
+  coord_flip() +
+  facet_wrap(~ gender) +
+  labs(
+    title = "Mean WVS-Style Scores by Country and Gender",
+    x = "Country",
+    y = "Mean score",
+    color = "Survey item"
+  ) +
+  theme_minimal()
+```
+
+This figure helps us compare men and women across countries while keeping the item dimension visible through color. The error bars remind us to avoid over-interpreting small differences.
+
+## Plot 2: Mean Scores by Age Group Faceted by Item
+
+Our second plot compares age-group patterns within countries and uses faceting by item.
+
+```{r plot-age-country-item}
+age_item_summary <- wvs_analysis %>%
+  filter(
+    country %in% top_countries,
+    !is.na(age_group),
+    !is.na(score)
+  ) %>%
+  group_by(country, age_group, item_label) %>%
+  summarize(
+    n = n(),
+    mean_score = mean(score),
+    sd = sd(score),
+    sem = sd / sqrt(n),
+    ci_low = mean_score - 1.96 * sem,
+    ci_high = mean_score + 1.96 * sem,
+    .groups = "drop"
+  )
+
+ggplot(age_item_summary, aes(x = age_group, y = mean_score, group = country, color = country)) +
+  geom_line(linewidth = 0.8) +
+  geom_point(size = 1.8) +
+  geom_errorbar(aes(ymin = ci_low, ymax = ci_high), width = 0.12, alpha = 0.5) +
+  facet_wrap(~ item_label) +
+  labs(
+    title = "Mean WVS-Style Scores by Age Group, Country, and Item",
+    x = "Age group",
+    y = "Mean score",
+    color = "Country"
+  ) +
+  theme_minimal()
+```
+
+This plot highlights how faceting supports comparison. Instead of mixing all items into one panel, we separate the items and compare country trajectories within each one.
+
+## A Short Interpretation
+
+At this stage, we have moved through the full workflow:
+
+- start from a wide survey file
+- clean special missing codes
+- partially normalize the data into respondent and answer tables
+- join the tables back into an analysis-ready long format
+- compute descriptive summaries with uncertainty
+- visualize subgroup patterns with faceting
+
+This is a good example of how relational thinking and tidy analysis complement each other. We normalize to think clearly about structure, and we rejoin to analyze efficiently.
+
+# Conclusion
+
+This lab has connected several ideas that are often taught separately:
+
+- relational tables and joins
+- normalization and tidy data
+- reshaping between wide and long formats
+- aggregation and uncertainty
+- multivariate visualization with facets
+
+The key practical lesson is that data transformation is not only technical. It is conceptual. When you know what your entities are, how they relate to each other, and which table structure is best for the task, your analysis becomes easier to understand and easier to trust.
+
+# Optional Exercises and Reflection Questions
+
+1. In the synthetic example, create an additional table for survey interviewers and join it to the respondent table. What new key would be needed?
+2. Modify the normalization example so that item metadata also includes a response scale description. How does that change the item lookup table?
+3. Replace the approximate 95 percent confidence interval `mean +/- 1.96 * sem` with a t-based interval using `qt()`. How much do the intervals change?
+4. In the WVS section, add a new grouped summary by `age_group` and `gender` at the same time. Which items show the strongest subgroup differences?
+5. Reflect in a few sentences: when is a normalized structure more useful than a flat rectangular table, and when is a denormalized analysis table more useful?
