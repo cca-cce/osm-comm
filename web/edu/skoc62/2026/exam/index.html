@@ -90,8 +90,13 @@
     .controls {
       display: flex;
       justify-content: center;
-      gap: 14px;
+      gap: 24px;
       margin-top: 8px;
+    }
+
+    .control-group {
+      display: flex;
+      gap: 14px;
     }
 
     button {
@@ -128,6 +133,15 @@
       color: #fffaf3;
     }
 
+    .back-btn {
+      background: #49615a;
+      color: #f9f5ee;
+    }
+
+    .back-btn:hover:not(:disabled) {
+      background: #3b4f49;
+    }
+
     .reset:hover:not(:disabled) {
       background: #744b27;
     }
@@ -159,9 +173,14 @@
     <p class="status" id="status"></p>
 
     <div class="controls">
-      <button id="down-btn" aria-label="Easier level">&darr;</button>
-      <button id="same-btn" aria-label="New question, same level">&rarr;</button>
-      <button id="up-btn" aria-label="Harder level">&uarr;</button>
+      <div class="control-group">
+        <button class="back-btn" id="back-btn" aria-label="Previous question">&larr;</button>
+        <button id="same-btn" aria-label="New question, same level">&rarr;</button>
+      </div>
+      <div class="control-group">
+        <button id="down-btn" aria-label="Easier level">&darr;</button>
+        <button id="up-btn" aria-label="Harder level">&uarr;</button>
+      </div>
     </div>
 
     <button class="reset" id="reset-btn" type="button">Reset session</button>
@@ -175,7 +194,9 @@
     const state = {
       rows: [],
       usedIds: [],
-      currentId: null
+      currentId: null,
+      history: [],
+      historyIndex: -1
     };
 
     const els = {
@@ -186,6 +207,7 @@
       question: document.getElementById("question"),
       answer: document.getElementById("answer"),
       status: document.getElementById("status"),
+      back: document.getElementById("back-btn"),
       down: document.getElementById("down-btn"),
       same: document.getElementById("same-btn"),
       up: document.getElementById("up-btn"),
@@ -208,7 +230,9 @@
     function saveSession() {
       sessionStorage.setItem(STORAGE_KEY, JSON.stringify({
         usedIds: state.usedIds,
-        currentId: state.currentId
+        currentId: state.currentId,
+        history: state.history,
+        historyIndex: state.historyIndex
       }));
     }
 
@@ -219,9 +243,13 @@
         const parsed = JSON.parse(raw);
         state.usedIds = Array.isArray(parsed.usedIds) ? parsed.usedIds : [];
         state.currentId = Number.isInteger(parsed.currentId) ? parsed.currentId : null;
+        state.history = Array.isArray(parsed.history) ? parsed.history.filter(Number.isInteger) : [];
+        state.historyIndex = Number.isInteger(parsed.historyIndex) ? parsed.historyIndex : -1;
       } catch {
         state.usedIds = [];
         state.currentId = null;
+        state.history = [];
+        state.historyIndex = -1;
       }
     }
 
@@ -262,6 +290,7 @@
       const currentLevel = row ? row.level : "E";
       const idx = levelIndex(currentLevel);
 
+      els.back.disabled = state.historyIndex <= 0;
       els.down.disabled = idx <= 0;
       els.up.disabled = idx >= LEVELS.length - 1;
 
@@ -271,10 +300,16 @@
       els.same.disabled = sameLevelDifferentTheme.length === 0;
     }
 
-    function setCurrentRow(row, message = "") {
+    function setCurrentRow(row, message = "", options = {}) {
+      const { recordHistory = true } = options;
       state.currentId = row.row_index;
       if (!state.usedIds.includes(row.row_index)) {
         state.usedIds.push(row.row_index);
+      }
+      if (recordHistory) {
+        state.history = state.history.slice(0, state.historyIndex + 1);
+        state.history.push(row.row_index);
+        state.historyIndex = state.history.length - 1;
       }
       saveSession();
       renderCard(row);
@@ -338,9 +373,31 @@
       setCurrentRow(next, `Moved one step ${directionLabel} to level ${targetLevel}.`);
     }
 
+    function showPrevious() {
+      if (state.historyIndex <= 0) {
+        updateButtons();
+        return;
+      }
+
+      state.historyIndex -= 1;
+      state.currentId = state.history[state.historyIndex];
+      const row = currentRow();
+      if (!row) {
+        showStatus("Could not load the previous question.");
+        updateButtons();
+        return;
+      }
+
+      saveSession();
+      renderCard(row);
+      showStatus("Showing previous question.");
+    }
+
     function resetSession() {
       state.usedIds = [];
       state.currentId = null;
+      state.history = [];
+      state.historyIndex = -1;
       sessionStorage.removeItem(STORAGE_KEY);
       drawInitialRow();
     }
@@ -361,18 +418,24 @@
         if (!validIds.has(state.currentId)) {
           state.currentId = null;
         }
+        state.history = state.history.filter((id) => validIds.has(id));
+        if (state.historyIndex >= state.history.length) {
+          state.historyIndex = state.history.length - 1;
+        }
 
         drawInitialRow();
       } catch (error) {
         els.question.textContent = "Could not load the question file.";
         els.answer.textContent = "";
         showStatus(error.message);
+        els.back.disabled = true;
         els.down.disabled = true;
         els.same.disabled = true;
         els.up.disabled = true;
       }
     }
 
+    els.back.addEventListener("click", showPrevious);
     els.same.addEventListener("click", navigateSameLevelDifferentTheme);
     els.up.addEventListener("click", () => navigateRelative(1));
     els.down.addEventListener("click", () => navigateRelative(-1));
@@ -386,7 +449,10 @@
         }
       }
 
-      if (event.key === "ArrowDown" && !els.down.disabled) {
+      if (event.key === "ArrowLeft" && !els.back.disabled) {
+        event.preventDefault();
+        els.back.click();
+      } else if (event.key === "ArrowDown" && !els.down.disabled) {
         event.preventDefault();
         els.down.click();
       } else if (event.key === "ArrowRight" && !els.same.disabled) {
