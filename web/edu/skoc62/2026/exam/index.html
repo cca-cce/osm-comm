@@ -249,7 +249,7 @@
 
     function renderCard(row) {
       els.level.textContent = `Level ${row.level}`;
-      els.theme.textContent = `Theme ${row.theme}`;
+      els.theme.textContent = `Theme ${row.theme}: ${row.theme_name}`;
       els.row.textContent = `Row ${row.row_index}`;
       els.progress.textContent = `Used ${state.usedIds.length} / ${state.rows.length}`;
       els.question.textContent = row.question;
