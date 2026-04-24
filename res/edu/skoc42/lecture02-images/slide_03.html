@@ -1,0 +1,211 @@
+<!DOCTYPE html><html><head><meta charset="UTF-8">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { width: 1200px; height: 800px; overflow: hidden; }
+body { background: #18181f; }
+.slide { width: 1200px; height: 800px; }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #000; }
+
+  /* ── Shared slide styles ─────────────────────────────── */
+  .slide {
+    background: #18181f;
+    color: #fff;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    padding: 80px 100px 70px 100px;
+    position: relative;
+  }
+
+  /* ── Title slide ─────────────────────────────────────── */
+  .slide-title {
+    justify-content: center;
+  }
+  .slide-title .main-title {
+    font-size: 68px;
+    font-weight: 700;
+    line-height: 1.15;
+    max-width: 900px;
+    margin-bottom: 56px;
+  }
+  .slide-title .subtitle {
+    font-size: 34px;
+    color: rgba(255,255,255,0.72);
+    margin-bottom: 20px;
+  }
+  .slide-title .authors {
+    font-size: 32px;
+    color: rgba(255,255,255,0.55);
+  }
+
+  /* ── Section header slides ───────────────────────────── */
+  .slide-section {
+    background: #111118;
+    justify-content: center;
+  }
+  .slide-section .sec-num {
+    font-size: 120px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.07);
+    line-height: 1;
+    margin-bottom: 24px;
+  }
+  .slide-section .sec-label {
+    font-size: 28px;
+    color: #d4821e;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+  .slide-section .sec-title {
+    font-size: 64px;
+    font-weight: 700;
+    line-height: 1.18;
+    max-width: 860px;
+  }
+
+  /* ── Content slides (two-column) ─────────────────────── */
+  .slide-content .slide-heading {
+    font-size: 52px;
+    font-weight: 700;
+    line-height: 1.18;
+    margin-bottom: 52px;
+    text-wrap: pretty;
+  }
+  .slide-content .columns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 72px;
+    flex: 1;
+    align-items: center;
+  }
+  .viz-col {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .slide-content .bullet-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+  }
+  .slide-content .bullet-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 18px;
+    font-size: 30px;
+    line-height: 1.45;
+    color: rgba(255,255,255,0.88);
+  }
+  .slide-content .bullet-list li::before {
+    content: "•";
+    color: rgba(255,255,255,0.4);
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .slide-content .bullet-list li.accent {
+    color: #d4821e;
+    font-weight: 600;
+  }
+  .slide-content .bullet-list li.accent::before {
+    color: #d4821e;
+  }
+
+  /* ── Image placeholder ───────────────────────────────── */
+  .img-placeholder {
+    width: 100%;
+    aspect-ratio: 4/3;
+    background: repeating-linear-gradient(
+      45deg,
+      rgba(255,255,255,0.03) 0px,
+      rgba(255,255,255,0.03) 1px,
+      transparent 1px,
+      transparent 12px
+    );
+    border: 1px solid rgba(255,255,255,0.10);
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    padding: 32px;
+    text-align: center;
+  }
+  .img-placeholder .img-icon {
+    opacity: 0.18;
+    font-size: 48px;
+  }
+  .img-placeholder .img-label {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 24px;
+    color: rgba(255,255,255,0.35);
+    line-height: 1.5;
+    letter-spacing: 0.02em;
+  }
+
+  /* ── Footer ──────────────────────────────────────────── */
+  .footer {
+    position: absolute;
+    bottom: 28px;
+    left: 0; right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 100px;
+  }
+  .footer .footer-url {
+    font-size: 24px;
+    color: #5ba4cf;
+  }
+  .footer .footer-logo {
+    font-size: 24px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.55);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .footer .footer-logo::before {
+    content: "";
+    display: inline-block;
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.15);
+  }
+
+</style></head><body><div class="slide slide-content">
+      <div class="slide-heading">Marketing Communication</div>
+      <div class="columns">
+        <ul class="bullet-list"><li class="accent">Marketing defined: Identifying, anticipating & satisfying customer requirements profitably</li><li>Facilitates the 'exchange of value' between manufacturers and consumers</li><li>Strategic techniques for acquiring new customers (CRM)</li><li>Develops long-term customer relationships</li><li>Foundation for all digital marketing activity</li></ul>
+        <div class="viz-col"><svg viewBox="0 0 500 340" xmlns="http://www.w3.org/2000/svg"
+      style="width:100%;height:100%;max-height:340px"
+      font-family="'Helvetica Neue',Arial,sans-serif"><defs>
+    <marker id="a"  markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3z" fill="rgba(255,255,255,0.42)"/></marker>
+    <marker id="ao" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3z" fill="#d4821e"/></marker>
+    <marker id="ab" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3z" fill="#5ba4cf"/></marker>
+    <marker id="ag" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3z" fill="#5bc4a0"/></marker>
+  </defs>
+      <text x="250" y="30" text-anchor="middle" font-size="16" fill="rgba(255,255,255,0.85)" font-weight="700">Marketing Management Cycle</text>
+      <circle cx="250" cy="175" r="100" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.18)" stroke-width="1.2"/>
+      <rect x="175" y="40" width="150" height="52" rx="8" fill="#d4821e22" stroke="#d4821e" stroke-width="1.2"/>  <text x="250" y="71" text-anchor="middle" font-size="14" fill="#d4821e" font-weight="600">Identify</text>
+      <rect x="340" y="140" width="140" height="52" rx="8" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.18)" stroke-width="1.2"/>      <text x="410" y="171" text-anchor="middle" font-size="14" fill="rgba(255,255,255,0.85)" font-weight="600">Anticipate</text>
+      <rect x="175" y="270" width="150" height="52" rx="8" fill="#5bc4a022" stroke="#5bc4a0" stroke-width="1.2"/> <text x="250" y="301" text-anchor="middle" font-size="14" fill="#5bc4a0" font-weight="600">Satisfy</text>
+      <rect x="20" y="140" width="140" height="52" rx="8" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.18)" stroke-width="1.2"/>       <text x="90" y="171" text-anchor="middle" font-size="14" fill="rgba(255,255,255,0.85)" font-weight="600">Profit</text>
+      <line x1="285" y1="92" x2="345" y2="140" stroke="rgba(255,255,255,0.42)" stroke-width="2" marker-end="url(#ao)"/>
+      <line x1="380" y1="192" x2="370" y2="192" stroke="rgba(255,255,255,0.42)" stroke-width="2" marker-end="url(#a)"/>
+      <line x1="215" y1="270" x2="100" y2="200" stroke="rgba(255,255,255,0.42)" stroke-width="2" marker-end="url(#ag)"/>
+      <line x1="90" y1="140" x2="175" y2="96" stroke="rgba(255,255,255,0.42)" stroke-width="2" marker-end="url(#a)"/>
+      <text x="250" y="180" text-anchor="middle" font-size="12" fill="rgba(255,255,255,0.42)" font-weight="normal">CRM</text>
+    </svg></div>
+      </div>
+      <div class="footer">
+    <span class="footer-url">canvas.education.lu.se/courses/37906</span>
+    <span class="footer-logo">Lund University</span>
+  </div>
+    </div></body></html>
