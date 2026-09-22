@@ -1,0 +1,216 @@
+respondent_type	respondent_id	age_group	gender	employment	municipality_type	school_size	region	music_teaching_experience	music_hours_week	education_detail	education_group	answers_lp12	answers_lp36	instrument_studies	singing_studies	music_theory_studies	choir_courses	band_ensemble_courses	music_school_studies	conservatory_or_uas_studies	liberal_adult_education_studies	music_in_free_time	leads_voluntary_music_activity	curriculum_familiarity	resources_sufficient	likes_teaching_music	needs_didactic_development	lp12_sing_group	lp12_positive_relation	lp12_natural_voice	lp12_move_to_music	lp12_positive_musical_self	lp12_act_responsibly	lp12_group_music_making	lp12_explore_musical_heritage	lp12_soundscapes_and_concepts	lp12_musical_diversity	lp12_notation_principles	lp12_play_group	lp12_goals_and_practice	lp12_create_and_improvise	lp36_sing_group	lp36_group_cohesion	lp36_positive_relation	lp36_group_music_making	lp36_natural_voice	lp36_positive_musical_self	lp36_play_group	lp36_concepts_and_notation	lp36_wellbeing_and_safe_sound	lp36_listen_analyze_describe	lp36_goals_practice_evaluate	lp36_move_to_music	lp36_embodied_expression	lp36_analyze_diversity	lp36_create_and_improvise	lp36_create_with_digital_tools	principal_resources_sufficient	activity_expanded_hours	activity_split_class	activity_orchestra	activity_band	activity_choir	activity_students_attend_external_concerts	activity_school_concerts	activity_music_study_visits	external_music_partner	special_music_education
+teacher	T001	50-59	woman	permanent	urban	100-299	Southwest Finland	over 20	1-2	class teacher: older 15-credit minor	Class teacher, compulsory + at least one course	1	1	0	1	0	1	0	0	0	0	1	0	4	1	5	0	4	4	3	3	4	4	3	3	3	2	2	3	3	2	5	4	3	3	3	4	5	5	3	3	4	3	3	3	3	2											
+teacher	T002	50-59	man	permanent	rural	100-299	Ostrobothnia	5-10	over 20	class teacher: newer 25-ECTS minor	Class teacher, compulsory + at least one course	0	1	0	0	0	0	0	1	0	0	1	0	3	1	4	1															4	4	4	4	3	3	3	4	2	3	2	3	2	2	2	2											
+teacher	T003	30-39	woman	permanent	rural	50-99	Uusimaa	5-10	1-2	class teacher: compulsory plus elective course	Class teacher, compulsory + at least one course	1	1	0	0	0	0	1	0	0	0	0	0	2	3	4	0	2	3	3	3	2	1	1	2	2	3	2	1	1	1	3	4	2	3	3	1	3	3	2	3	2	2	3	2	1	3											
+teacher	T004	50-59	woman	permanent	rural	100-299	Ostrobothnia	under 5	1-2	class teacher: compulsory music didactics	Class teacher, compulsory studies	1	1	0	0	0	0	1	1	0	0	1	0	3	5	5	0	4	3	3	3	4	4	3	3	2	3	2	1	1	1	4	4	3	5	3	4	5	3	3	2	3	4	3	2	3	2											
+teacher	T005	30-39	man	permanent	rural	50-99	Uusimaa	over 20	1-2	class teacher: compulsory music didactics	Class teacher, compulsory studies	1	0	1	0	1	0	1	1	0	0	1	1	3	3	4	1	2	2	3	2	3	3	3	4	2	3	1	1	2	2																											
+teacher	T006	30-39	woman	permanent	urban	100-299	Ostrobothnia	11-15	1-2	class teacher: compulsory music didactics	Class teacher, compulsory studies	1	0	0	1	1	0	0	1	0	0	1	0	4	2	4	0	2	3	1	1	2	3	1	1	3	1	1	1	1	1																											
+teacher	T007	50-59	woman	permanent	urban	100-299	Ostrobothnia	16-20	3-5	class teacher: compulsory music didactics	Class teacher, compulsory studies	1	1	1	1	1	0	1	1	0	0	1	0	3	4	4	0	5	4	4	5	3	5	5	4	3	4	5	5	3	3	4	4	4	4	3	4	4	3	4	3	2	2	3	3	2	2											
+teacher	T008	50-59	woman	permanent	rural	300-499	Uusimaa	5-10	6-10	class teacher: compulsory music didactics	Class teacher, compulsory studies	0	1	1	0	0	0	1	0	0	0	0	1	4	2	4	0															4	4	3	4	4	3	3	3	3	1	4	3	1	1	5	2											
+teacher	T009	40-49	man	permanent	semi-urban	under 50	Uusimaa	under 5	3-5	class teacher: older 15-credit minor	Class teacher, compulsory + at least one course	1	1	0	1	0	0	0	0	0	0	1	0	2	2	2	1	5	4	3	3	3	4	3	2	3	3	4	4	2	2	2	3	3	1	2	3	3	2	2	1	1	2	2	3	2	2											
+teacher	T010	over 60	woman	fixed-term	semi-urban	50-99	Uusimaa	over 20	6-10	neither class nor subject teacher	Neither class nor subject teacher	0	1	0	0	0	0	0	0	0	0	0	0	3	1	2	0															3	4	3	3	3	2	3	2	1	2	2	2	1	2	2	2											
+teacher	T011	50-59	woman	substitute	semi-urban	100-299	Southwest Finland	11-15	1-2	music subject teacher	Subject teacher or dual qualification	1	1	1	0	0	0	1	1	0	0	1	0	3	3	5	1	5	4	4	3	4	3	3	3	2	2	3	3	1	2	3	4	4	5	3	2	5	3	3	3	2	2	2	2	1	1											
+teacher	T012	50-59	woman	permanent	rural	100-299	Southwest Finland	under 5	3-5	class teacher: compulsory music didactics	Class teacher, compulsory studies	1	1	1	1	1	1	0	1	1	0	1	0	4	2	4	1	4	4	4	3	3	4	2	3	3	2	3	3	3	2	5	3	4	4	4	5	4	3	4	3	4	3	1	2	3	2											
+teacher	T013	50-59	woman	permanent	urban	50-99	Uusimaa	5-10	3-5	class teacher: compulsory music didactics	Class teacher, compulsory studies	1	1	0	0	1	0	1	0	0	0	1	0	2	4	3	1	4	3	3	2	2	3	2	3	2	2	2	2	1	2	4	2	4	3	4	4	3	3	3	4	4	3	3	3	2	2											
+teacher	T014	30-39	woman	permanent	semi-urban	under 50	Uusimaa	16-20	1-2	neither class nor subject teacher	Neither class nor subject teacher	0	1	1	1	1	0	0	0	0	1	1	0	3	2	4	1															2	1	1	1	2	1	1	1	1	1	1	1	1	1	1	1											
+teacher	T015	50-59	woman	permanent	urban	100-299	Ostrobothnia	under 5	6-10	class teacher: compulsory music didactics	Class teacher, compulsory studies	0	1	1	0	1	1	0	1	1	0	1	1	5	4	5	1															5	5	4	4	4	3	3	5	3	4	4	3	3	3	3	4											
+teacher	T016	40-49	woman	permanent	rural	100-299	Southwest Finland	5-10	3-5	class teacher: compulsory music didactics	Class teacher, compulsory studies	0	1	0	0	0	0	0	0	0	0	0	0	3	3	4	0															5	3	5	4	3	3	5	4	4	4	3	3	4	3	3	4											
+teacher	T017	40-49	woman	fixed-term	urban	50-99	Uusimaa	5-10	1-2	class teacher: compulsory plus elective course	Class teacher, compulsory + at least one course	1	0	1	0	0	1	0	1	0	0	1	0	4	4	4	1	4	3	3	3	4	3	3	2	3	3	2	3	1	3																											
+teacher	T018	30-39	woman	permanent	rural	100-299	Ostrobothnia	over 20	6-10	dual qualification	Subject teacher or dual qualification	0	1	1	1	1	1	1	1	0	1	1	1	5	2	5	1															4	4	4	4	4	4	5	3	3	4	5	4	3	2	3	2											
+teacher	T019	30-39	woman	permanent	rural	100-299	Uusimaa	over 20	3-5	class teacher: compulsory music didactics	Class teacher, compulsory studies	0	1	1	1	1	0	0	1	0	1	1	0	4	2	4	0															4	4	4	4	4	3	3	3	3	3	3	3	2	3	2	1											
+teacher	T020	50-59	woman	permanent	urban	under 50	Southwest Finland	5-10	1-2	class teacher: compulsory music didactics	Class teacher, compulsory studies	0	1	0	1	0	0	0	0	0	0	0	0	2	1	1	0															3	3	3	3	3	3	2	2	2	3	3	2	2	1	1	1											
+teacher	T021	50-59	woman	permanent	rural	100-299	Southwest Finland	over 20	1-2	dual qualification	Subject teacher or dual qualification	1	1	0	0	1	1	1	1	0	0	0	0	4	4	5	1	5	5	4	5	4	5	5	5	4	4	3	4	4	3	5	5	5	5	4	5	5	4	4	5	5	4	5	4	5	5											
+teacher	T022	50-59	woman	permanent	semi-urban	100-299	Southwest Finland	5-10	1-2	class teacher: compulsory music didactics	Class teacher, compulsory studies	1	0	0	0	0	0	0	1	0	0	1	0	2	2	4	0	3	3	3	2	2	3	2	1	1	2	1	2	2	1																											
+teacher	T023	40-49	woman	permanent	urban	100-299	Ostrobothnia	over 20	3-5	class teacher: older 15-credit minor	Class teacher, compulsory + at least one course	1	0	0	1	0	1	0	0	0	0	1	0	4	4	3	1	4	4	5	4	4	4	4	4	4	2	3	3	5	2																											
+teacher	T024	50-59	woman	permanent	urban	100-299	Ostrobothnia	under 5	3-5	class teacher: compulsory music didactics	Class teacher, compulsory studies	1	1	1	0	1	1	0	1	0	0	1	1	4	4	4	1	5	4	5	4	3	3	3	3	3	1	4	3	3	3	2	3	3	3	3	3	3	3	3	3	2	2	2	2	3	1											
+teacher	T025	50-59	woman	permanent	rural	100-299	Ostrobothnia	over 20	1-2	class teacher: compulsory music didactics	Class teacher, compulsory studies	1	1	1	0	1	0	0	1	0	1	0	0	4	3	4	0	5	4	4	4	4	4	4	5	5	3	4	4	4	3	4	5	4	3	4	4	5	4	2	3	3	3	3	3	5	3											
+teacher	T026	40-49	woman	permanent	semi-urban	50-99	Uusimaa	5-10	6-10	class teacher: newer 25-ECTS minor	Class teacher, compulsory + at least one course	1	1	1	1	1	1	0	1	0	1	1	1	5	4	5	1	5	3	4	4	3	4	4	4	3	3	4	4	3	3	5	4	5	4	4	4	3	3	3	3	3	4	3	1	3	3											
+teacher	T027	29 or younger	man	permanent	rural	100-299	Ostrobothnia	11-15	1-2	class teacher: compulsory music didactics	Class teacher, compulsory studies	0	1	0	0	0	0	0	1	0	0	0	0	3	4	2	0															3	2	4	4	3	3	3	2	3	2	2	1	3	2	2	2											
+teacher	T028	50-59	woman	fixed-term	rural	under 50	Uusimaa	over 20	1-2	music subject teacher	Subject teacher or dual qualification	0	1	1	1	1	1	1	1	1	0	1	1	5	4	5	1															4	3	4	4	4	4	4	3	4	3	2	5	3	3	4	4											
+teacher	T029	40-49	woman	permanent	rural	100-299	Ostrobothnia	under 5	1-2	class teacher: older 15-credit minor	Class teacher, compulsory + at least one course	1	1	1	1	0	0	0	0	0	0	1	0	3	5	4	0	5	5	2	4	4	3	2	3	3	3	3	2	2	2	4	5	4	2	4	3	2	2	3	1	3	2	1	2	2	2											
+teacher	T030	40-49	man	permanent	semi-urban	under 50	Ostrobothnia	over 20	11-20	neither class nor subject teacher	Neither class nor subject teacher	1	1	0	1	0	0	1	0	0	0	0	0	3	1	3	1	4	3	3	3	3	2	2	2	2	3	3	3	3	2	4	3	3	2	3	3	3	2	2	3	2	1	2	3	1	1											
+teacher	T031	40-49	woman	permanent	rural	100-299	Ostrobothnia	over 20	3-5	class teacher: older 15-credit minor	Class teacher, compulsory + at least one course	0	1	1	1	1	1	1	1	0	0	0	0	3	3	5	1															5	5	5	5	4	5	5	5	5	5	5	4	4	5	5	5											
+teacher	T032	50-59	woman	permanent	rural	100-299	Ostrobothnia	5-10	3-5	class teacher: compulsory music didactics	Class teacher, compulsory studies	1	1	0	0	0	0	1	1	0	0	1	0	4	5	4	0	4	4	4	4	3	4	5	4	3	3	3	3	3	3	4	4	4	4	3	3	3	4	2	4	2	4	3	4	3	3											
+teacher	T033	50-59	woman	permanent	rural	50-99	Uusimaa	over 20	1-2	class teacher: older 15-credit minor	Class teacher, compulsory + at least one course	1	1	0	0	0	0	1	0	0	0	0	0	3	4	3	0	4	3	4	4	4	2	4	3	4	4	3	2	3	1	4	5	3	3	3	4	4	3	2	3	2	3	4	3	2	3											
+teacher	T034	40-49	woman	permanent	urban	100-299	Ostrobothnia	under 5	1-2	class teacher: compulsory music didactics	Class teacher, compulsory studies	0	1	1	0	1	1	0	1	1	1	1	1	5	4	5	1															3	4	4	4	4	4	3	4	3	3	4	2	2	2	2	3											
+teacher	T035	50-59	man	permanent	urban	50-99	Southwest Finland	over 20	3-5	neither class nor subject teacher	Neither class nor subject teacher	0	1	0	0	0	0	0	0	0	0	0	0	3	4	3	1															3	2	4	2	3	2	1	1	3	2	1	1	2	2	2	1											
+teacher	T036	50-59	man	permanent	rural	under 50	Ostrobothnia	over 20	1-2	class teacher: compulsory music didactics	Class teacher, compulsory studies	0	1	1	0	1	1	1	1	0	0	1	0	4	2	4	1															3	4	4	5	5	4	4	4	4	3	3	3	3	2	3	3											
+teacher	T037	40-49	woman	permanent	rural	100-299	Uusimaa	over 20	1-2	class teacher: compulsory music didactics	Class teacher, compulsory studies	0	1	1	0	0	0	0	0	0	1	1	0	3	2	5	1															4	3	3	4	3	4	3	4	3	2	2	2	1	2	3	2											
+teacher	T038	30-39	man	fixed-term	semi-urban	50-99	Ostrobothnia	over 20	3-5	class teacher: older 15-credit minor	Class teacher, compulsory + at least one course	0	1	1	0	1	1	0	1	0	0	0	1	4	3	5	0															4	4	3	3	4	3	4	4	2	3	4	3	2	3	2	3											
+teacher	T039	50-59	man	permanent	rural	100-299	Ostrobothnia	11-15	1-2	class teacher: compulsory music didactics	Class teacher, compulsory studies	1	1	0	1	0	0	1	0	0	1	0	0	2	1	4	0	4	3	4	4	3	2	3	3	2	2	3	2	3	3	3	2	3	3	3	2	2	3	2	3	2	1	3	2	2	1											
+teacher	T040	29 or younger	woman	permanent	semi-urban	50-99	Ostrobothnia	over 20	6-10	class teacher: compulsory music didactics	Class teacher, compulsory studies	1	1	0	1	0	0	0	0	0	0	1	0	3	5	4	1	3	4	4	3	3	4	5	4	4	3	5	3	3	2	5	3	4	5	3	4	5	3	3	4	4	4	2	3	4	2											
+teacher	T041	40-49	woman	permanent	urban	100-299	Ostrobothnia	over 20	3-5	class teacher: compulsory music didactics	Class teacher, compulsory studies	0	1	0	0	1	0	0	0	0	1	1	0	2	1	5	0															3	4	3	2	2	3	4	2	3	3	2	3	3	2	2	2											
+teacher	T042	50-59	woman	permanent	rural	100-299	Ostrobothnia	5-10	3-5	class teacher: compulsory music didactics	Class teacher, compulsory studies	1	1	0	0	1	0	0	1	0	0	1	0	4	4	4	0	5	3	4	3	3	4	3	5	3	4	2	3	4	3	4	4	4	5	4	3	4	3	2	3	3	3	3	3	2	2											
+teacher	T043	30-39	woman	fixed-term	rural	100-299	Uusimaa	over 20	3-5	class teacher: compulsory music didactics	Class teacher, compulsory studies	0	1	0	1	1	1	0	0	0	0	1	0	4	4	3	1															4	4	4	5	3	5	3	4	3	4	3	4	4	3	3	2											
+teacher	T044	40-49	woman	permanent	urban	100-299	Ostrobothnia	16-20	1-2	class teacher: newer 25-ECTS minor	Class teacher, compulsory + at least one course	1	0	1	1	1	1	0	1	0	1	1	1	4	2	5	0	4	3	4	4	4	3	4	3	4	3	3	4	2	2																											
+teacher	T045	50-59	woman	permanent	rural	50-99	Uusimaa	16-20	over 20	class teacher: compulsory music didactics	Class teacher, compulsory studies	0	1	1	1	1	1	0	1	0	0	1	1	4	2	5	1															4	4	3	3	3	5	3	4	4	3	3	4	3	3	2	3											
+teacher	T046	40-49	man	substitute	rural	50-99	Ostrobothnia	16-20	6-10	class teacher: compulsory music didactics	Class teacher, compulsory studies	1	0	0	0	0	0	0	0	0	0	0	0	3	4	2	0	3	3	2	2	3	3	2	2	2	1	2	1	1	1																											
+teacher	T047	50-59	woman	permanent	semi-urban	100-299	Ostrobothnia	5-10	6-10	class teacher: compulsory music didactics	Class teacher, compulsory studies	1	1	0	0	0	0	0	0	0	1	0	0	2	4	1	0	5	4	3	5	4	4	5	5	3	5	3	4	4	2	4	4	2	2	4	2	2	3	3	3	2	2	1	1	3	2											
+teacher	T048	50-59	woman	permanent	urban	100-299	Ostrobothnia	over 20	1-2	class teacher: compulsory music didactics	Class teacher, compulsory studies	1	0	0	0	0	0	1	1	0	0	0	0	4	3	4	1	4	3	4	3	1	3	3	3	2	2	3	1	3	2																											
+teacher	T049	40-49	man	fixed-term	urban	100-299	Uusimaa	16-20	3-5	class teacher: newer 25-ECTS minor	Class teacher, compulsory + at least one course	1	0	1	0	0	0	0	0	0	0	1	0	4	3	3		5	3	4	4	4	5	4	4	4	3	3	2	3	3																											
+teacher	T050	29 or younger	woman	permanent	semi-urban	50-99	Ostrobothnia	over 20	3-5	class teacher: older 15-credit minor	Class teacher, compulsory + at least one course	0	1	1	0	0	1	0	1	0	1	1	1	5	4	4	1															4	5	4	5	4	4	4	3	4	3	3	4	3	3	1	2											
+teacher	T051	30-39	woman	permanent	rural	50-99	Ostrobothnia	over 20	6-10	class teacher: compulsory music didactics	Class teacher, compulsory studies	1	1	0	1	0	0	1	0	0	0	0	0	2	3	1	1	4	5	5	4	4	4	4	4	3	3	4	2	4	3	4	3	2	3	3	3	3	3	1	3	1	3	1	2	1	1											
+teacher	T052	50-59	woman	permanent	semi-urban	over 500	Ostrobothnia	11-15	11-20	class teacher: newer 25-ECTS minor	Class teacher, compulsory + at least one course	1	1	1	1	1	1	1	1	1	1	1	1	4	4	5	1	5	4	5	4	4	4	5	4	4	3	4	4	3	3	4	4	4	5	3	3	4	3	3	3	4	4	3	3	2	3											
+teacher	T053	50-59	woman	permanent	urban	300-499	Ostrobothnia	over 20	3-5	class teacher: older 15-credit minor	Class teacher, compulsory + at least one course	1	1	0	0	0	0	0	0	0	1	1	0	2	4	4	0	5	3	4	4	3	3	5	2	4	2	3	3	3	2	3	4	4	3	3	4	2	3	3	3	3	3	2	3	2	2											
+teacher	T054	30-39	man	permanent	rural	50-99	Uusimaa	16-20	1-2	class teacher: older 15-credit minor	Class teacher, compulsory + at least one course	1	0	1	1	0	0	0	1	0	0	1	1	5	4	3	0	4	4	3	3	4	4	3	4	4	2	3	3	3	3																											
+teacher	T055	50-59	woman	permanent	urban	100-299	Uusimaa	under 5	over 20	class teacher: compulsory music didactics	Class teacher, compulsory studies	1	0	1	0	0	0	0	0	0	0	0	0	3	2	5	0	5	5	4	3	3	4	4	4	3	4	3	4	3	2																											
+teacher	T056	30-39	man	permanent	rural	100-299	Uusimaa	over 20	3-5	neither class nor subject teacher	Neither class nor subject teacher	1	1	1	0	1	1	0	0	0	0	1	1	4	4	4	1	4	4	2	3	2	3	2	3	2	2	2	3	3	1	4	5	4	4	4	4	4	4	3	3	4	3	2	4	3	3											
+teacher	T057	50-59	woman	permanent	urban	100-299	Uusimaa	under 5	3-5	class teacher: compulsory music didactics	Class teacher, compulsory studies	0	1	0	0	1	1	1	1	0	0	1	0	4	4	5	1															5	3	4	3	3	4	2	2	4	3	3	2	2	2	2	2											
+teacher	T058	30-39	woman	permanent	rural	under 50	Uusimaa	16-20	3-5	class teacher: older 15-credit minor	Class teacher, compulsory + at least one course	1	1	1	1	1	1	1	1	0	0	1	0	5	4	5	1	5	5	4	4	4	3	2	3	3	3	3	3	4	2	4	5	4	4	3	4	5	2	3	3	3	3	3	4	1	2											
+teacher	T059	50-59	woman	permanent	rural	100-299	Uusimaa	5-10	3-5	class teacher: newer 25-ECTS minor	Class teacher, compulsory + at least one course	1	0	1	1	1	1	1	1	1	0	1	0	5	5	4	1	5	4	5	5	3	5	3	3	3	4	4	4	4	3																											
+teacher	T060	50-59	woman	permanent	semi-urban	100-299	Ostrobothnia	over 20	3-5	class teacher: compulsory music didactics	Class teacher, compulsory studies	0	1	1	1	0	1	0	1	0	0	1	1	3	1	4	0															3	2	3	2	2	3	2	4	1	3	2	1	3	1	1	1											
+teacher	T061	30-39	woman	fixed-term	urban	100-299	Uusimaa	over 20	3-5	class teacher: older 15-credit minor	Class teacher, compulsory + at least one course	1	1	0	0	0	0	0	0	0	1	1	0	2	4	1	0	2	3	3	4	3	3	2	3	3	3	2	2	2	2	2	5	3	2	2	4	2	3	3	4	2	3	2	2	1	2											
+teacher	T062	50-59	woman	substitute	urban	100-299	Ostrobothnia	11-15	3-5	class teacher: compulsory music didactics	Class teacher, compulsory studies	1	0	0	1	1	0	1	1	0	0	1	1	4	2	3	0	5	3	3	3	3	3	3	4	2	3	4	2	2	2																											
+teacher	T063	40-49	man	permanent	urban	under 50	Ostrobothnia	5-10	3-5	class teacher: compulsory plus elective course	Class teacher, compulsory + at least one course	1	1	1	0	1	1	0	1	1	0	1	1	5	4	5	1	4	4	4	3	3	4	3	2	3	2	3	4	2	3	3	3	4	5	5	3	4	3	4	3	3	3	2	3	2	2											
+teacher	T064	40-49	woman	permanent	urban	300-499	Ostrobothnia	5-10	6-10	class teacher: compulsory music didactics	Class teacher, compulsory studies	1	1	0	0	0	0	0	0	0	1	0	0	2	2	4	1	4	4	4	3	3	3	3	4	3	4	3	4	4	3	2	2	2	1	2	3	1	4	3	1	1	1	1	1	1	2											
+teacher	T065	40-49	woman	permanent	rural	50-99	Uusimaa	over 20	3-5	neither class nor subject teacher	Neither class nor subject teacher	1	0	0	0	0	0	0	0	0	0	0	0	1	4	1	0	5	4	2	1	2	3	4	2	2	2	2	1	2	1																											
+teacher	T066	40-49	woman	permanent	urban	100-299	Southwest Finland	5-10	3-5	class teacher: compulsory music didactics	Class teacher, compulsory studies	0	1	1	1	1	1	0	1	0	0	1	1	4	4	5	1															4	3	3	2	3	3	1	2	3	3	2	1	2	1	2	2											
+teacher	T067	50-59	man	permanent	semi-urban	100-299	Ostrobothnia	over 20	1-2	class teacher: compulsory plus elective course	Class teacher, compulsory + at least one course	1	1	1	1	1	1	0	1	1	1	1	1	4	3	5	0	4	4	5	5	4	4	4	4	4	3	3	4	2	3	4	3	4	4	4	3	4	2	3	3	3	2	2	3	2	2											
+teacher	T068	30-39	woman	permanent	semi-urban	100-299	Uusimaa	5-10	3-5	class teacher: compulsory music didactics	Class teacher, compulsory studies	1	1	1	0	1	1	0	1	0	0	1	1	4	5	4	1	4	3	3	4	2	1	2	3	4	3	3	1	2	3	4	5	3	3	5	4	2	3	3	2	3	2	3	3	2	3											
+teacher	T069	50-59	woman	permanent	urban	100-299	Uusimaa	under 5	3-5	neither class nor subject teacher	Neither class nor subject teacher	0	1	1	0	0	0	0	0	0	0	1	0	3	4	3	0															4	3	4	3	4	3	1	5	4	3	4	3	3	3	3	2											
+teacher	T070	50-59	woman	permanent	urban	100-299	Ostrobothnia	under 5	11-20	class teacher: older 15-credit minor	Class teacher, compulsory + at least one course	0	1	1	0	1	1	0	1	1	0	1	0	5	2	5	1															2	4	3	2	2	2	2	1	2	1	1	1	1	1	1	1											
+teacher	T071	50-59	woman	permanent	semi-urban	300-499	Southwest Finland	11-15	1-2	neither class nor subject teacher	Neither class nor subject teacher	1	1	0	0	0	0	0	1	0	0	0	0	3	1	2	1	3	3	1	2	4	3	1	2	3	3	1	1	2	1	4	4	4	4	4	3	3	2	3	3	4	3	1	2	1	3											
+teacher	T072	40-49	woman	permanent	semi-urban	under 50	Southwest Finland	under 5	3-5	dual qualification	Subject teacher or dual qualification	0	1	1	0	1	1	1	1	0	0	1	0	3	5	4	0															3	3	2	3	2	3	1	3	1	3	2	2	1	3	3	2											
+teacher	T073	50-59	man	permanent	urban	300-499	Southwest Finland	over 20	1-2	class teacher: compulsory music didactics	Class teacher, compulsory studies	1	1	0	1	0	0		1	0	0	1	0	3	4	1	0	5	4	4	4	4	3	4	3	4	4	3	3	3	3	5	4	3	4	4	4	3	2	4	4	2	3	2	3	3	3											
+teacher	T074	30-39	woman	permanent	rural	50-99	Ostrobothnia	under 5	1-2	class teacher: compulsory music didactics	Class teacher, compulsory studies	0	1	0	0	0	0	1	1	0	0	0	0	3	4	4	0															4	5	4	5	4	4	4	4	3	5	3	3	3	4	4	3											
+teacher	T075	50-59	woman	fixed-term	urban	100-299	Ostrobothnia	over 20	1-2	class teacher: older 15-credit minor	Class teacher, compulsory + at least one course	0	1	1	0	0	1	0	1	0	0	1	0	3	4	5	1															3	4	3	3	3	3	4	4	3	3	2	2	3	3	2	2											
+teacher	T076	30-39	woman	permanent	rural	100-299	Uusimaa	under 5	3-5	class teacher: compulsory music didactics	Class teacher, compulsory studies	0	1	1	0	1	0	0	1	0	0	1	0	4	4	5	0															4	4	3	4	3	3	5	4	3	3	3	2	3	3	3	2											
+teacher	T077	50-59	woman	fixed-term	rural	under 50	Ostrobothnia	5-10	3-5	class teacher: older 15-credit minor	Class teacher, compulsory + at least one course	1	1	1	1	1	1	0	1	0	1	1	0	3	4	5	0	5	5	3	5	5	3	3	4	3	3	2	4	3	3	4	4	3	5	4	4	3	2	4	3	4	3	2	2	3	3											
+teacher	T078	50-59	man	permanent	semi-urban	300-499	Ostrobothnia	5-10	3-5	class teacher: compulsory music didactics	Class teacher, compulsory studies	1	1	0	0	0	0	1	1	0	0	1	0	3	2	2	0	3	3	3	4	3	4	4	4	3	3	3	1	3	3	4	3	3	3	5	3	3	4	3	4	2	4	4	3	1	3											
+teacher	T079	50-59	woman	permanent	semi-urban	100-299	Ostrobothnia	over 20	6-10	class teacher: compulsory plus elective course	Class teacher, compulsory + at least one course	0	1	0	1	0	0	1	0	0	0	0	0	3	4	2	1															4	3	3	3	3	3	4	4	3	2	3	2	2	2	2	1											
+teacher	T080	30-39	woman	permanent	semi-urban	under 50	Uusimaa	over 20	11-20	class teacher: compulsory music didactics	Class teacher, compulsory studies	1	1	0	0	0	0	0	0	0	1	0	0	1	2	3	1	4	2	3	2	2	2	1	2	3	3	2	1	3	1	2	3	4	3	2	3	2	3	3	3	2	2	2	2	1	2											
+teacher	T081	50-59	man	permanent	rural	50-99	Uusimaa	over 20	3-5	music subject teacher	Subject teacher or dual qualification	1	1	1	1	1	1	1	1	1	1	1	1	5	4	5	1	5	5	5	5	5	5	5	5	4	4	5	5	5	5	5	5	5	5	5	4	5	3	3	4	4	4	5	4	4	4											
+teacher	T082	30-39	woman	permanent	rural	300-499	Ostrobothnia	over 20	1-2	neither class nor subject teacher	Neither class nor subject teacher	1	1	0	1	0	0	0	0	0	0	0	0	2	4	2	0	4	4	4	4	4	3	2	3	2	3	2	3	3	1	3	2	4	2	4	3	2	1	3	2	3	4	2	2	3	2											
+teacher	T083	40-49	woman	permanent	urban	100-299	Southwest Finland	11-15	6-10	class teacher: older 15-credit minor	Class teacher, compulsory + at least one course	1	1	1	0	0	0	1	1	0	1	1	0	3	4	3	0	4	2	3	4	4	3	3	2	3	3	3	2	3	2	4	3	5	3	1	3	4	3	4	4	2	4	3	2	2	4											
+teacher	T084	50-59	woman	permanent	rural	under 50	Uusimaa	5-10	1-2	class teacher: older 15-credit minor	Class teacher, compulsory + at least one course	1	1	1	0	1	0	0	1	0	0	1	0	3	2	5	1	4	3	3	3	3	2	4	3	3	4	2	2	2	2	2	2	3	2	3	2	3	4	2	2	2	2	2	2	1	1											
+teacher	T085	40-49	woman	permanent	urban	100-299	Ostrobothnia	5-10	3-5	neither class nor subject teacher	Neither class nor subject teacher	1	0	0	1	0	0	0	1	0	1	0	0	3	1	4	0	4	4	4	5	4	4	4	4	5	4	4	3	3	3																											
+teacher	T086	30-39	woman	permanent	rural	50-99	Ostrobothnia	over 20	11-20	neither class nor subject teacher	Neither class nor subject teacher	0	1	0	1	0	0	0	0	0	0	1	0	3	2	3	1															4	3	3	3	4	3	3	3	2	3	3	2	2	2	2	3											
+teacher	T087	40-49	woman	permanent	rural	50-99	Uusimaa	over 20	1-2	class teacher: older 15-credit minor	Class teacher, compulsory + at least one course	1	1	0	0	0	0	0	0	0	1	0	0	2	4	2	0	3	3	4	1	4	3	3	2	1	2	1	1	2	1	5	4	4	3	3	2	3	5	3	3	4	2	2	2	2	1											
+teacher	T088	40-49	man	permanent	semi-urban	300-499	Ostrobothnia	over 20		class teacher: compulsory music didactics	Class teacher, compulsory studies	0	1	1	0	1	1	0	0	0	1	1	0	3	4	4	1															4	3	2	3	2	2	1	2	3	3	2	2	1	1	2	1											
+teacher	T089	40-49	woman	permanent	semi-urban	50-99	Ostrobothnia	5-10	3-5	class teacher: newer 25-ECTS minor	Class teacher, compulsory + at least one course	1	1	1	0	1	1	1	1	1	0	1	1	5	5	5	1	4	4	3	4	3	2	3	3	3	3	3	3	3	3	4	5	5	4	3	3	3	4	3	4	3	4	3	3	2	1											
+teacher	T090	30-39	woman	fixed-term	semi-urban	100-299	Ostrobothnia	5-10	1-2	class teacher: compulsory music didactics	Class teacher, compulsory studies	1	1	0	0	0	0	1	0	0	0	0	0	3	1	3	0	4	4	3	4	4	2	3	3	3	2	2	4	2	1	5	3	4	4	4	3	3	3	4	4	3	3	3	3	3	4											
+teacher	T091	50-59	woman	permanent	semi-urban	100-299	Ostrobothnia	5-10	11-20	class teacher: compulsory music didactics	Class teacher, compulsory studies	0	1	0	0	0	0	0	0	0	0	0	0	2	4	1	0															3	3	3	4	2	4	2	3	4	3	3	3	1	2	2	2											
+teacher	T092	40-49	woman	fixed-term	semi-urban	under 50	Uusimaa	over 20	3-5	class teacher: compulsory music didactics	Class teacher, compulsory studies	0	1	0	1	0	0	0	0	0	0	0	0	3	4	3	1															4	4	3	4	4	2	4	3	3	2	3	1	1	2	2	3											
+teacher	T093	30-39	woman	permanent	semi-urban	50-99	Uusimaa	under 5	1-2	class teacher: compulsory music didactics	Class teacher, compulsory studies	0	1	1	1	0	0	1	0	0	1	1	1	3	4	4	1															4	4	4	4	3	3	4	3	3	4	4	3	4	4	2	4											
+teacher	T094	50-59	woman	permanent	rural	100-299	Uusimaa	5-10	3-5	class teacher: compulsory music didactics	Class teacher, compulsory studies	0	1	1	0	0	0	0	0	0	0	0	0	3	1	2	1															4	3	3	2	3	3	1	4	4	3	3	4	3	2	2	3											
+teacher	T095	40-49	woman	permanent	rural	50-99	Ostrobothnia	under 5	1-2	music subject teacher	Subject teacher or dual qualification	1	1	1	0	1	1	1	1	0	1	1	1	4	4	5	0	4	5	4	3	2	4	4	4	3	2	2	2	3	2	5	5	4	5	3	5	4	3	3	4	4	3	2	3	4	4											
+teacher	T096	over 60	woman	substitute	semi-urban	100-299	Uusimaa	over 20	1-2	class teacher: newer 25-ECTS minor	Class teacher, compulsory + at least one course	0	1	0	0	0	0	0	0	0	0	0	0	2	2	2	0															3	3	2	4	2	2	2	2	2	2	2	1	1	2	1	1											
+teacher	T097	over 60	woman	permanent	rural	100-299	Southwest Finland	over 20	1-2	class teacher: compulsory music didactics	Class teacher, compulsory studies	1	0	0	0	1	1	0	1	0	1	1	0	4	4	4	1	4	4	4	4	4	3	3	3	4	4	2	3	3	2																											
+teacher	T098	40-49	woman	permanent	semi-urban	50-99	Ostrobothnia	over 20	1-2	class teacher: compulsory music didactics	Class teacher, compulsory studies	1	1	0	0	0	0	1	0	0	1	0	0	1	3	1	1	3	4	4	4	3	3	3	3	3	4	3	2	3	3	5	4	3	3	3	3	3	3	5	2	1	3	2	2	3	1											
+teacher	T099	40-49	woman	permanent	rural	100-299	Southwest Finland	under 5	1-2	class teacher: compulsory music didactics	Class teacher, compulsory studies	0	1	0	1	0	0	0	0	0	0	1	0	3	2	4	1															3	2	3	1	2	3	2	2	2	3	2	1	2	2	1	1											
+teacher	T100	40-49	woman	permanent	semi-urban	100-299	Ostrobothnia	11-15	6-10	music subject teacher	Subject teacher or dual qualification	0	1	0	1	0	0	1	1	0	1	0	0	2	2	4	0															4	1	2	1	3	3	2	2	2	2	2	2	2	2	2	1											
+teacher	T101	50-59	woman	permanent	urban	100-299	Uusimaa	16-20	6-10	music subject teacher	Subject teacher or dual qualification	0	1	0	0	1	0	1	0	0	1	1	1	4	5	3	1															5	4	5	5	4	4	5	3	4	3	4	5	4	3	4	3											
+teacher	T102	50-59	woman	permanent	rural	300-499	Southwest Finland	5-10	3-5	class teacher: older 15-credit minor	Class teacher, compulsory + at least one course	1	1	1	0	1	1	0	1	0	0	0	0	5	4	4	1	5	4	4	4	4	4	5	3	4	3	3	3	3	2	3	3	3	3	3	3	5	3	4	2	2	2	3	1	1	1											
+teacher	T103	30-39	woman	permanent	semi-urban	50-99	Ostrobothnia	5-10	11-20	class teacher: compulsory plus elective course	Class teacher, compulsory + at least one course	1	0	0	1	1	0	0	1	0	1	1	0	3	4	5	0	4	3	3	4	5	3	4	3	4	4	4	4	3	3																											
+teacher	T104	50-59	woman	permanent	rural	100-299	Ostrobothnia	over 20	1-2	class teacher: older 15-credit minor	Class teacher, compulsory + at least one course	0	1	1	0	1	1	0	1	1	1	1	0	4	5	5	0															4	4	5	4	4	4	4	5	4	4	4	3	4	4	3	4											
+teacher	T105	40-49	man	permanent	rural	300-499	Uusimaa	11-15	1-2	class teacher: compulsory music didactics	Class teacher, compulsory studies	0	1	1	0	0	1	1	1	0	1	1	1	4	5	4	1															5	4	4	5	4	4	5	4	4	4	4	4	3	3	3	4											
+teacher	T106	50-59	woman	permanent	urban	100-299	Ostrobothnia	16-20	3-5	class teacher: older 15-credit minor	Class teacher, compulsory + at least one course	1	1	1	1	1	1	1	1	0	1	1	1	5	3	5	1	4	4	4	4	3	3	3	4	4	3	3	4	2	3	3	4	4	5	5	3	5	4	4	3	4	2	3	3	3	2											
+teacher	T107	50-59	woman	permanent	semi-urban	300-499	Ostrobothnia	under 5	3-5	class teacher: compulsory music didactics	Class teacher, compulsory studies	1	1	1	0	1	0	0	1	0	1	1	0	3	4	4	0	3	3	3	2	3	3	2	4	3	2	3	2	2	1	4	4	4	4	3	4	4	3	5	3	5	4	2	2	2	2											
+teacher	T108	30-39	woman	permanent	urban	100-299	Ostrobothnia	11-15	1-2	class teacher: compulsory music didactics	Class teacher, compulsory studies	0	1	0	0	0	1	0	1	0	1	1	0	3	1	5	0															4	3	2	4	3	3	2	2	3	2	3	3	2	3	2	1											
+teacher	T109	30-39	man	permanent	semi-urban	100-299	Uusimaa	over 20	1-2	class teacher: compulsory music didactics	Class teacher, compulsory studies	1	1	1	0	0	1	0	1	0	1	1	0	3	1	4	1	4	3	2	3	3	3	3	3	3	2	3	3	2	2	2	2	3	2	2	2	1	1	2	1	1	2	1	1	1	1											
+teacher	T110	30-39	woman	permanent	rural	100-299	Ostrobothnia	16-20	1-2	class teacher: compulsory music didactics	Class teacher, compulsory studies	0	1	1	0	0	0	0	0	0	0	0	0	4	2	4	0															4	4	3	3	4	5	2	3	3	3	3	2	3	2	2	1											
+teacher	T111	40-49	woman	permanent	rural	50-99	Other Finland	under 5	1-2	class teacher: compulsory music didactics	Class teacher, compulsory studies	1	1	0	0	0	0	0	1	0	1	1	0	3	4	3	0	5	5	5	5	4	4	5	5	4	5	2	4	3	4	2	3	3	3	3	3	3	3	3	3	2	2	3	1	3	2											
+teacher	T112	50-59	woman	permanent	rural	50-99	Ostrobothnia	11-15	3-5	class teacher: compulsory music didactics	Class teacher, compulsory studies	1	1	1	0	1	0	0	1	0	1	1	0	3	4	4	1	3	2	2	3	1	2	3	3	2	2	2	2	2	1	3	3	3	3	3	3	3	2	1	2	3	2	2	3	2	2											
+teacher	T113	30-39	man	substitute	urban	50-99	Ostrobothnia	5-10	1-2	class teacher: compulsory music didactics	Class teacher, compulsory studies	1	0	1	0	1	1	1	1	0	0	1	1	4	2	4	1	5	3	4	2	3	3	3	3	3	2	3	2	3	1																											
+teacher	T114	50-59	woman	permanent	urban	300-499	Ostrobothnia	over 20	1-2	dual qualification	Subject teacher or dual qualification	1	1	1	0	1	1	1	1	1	0	1	1	5	4	5	1	5	5	4	4	5	4	4	4	4	3	4	5	4	3	5	5	5	5	4	5	5	5	4	3	4	4	4	3	4	4											
+teacher	T115	50-59	woman	permanent	urban	100-299	Ostrobothnia	11-15	3-5	class teacher: older 15-credit minor	Class teacher, compulsory + at least one course	1	0	1	0	0	0	1	1	0	0	1	0	3	2	4	1	4	4	4	2	3	4	4	4	3	4	1	4	3	3																											
+teacher	T116	50-59	woman	permanent	urban	over 500	Uusimaa	11-15	1-2	class teacher: older 15-credit minor	Class teacher, compulsory + at least one course	1	0	0	0	0	0	1	0	0	0	1	0	3	4	4	0	3	3	5	3	3	4	3	3	2	3	2	3	2	1																											
+teacher	T117	30-39	woman	permanent	urban	under 50	Ostrobothnia	over 20	1-2	neither class nor subject teacher	Neither class nor subject teacher	1	1	0	0	0	0	0	1	0	0	1	0	2	3	2	1	4	2	3	4	3	3	3	3	3	3	1	1	2	2	4	4	4	4	3	3	2	3	3	3	3	1	2	1	2	1											
+teacher	T118	40-49	woman	permanent	urban	300-499	Ostrobothnia	over 20	3-5	class teacher: older 15-credit minor	Class teacher, compulsory + at least one course	1	1	0	0	0	0	0	0	0	0	1	0	4	5	4		3	3	3	4	4	3	3	5	4	3	2	4	4	3	5	3	3	2	4	3	5	3	2	4	2	3	3	2	2	2											
+teacher	T119	50-59	woman	fixed-term	urban	100-299	Uusimaa	5-10	3-5	music subject teacher	Subject teacher or dual qualification	1	1	1	0	1	1	1	1	1	0	1	0	4	1	5	0	2	3	3	2	2	2	2	2	3	2	1	2	2	1	4	4	4	5	3	4	3	3	4	4	3	3	2	4	2	3											
+teacher	T120	29 or younger	woman	fixed-term	semi-urban	100-299	Uusimaa	over 20	1-2	class teacher: compulsory music didactics	Class teacher, compulsory studies	1	0	0	0	0	0	0	1	0	0	1	0	3	3	3	1	3	3	4	2	3	3	4	3	2	2	2	1	2	2																											
+teacher	T121	over 60	woman	permanent	urban	over 500	Ostrobothnia	11-15	1-2	class teacher: older 15-credit minor	Class teacher, compulsory + at least one course	1	1	1	0	0	0	1	0	0	1	1	0	3	2	3	1	4	5	3	4	3	3	4	3	3	3	4	3	4	1	4	3	3	3	5	3	3	4	3	3	2	2	3	2	1	2											
+teacher	T122	29 or younger	woman	permanent	urban	100-299	Ostrobothnia	over 20	1-2	class teacher: compulsory plus elective course	Class teacher, compulsory + at least one course	0	1	0	1	0	0	0	0	0	0	1	0	3	2	4	1															5	3	3	4	4	3	5	4	3	4	3	3	3	3	3	3											
+teacher	T123	30-39	woman	permanent	urban	300-499	Uusimaa	under 5	1-2	class teacher: compulsory music didactics	Class teacher, compulsory studies	0	1	0	0	0	0	0	1	0	0	0	0	3	5	4	1															5	3	3	4	4	3	2	3	4	2	3	3	3	3	2	1											
+teacher	T124	29 or younger	woman	permanent	rural	100-299	Ostrobothnia	over 20	3-5	class teacher: older 15-credit minor	Class teacher, compulsory + at least one course	1	1	1	0	1	1	0	1	1	1	1	1	5	2	5	1	5	5	4	4	5	5	4	4	4	4	4	4	3	3	5	5	4	4	4	4	4	3	4	4	4	3	3	2	3	1											
+teacher	T125	50-59	woman	permanent	semi-urban	100-299	Ostrobothnia	over 20	3-5	class teacher: compulsory plus elective course	Class teacher, compulsory + at least one course	0	1	1	1	0	0	0	0	0	0	1	0	4	4	4	1															4	4	3	4	3	1	3	4	2	3	2	3	2	3	3	1											
+teacher	T126	50-59	woman	permanent	rural	under 50	Ostrobothnia	over 20	3-5	class teacher: older 15-credit minor	Class teacher, compulsory + at least one course	1	1	1	1	1	1	0	1	1	0	1	1	5	5	5	0	5	5	4	4	5	5	5	5	5	2	4	4	4	3	3	3	3	3	3	4	4	2	4	3	3	3	2	2	3	4											
+teacher	T127	50-59	man	permanent	rural	100-299	Southwest Finland	5-10	3-5	dual qualification	Subject teacher or dual qualification	1	1	1	0	1	0	1	1	0	1	1	1	4	3	5	1	5	4	5	4	4	3	3	2	3	3	2	3	2	2	4	5	5	5	4	4	5	4	4	2	3	4	3	2	3	4											
+teacher	T128	50-59	man	permanent	urban	100-299	Ostrobothnia	over 20	3-5	class teacher: older 15-credit minor	Class teacher, compulsory + at least one course	1	1	1	0	1	1	0	1	0	0	1	1	4	4	5	0	3	3	4	2	2	2	3	3	2	3	5	2	2	1	3	3	4	3	4	3	4	3	3	3	3	2	2	3	2	2											
+teacher	T129	40-49	woman	permanent	semi-urban	under 50	Ostrobothnia	11-15	1-2	class teacher: newer 25-ECTS minor	Class teacher, compulsory + at least one course	1	1	0	0	0	0	1	0	0	1	1	0	1	1	3	1	3	3	2	1	3	2	1	3	2	2	1	2	2	2	3	3	2	1	3	3	1	2	2	2	2	1	2	2	1	2											
+teacher	T130	50-59	woman	permanent	rural	under 50	Ostrobothnia	under 5	11-20	class teacher: compulsory music didactics	Class teacher, compulsory studies	1	1	0	0	0	0	0	0	0	0	0	0	2	2	3	0	3	3	2	3	2	3	2	3	3	2	2	2	2	2	4	4	3	5	4	2	3	3	2	3	3	2	3	2	2	1											
+teacher	T131	29 or younger	man	permanent	rural	300-499	Ostrobothnia	16-20	3-5			0	0	1	1	1	0	0	1	0	1	1	0		5	5	1																																									
+teacher	T132	30-39	woman	permanent	urban	under 50	Southwest Finland	over 20	3-5	class teacher: older 15-credit minor	Class teacher, compulsory + at least one course	1	1	1	0	1	1	1	1	1	1	1	1	5	4	5	0	4	3	3	3	4	3	4	3	2	2	2	2	3	1	4	3	4	2	3	3	5	3	4	3	2	2	2	3	2	2											
+teacher	T133	30-39	woman	permanent	rural	100-299	Ostrobothnia	under 5	3-5	class teacher: compulsory plus elective course	Class teacher, compulsory + at least one course	1	0	1	1	1	1	0	1	1	0	1	0	4	2	4		4	4	3	3	4	3	5	3	3	5	4	4	3	3																											
+principal	P001																																																									2	0	0	0	0	1	1	0	1	0	none
+principal	P002																																																									2	0	1	1	1	1	0	0	1	0	none
+principal	P003																																																									2	0	0	0	0	0	1	0	0	0	none
+principal	P004																																																									2	0	1	1	1	1	1	0	0	0	none
+principal	P005																																																									2	0	0	0	0	0	0	1	0	0	none
+principal	P006																																																									2	0	0	0	0	1	1	1	0	0	none
+principal	P007																																																									3	0	0	0	0	0	1	0	1	0	none
+principal	P008																																																									3	0	0	0	0	0	0	1	0	0	none
+principal	P009																																																									2	0	0	0	1	1	0	0	0	0	three-tier model
+principal	P010																																																									1	0	0	0	1	0	1	1	1	1	none
+principal	P011																																																									5	0	0	0	1	0	1	0	0	0	none
+principal	P012																																																									5	1	0	0	0	1	0	0	1	0	none
+principal	P013																																																									5	0	0	0	0	1	0	1	0	0	none
+principal	P014																																																									2	0	0	0	1	1	1	0	0	1	none
+principal	P015																																																									5	0	0	0	0	1	1	1	1	0	none
+principal	P016																																																									3	0	1	0	0	0	1	0	0	1	none
+principal	P017																																																									4	1	0	0	0	0	1	1	0	0	none
+principal	P018																																																									3	0	0	0	0	1	0	1	0	0	three-tier model
+principal	P019																																																									4	0	0	0	0	1	1	0	0	1	none
+principal	P020																																																									5	0	0	0	0	1	1	1	1	0	some extent
+principal	P021																																																									3	1	1	0	0	1	1	1	0	0	none
+principal	P022																																																									1	0	0	0	1	1	1	1	0	0	none
+principal	P023																																																									5	0	0	0	1	1	1	1	1	0	none
+principal	P024																																																									2	1	0	0	1	1	1	0	0	0	three-tier model
+principal	P025																																																									3	0	0	0	0	1	1	0	0	0	three-tier model
+principal	P026																																																									5	0	0	0	0	0	0	1	0	1	some extent
+principal	P027																																																									4	0	0	1	0	1	0	0	1	1	none
+principal	P028																																																									4	1	0	0	1	1	1	1	0	0	none
+principal	P029																																																									1	0	0	0	0	0	1	0	0	1	none
+principal	P030																																																									2	0	1	0	0	0	0	0	0	1	some extent
+principal	P031																																																									4	0	0	0	0	1	0	0	0	0	none
+principal	P032																																																									4	1	0	0	0	1	0	0	0	0	none
+principal	P033																																																									3	0	0	0	1	0	0	1	0	0	three-tier model
+principal	P034																																																									2	0	0	1	0	0	0	0	1	0	none
+principal	P035																																																									4	0	0	0	0	0	0	0	0	1	none
+principal	P036																																																									2	1	0	0	0	0	0	1	1	0	some extent
+principal	P037																																																									3	1	0	0	1	1	1	1	1	0	none
+principal	P038																																																									3	1	0	0	0	0	0	0	0	1	none
+principal	P039																																																									4	0	0	0	1	1	0	1	1	1	none
+principal	P040																																																									3	0	0	0	0	0	1	1	1	1	three-tier model
+principal	P041																																																									1	0	0	0	1	0	0	0	0	0	three-tier model
+principal	P042																																																									4	1	0	0	0	1	0	0	0	1	none
+principal	P043																																																									2	0	0	0	0	1	0	1	1	0	three-tier model
+principal	P044																																																									3	1	0	0	0	0	1	0	1	1	some extent
+principal	P045																																																									4	0	1	1	0	1	1	0	0	1	none
+principal	P046																																																									4	1	0	0	0	1	0	1	0	1	none
+principal	P047																																																									1	0	0	0	1	1	1	1	0	0	none
+principal	P048																																																									1	0	0	0	0	1	1	0	0	0	none
+principal	P049																																																									4	0	0	0	0	0	1	1	1	0	none
+principal	P050																																																									3	0	0	0	0	1	0	1	0	1	none
+principal	P051																																																									2	0	0	0	0	1	0	1	0	1	none
+principal	P052																																																									4	1	0	0	0	1	1	0	0	0	none
+principal	P053																																																									3	1	0	0	0	1	0	0	0	0	none
+principal	P054																																																									3	0	0	0	0	1	0	0	0	0	none
+principal	P055																																																									4	0	0	0	0	0	0	0	0	0	none
+principal	P056																																																									3	0	0	1	0	0	0	1	0	1	none
+principal	P057																																																									2	0	0	0	0	0	1	0	1	0	some extent
+principal	P058																																																									3	0	0	1	0	1	1	0	0	0	none
+principal	P059																																																									5	0	0	1	1	0	0	0	0	1	some extent
+principal	P060																																																									3	0	0	0	0	0	0	0	0	1	none
+principal	P061																																																									5	0	0	1	1	1	1	1	0	0	none
+principal	P062																																																									2	0	0	0	0	1	0	0	1	1	none
+principal	P063																																																									2	0	0	0	0	1	0	1	1	1	none
+principal	P064																																																									4	0	0	0	0	1	0	1	1	1	some extent
+principal	P065																																																									3	0	0	0	0	1	1	1	0	1	none
+principal	P066																																																									5	0	0	0	0	1	1	0	0	1	none
+principal	P067																																																									2	0	0	0	1	0	0	1	0	1	some extent
+principal	P068																																																									2	0	0	0	0	1	0	0	0	0	none
+principal	P069																																																									2	0	0	0	0	0	0	0	0	1	none
+principal	P070																																																									5	1	0	0	0	1	1	0	0	0	none
+principal	P071																																																									4	0	0	0	0	0	0	1	0	1	none
+principal	P072																																																									2	0	0	0	0	1	0	0	0	1	none
+principal	P073																																																									5	0	1	0	0	1	1	1	0	1	none
+principal	P074																																																									2	0	0	0	1	0	1	0	1	0	none
+principal	P075																																																									5	0	1	1	0	0	0	0	1	0	none
+principal	P076																																																									4	0	1	0	1	1	0	0	1	0	three-tier model
+principal	P077																																																									5	1	0	0	0	0	1	0	0	0	none
+principal	P078																																																									1	0	0	0	0	1	1	1	1	0	none
+principal	P079																																																									3	1	1	0	0	1	1	1	0	0	none
+principal	P080																																																									3	0	0	0	0	1	1	0	1	0	some extent
+principal	P081																																																									2	0	1	0	0	1	1	0	0	1	three-tier model
+principal	P082																																																									2	0	0	1	1	0	1	1	1	0	none
