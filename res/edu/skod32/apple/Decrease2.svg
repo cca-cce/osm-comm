@@ -1,0 +1,5 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="300" height="300">
+<desc xml:lang="en">triangle dp red</desc>
+   <polygon points="0 0  150 300  300 0" fill="#F00"/>
+</svg>
