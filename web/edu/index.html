@@ -2,16 +2,23 @@
 <html>
 <head>
     <meta charset='utf-8'>
+    <meta name="color-scheme" content="dark">
     <title>Course Index</title>
     <style>
-        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; padding: 20px; color: #333; }
-        header { margin-bottom: 20px; border-bottom: 2px solid #eee; padding-bottom: 10px; }
+        :root {
+            color-scheme: dark;
+            --bg: #121417; --fg: #d7dae0; --muted: #8b929c;
+            --rule: #2a2e35; --accent: #ef6b6b; --accent-rule: #5a2a2a;
+            --link: #6cb6ff; --link-hover: #a5d2ff;
+        }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; padding: 20px; background: var(--bg); color: var(--fg); }
+        header { margin-bottom: 20px; border-bottom: 2px solid var(--rule); padding-bottom: 10px; }
         
         /* The Magic: 5-column layout that wraps items vertically */
         .column-container {
             column-count: 5;
             column-gap: 30px;
-            column-rule: 1px solid #f0f0f0; /* Optional vertical line between columns */
+            column-rule: 1px solid var(--rule); /* Optional vertical line between columns */
         }
 
         .group-box {
@@ -24,8 +31,8 @@
         h2 { 
             font-size: 1.1em; 
             margin: 0 0 8px 0; 
-            color: #d32f2f; 
-            border-bottom: 1px solid #ffcdd2;
+            color: var(--accent); 
+            border-bottom: 1px solid var(--accent-rule);
         }
 
         .item { 
@@ -36,8 +43,8 @@
             text-overflow: ellipsis; 
         }
 
-        a { text-decoration: none; color: #0066cc; }
-        a:hover { color: #004488; text-decoration: underline; }
+        a { text-decoration: none; color: var(--link); }
+        a:hover { color: var(--link-hover); text-decoration: underline; }
     </style>
 </head>
 <body>
@@ -155,6 +162,11 @@
 <div class='item'><a href="skod52-cca01.html" title="skod52-cca01.html">skod52-cca01.html</a></div>
 <div class='item'><a href="skod52-cca02.html" title="skod52-cca02.html">skod52-cca02.html</a></div>
 <div class='item'><a href="skod52-module3.html" title="skod52-module3.html">skod52-module3.html</a></div>
+</div>
+<div class='group-box'><h2>skod52/2025</h2>
+<div class='item'><a href="skod52/2025/skod52-cca01.html" title="skod52-cca01.html">skod52-cca01.html</a></div>
+<div class='item'><a href="skod52/2025/skod52-cca02.html" title="skod52-cca02.html">skod52-cca02.html</a></div>
+<div class='item'><a href="skod52/2025/skod52-module3.html" title="skod52-module3.html">skod52-module3.html</a></div>
 </div>
 <div class='group-box'><h2>skom12</h2>
 <div class='item'><a href="skom12-workshop-ai.html" title="skom12-workshop-ai.html">skom12-workshop-ai.html</a></div>
