@@ -11,38 +11,19 @@
             --rule: #2a2e35; --accent: #ef6b6b; --accent-rule: #5a2a2a;
             --link: #6cb6ff; --link-hover: #a5d2ff;
         }
+        [hidden] { display: none !important; }
         body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; padding: 20px; background: var(--bg); color: var(--fg); }
-        header { margin-bottom: 20px; border-bottom: 2px solid var(--rule); padding-bottom: 10px; }
-        
-        /* The Magic: 5-column layout that wraps items vertically */
-        .column-container {
-            column-count: 5;
-            column-gap: 30px;
-            column-rule: 1px solid var(--rule); /* Optional vertical line between columns */
+        header { margin-bottom: 20px; border-bottom: 2px solid var(--rule); padding-bottom: 12px; }
+        #course-search {
+            display: block; box-sizing: border-box; width: 100%; max-width: 420px; margin-top: 10px; padding: 7px 10px;
+            font-size: 1em; color: var(--fg); background: #1b1e23; border: 1px solid var(--rule); border-radius: 4px;
         }
-
-        .group-box {
-            break-inside: avoid; /* Prevents a group from being split across two columns */
-            margin-bottom: 20px;
-            display: inline-block; /* Helps with browser compatibility for column-break */
-            width: 100%;
-        }
-
-        h2 { 
-            font-size: 1.1em; 
-            margin: 0 0 8px 0; 
-            color: var(--accent); 
-            border-bottom: 1px solid var(--accent-rule);
-        }
-
-        .item { 
-            font-size: 0.85em; 
-            margin: 3px 0; 
-            white-space: nowrap; 
-            overflow: hidden; 
-            text-overflow: ellipsis; 
-        }
-
+        #course-search:focus { outline: 2px solid var(--link); outline-offset: 0; }
+        #no-results { color: var(--muted); }
+        .column-container { column-count: 5; column-gap: 30px; column-rule: 1px solid var(--rule); }
+        .group-box { break-inside: avoid; margin-bottom: 20px; display: inline-block; width: 100%; }
+        h2 { font-size: 1.1em; margin: 0 0 8px 0; color: var(--accent); border-bottom: 1px solid var(--accent-rule); }
+        .item { font-size: 0.85em; margin: 3px 0; overflow-wrap: anywhere; }
         a { text-decoration: none; color: var(--link); }
         a:hover { color: var(--link-hover); text-decoration: underline; }
     </style>
@@ -50,140 +31,144 @@
 <body>
 <header>
     <a href='https://cca-cce.github.io/osm-comm/web/edu/index.html'>https://cca-cce.github.io/osm-comm/web/edu/index.html</a>
+    <input id="course-search" type="search" placeholder="Search courses, e.g. komc" aria-label="Search courses" autocomplete="off" autofocus>
 </header>
 
+<p id="no-results" hidden>No matching courses.</p>
 <div class="column-container">
-<div class='group-box'><h2>htxn09</h2>
-<div class='item'><a href="htxn09-expw.html" title="htxn09-expw.html">htxn09-expw.html</a></div>
+<div class='group-box' data-group="htxn09"><h2>htxn09</h2>
+<div class='item' data-path="htxn09-expw.html"><a href="htxn09-expw.html" title="htxn09-expw.html">htxn09-expw.html</a></div>
+<div class='item' data-path="htxn09/2024/htxn09-expw.html"><a href="htxn09/2024/htxn09-expw.html" title="htxn09/2024/htxn09-expw.html">2024/htxn09-expw.html</a></div>
 </div>
-<div class='group-box'><h2>htxn09/2024</h2>
-<div class='item'><a href="htxn09/2024/htxn09-expw.html" title="htxn09-expw.html">htxn09-expw.html</a></div>
+<div class='group-box' data-group="komb27"><h2>komb27</h2>
+<div class='item' data-path="komb27-intro.html"><a href="komb27-intro.html" title="komb27-intro.html">komb27-intro.html</a></div>
+<div class='item' data-path="komb27/2025/komb27-info.html"><a href="komb27/2025/komb27-info.html" title="komb27/2025/komb27-info.html">2025/komb27-info.html</a></div>
 </div>
-<div class='group-box'><h2>komb27</h2>
-<div class='item'><a href="komb27-intro.html" title="komb27-intro.html">komb27-intro.html</a></div>
+<div class='group-box' data-group="komc37"><h2>komc37</h2>
+<div class='item' data-path="komc37-lecture01.html"><a href="komc37-lecture01.html" title="komc37-lecture01.html">komc37-lecture01.html</a></div>
+<div class='item' data-path="komc37-lecture02.html"><a href="komc37-lecture02.html" title="komc37-lecture02.html">komc37-lecture02.html</a></div>
+<div class='item' data-path="komc37/2026/komc37-lecture01.html"><a href="komc37/2026/komc37-lecture01.html" title="komc37/2026/komc37-lecture01.html">2026/komc37-lecture01.html</a></div>
+<div class='item' data-path="komc37/2026/komc37-lecture02.html"><a href="komc37/2026/komc37-lecture02.html" title="komc37/2026/komc37-lecture02.html">2026/komc37-lecture02.html</a></div>
+<div class='item' data-path="komc37/komc36/2023/komc36-iaui.html"><a href="komc37/komc36/2023/komc36-iaui.html" title="komc37/komc36/2023/komc36-iaui.html">komc36/2023/komc36-iaui.html</a></div>
+<div class='item' data-path="komc37/komc36/2024/komc36-iaui.html"><a href="komc37/komc36/2024/komc36-iaui.html" title="komc37/komc36/2024/komc36-iaui.html">komc36/2024/komc36-iaui.html</a></div>
+<div class='item' data-path="komc37/komc36/2025/komc36-iaui.html"><a href="komc37/komc36/2025/komc36-iaui.html" title="komc37/komc36/2025/komc36-iaui.html">komc36/2025/komc36-iaui.html</a></div>
 </div>
-<div class='group-box'><h2>komb27/2025</h2>
-<div class='item'><a href="komb27/2025/komb27-info.html" title="komb27-info.html">komb27-info.html</a></div>
+<div class='group-box' data-group="komp014"><h2>komp014</h2>
+<div class='item' data-path="komp014-lecture01.html"><a href="komp014-lecture01.html" title="komp014-lecture01.html">komp014-lecture01.html</a></div>
+<div class='item' data-path="komp014-lecture03.html"><a href="komp014-lecture03.html" title="komp014-lecture03.html">komp014-lecture03.html</a></div>
+<div class='item' data-path="komp014-lecture05.html"><a href="komp014-lecture05.html" title="komp014-lecture05.html">komp014-lecture05.html</a></div>
+<div class='item' data-path="komp014-lecture06.html"><a href="komp014-lecture06.html" title="komp014-lecture06.html">komp014-lecture06.html</a></div>
+<div class='item' data-path="komp014-lecture07.html"><a href="komp014-lecture07.html" title="komp014-lecture07.html">komp014-lecture07.html</a></div>
 </div>
-<div class='group-box'><h2>komc36</h2>
-<div class='item'><a href="komc36-iaui.html" title="komc36-iaui.html">komc36-iaui.html</a></div>
+<div class='group-box' data-group="simm59"><h2>simm59</h2>
+<div class='item' data-path="simm59-lecture1-nlp.html"><a href="simm59-lecture1-nlp.html" title="simm59-lecture1-nlp.html">simm59-lecture1-nlp.html</a></div>
+<div class='item' data-path="simm59-lecture2-nlp.html"><a href="simm59-lecture2-nlp.html" title="simm59-lecture2-nlp.html">simm59-lecture2-nlp.html</a></div>
 </div>
-<div class='group-box'><h2>komc36/2023</h2>
-<div class='item'><a href="komc36/2023/komc36-iaui.html" title="komc36-iaui.html">komc36-iaui.html</a></div>
+<div class='group-box' data-group="simp59"><h2>simp59</h2>
+<div class='item' data-path="simp59-intro.html"><a href="simp59-intro.html" title="simp59-intro.html">simp59-intro.html</a></div>
+<div class='item' data-path="simp59-lecture1-nlp.html"><a href="simp59-lecture1-nlp.html" title="simp59-lecture1-nlp.html">simp59-lecture1-nlp.html</a></div>
+<div class='item' data-path="simp59-lecture2-nlp.html"><a href="simp59-lecture2-nlp.html" title="simp59-lecture2-nlp.html">simp59-lecture2-nlp.html</a></div>
+<div class='item' data-path="simp59/2025/simp59-01tra.html"><a href="simp59/2025/simp59-01tra.html" title="simp59/2025/simp59-01tra.html">2025/simp59-01tra.html</a></div>
+<div class='item' data-path="simp59/2025/simp59-01viz.html"><a href="simp59/2025/simp59-01viz.html" title="simp59/2025/simp59-01viz.html">2025/simp59-01viz.html</a></div>
+<div class='item' data-path="simp59/2025/simp59-02tmp.html"><a href="simp59/2025/simp59-02tmp.html" title="simp59/2025/simp59-02tmp.html">2025/simp59-02tmp.html</a></div>
+<div class='item' data-path="simp59/2025/simp59-02viz.html"><a href="simp59/2025/simp59-02viz.html" title="simp59/2025/simp59-02viz.html">2025/simp59-02viz.html</a></div>
 </div>
-<div class='group-box'><h2>komc36/2024</h2>
-<div class='item'><a href="komc36/2024/komc36-iaui.html" title="komc36-iaui.html">komc36-iaui.html</a></div>
+<div class='group-box' data-group="skda50"><h2>skda50</h2>
+<div class='item' data-path="skda50-intro.html"><a href="skda50-intro.html" title="skda50-intro.html">skda50-intro.html</a></div>
+<div class='item' data-path="skda50/2025/skda50-komb27.html"><a href="skda50/2025/skda50-komb27.html" title="skda50/2025/skda50-komb27.html">2025/skda50-komb27.html</a></div>
 </div>
-<div class='group-box'><h2>komp014</h2>
-<div class='item'><a href="komp014-lecture01.html" title="komp014-lecture01.html">komp014-lecture01.html</a></div>
-<div class='item'><a href="komp014-lecture03.html" title="komp014-lecture03.html">komp014-lecture03.html</a></div>
-<div class='item'><a href="komp014-lecture05.html" title="komp014-lecture05.html">komp014-lecture05.html</a></div>
-<div class='item'><a href="komp014-lecture06.html" title="komp014-lecture06.html">komp014-lecture06.html</a></div>
-<div class='item'><a href="komp014-lecture07.html" title="komp014-lecture07.html">komp014-lecture07.html</a></div>
+<div class='group-box' data-group="skoc24"><h2>skoc24</h2>
+<div class='item' data-path="skoc24-webtext.html"><a href="skoc24-webtext.html" title="skoc24-webtext.html">skoc24-webtext.html</a></div>
 </div>
-<div class='group-box'><h2>simm59</h2>
-<div class='item'><a href="simm59-lecture1-nlp.html" title="simm59-lecture1-nlp.html">simm59-lecture1-nlp.html</a></div>
-<div class='item'><a href="simm59-lecture2-nlp.html" title="simm59-lecture2-nlp.html">simm59-lecture2-nlp.html</a></div>
+<div class='group-box' data-group="skoc39"><h2>skoc39</h2>
+<div class='item' data-path="skoc39-analysis.html"><a href="skoc39-analysis.html" title="skoc39-analysis.html">skoc39-analysis.html</a></div>
+<div class='item' data-path="skoc39-collection.html"><a href="skoc39-collection.html" title="skoc39-collection.html">skoc39-collection.html</a></div>
+<div class='item' data-path="skoc39/2024/skoc39-analysis.html"><a href="skoc39/2024/skoc39-analysis.html" title="skoc39/2024/skoc39-analysis.html">2024/skoc39-analysis.html</a></div>
+<div class='item' data-path="skoc39/2024/skoc39-collection.html"><a href="skoc39/2024/skoc39-collection.html" title="skoc39/2024/skoc39-collection.html">2024/skoc39-collection.html</a></div>
 </div>
-<div class='group-box'><h2>simp59</h2>
-<div class='item'><a href="simp59-intro.html" title="simp59-intro.html">simp59-intro.html</a></div>
-<div class='item'><a href="simp59-lecture1-nlp.html" title="simp59-lecture1-nlp.html">simp59-lecture1-nlp.html</a></div>
-<div class='item'><a href="simp59-lecture2-nlp.html" title="simp59-lecture2-nlp.html">simp59-lecture2-nlp.html</a></div>
+<div class='group-box' data-group="skoc42"><h2>skoc42</h2>
+<div class='item' data-path="skoc42-lecture01.html"><a href="skoc42-lecture01.html" title="skoc42-lecture01.html">skoc42-lecture01.html</a></div>
+<div class='item' data-path="skoc42-lecture02.html"><a href="skoc42-lecture02.html" title="skoc42-lecture02.html">skoc42-lecture02.html</a></div>
+<div class='item' data-path="skoc42-lecture05.html"><a href="skoc42-lecture05.html" title="skoc42-lecture05.html">skoc42-lecture05.html</a></div>
+<div class='item' data-path="skoc42-lecture07.html"><a href="skoc42-lecture07.html" title="skoc42-lecture07.html">skoc42-lecture07.html</a></div>
+<div class='item' data-path="skoc42-workshop02.html"><a href="skoc42-workshop02.html" title="skoc42-workshop02.html">skoc42-workshop02.html</a></div>
+<div class='item' data-path="skoc42/2025/skoc42-intro.html"><a href="skoc42/2025/skoc42-intro.html" title="skoc42/2025/skoc42-intro.html">2025/skoc42-intro.html</a></div>
+<div class='item' data-path="skoc42/2025/skoc42-mod2-lec1.html"><a href="skoc42/2025/skoc42-mod2-lec1.html" title="skoc42/2025/skoc42-mod2-lec1.html">2025/skoc42-mod2-lec1.html</a></div>
+<div class='item' data-path="skoc42/2025/skoc42-mod2-lec2.html"><a href="skoc42/2025/skoc42-mod2-lec2.html" title="skoc42/2025/skoc42-mod2-lec2.html">2025/skoc42-mod2-lec2.html</a></div>
+<div class='item' data-path="skoc42/2025/skoc42-mod2-lec3.html"><a href="skoc42/2025/skoc42-mod2-lec3.html" title="skoc42/2025/skoc42-mod2-lec3.html">2025/skoc42-mod2-lec3.html</a></div>
+<div class='item' data-path="skoc42/2025/skoc42-mod2-ws1.html"><a href="skoc42/2025/skoc42-mod2-ws1.html" title="skoc42/2025/skoc42-mod2-ws1.html">2025/skoc42-mod2-ws1.html</a></div>
 </div>
-<div class='group-box'><h2>simp59/2025</h2>
-<div class='item'><a href="simp59/2025/simp59-01tra.html" title="simp59-01tra.html">simp59-01tra.html</a></div>
-<div class='item'><a href="simp59/2025/simp59-01viz.html" title="simp59-01viz.html">simp59-01viz.html</a></div>
-<div class='item'><a href="simp59/2025/simp59-02tmp.html" title="simp59-02tmp.html">simp59-02tmp.html</a></div>
-<div class='item'><a href="simp59/2025/simp59-02viz.html" title="simp59-02viz.html">simp59-02viz.html</a></div>
+<div class='group-box' data-group="skoc50"><h2>skoc50</h2>
+<div class='item' data-path="skoc50-intro.html"><a href="skoc50-intro.html" title="skoc50-intro.html">skoc50-intro.html</a></div>
+<div class='item' data-path="skoc50/2025/skoc50-intro.html"><a href="skoc50/2025/skoc50-intro.html" title="skoc50/2025/skoc50-intro.html">2025/skoc50-intro.html</a></div>
 </div>
-<div class='group-box'><h2>skda50</h2>
-<div class='item'><a href="skda50-intro.html" title="skda50-intro.html">skda50-intro.html</a></div>
+<div class='group-box' data-group="skoc62"><h2>skoc62</h2>
+<div class='item' data-path="skoc62-lecture1.html"><a href="skoc62-lecture1.html" title="skoc62-lecture1.html">skoc62-lecture1.html</a></div>
+<div class='item' data-path="skoc62-lecture2.html"><a href="skoc62-lecture2.html" title="skoc62-lecture2.html">skoc62-lecture2.html</a></div>
+<div class='item' data-path="skoc62-workshop1.html"><a href="skoc62-workshop1.html" title="skoc62-workshop1.html">skoc62-workshop1.html</a></div>
+<div class='item' data-path="skoc62-workshop2.html"><a href="skoc62-workshop2.html" title="skoc62-workshop2.html">skoc62-workshop2.html</a></div>
+<div class='item' data-path="skoc62/2025/index.html"><a href="skoc62/2025/index.html" title="skoc62/2025/index.html">2025/index.html</a></div>
+<div class='item' data-path="skoc62/2025/workshop-1.html"><a href="skoc62/2025/workshop-1.html" title="skoc62/2025/workshop-1.html">2025/workshop-1.html</a></div>
+<div class='item' data-path="skoc62/2025/workshop-2.html"><a href="skoc62/2025/workshop-2.html" title="skoc62/2025/workshop-2.html">2025/workshop-2.html</a></div>
+<div class='item' data-path="skoc62/2025/workshop-3.html"><a href="skoc62/2025/workshop-3.html" title="skoc62/2025/workshop-3.html">2025/workshop-3.html</a></div>
+<div class='item' data-path="skoc62/2025/workshop-4.html"><a href="skoc62/2025/workshop-4.html" title="skoc62/2025/workshop-4.html">2025/workshop-4.html</a></div>
+<div class='item' data-path="skoc62/2026/exam/index.html"><a href="skoc62/2026/exam/index.html" title="skoc62/2026/exam/index.html">2026/exam/index.html</a></div>
 </div>
-<div class='group-box'><h2>skda50/2025</h2>
-<div class='item'><a href="skda50/2025/skda50-komb27.html" title="skda50-komb27.html">skda50-komb27.html</a></div>
+<div class='group-box' data-group="skod32"><h2>skod32</h2>
+<div class='item' data-path="skod32-lecture01.html"><a href="skod32-lecture01.html" title="skod32-lecture01.html">skod32-lecture01.html</a></div>
+<div class='item' data-path="skod32-workshop01.html"><a href="skod32-workshop01.html" title="skod32-workshop01.html">skod32-workshop01.html</a></div>
+<div class='item' data-path="skod32/2025/skoc26-digital.html"><a href="skod32/2025/skoc26-digital.html" title="skod32/2025/skoc26-digital.html">2025/skoc26-digital.html</a></div>
+<div class='item' data-path="skod32/2025/skoc26-module2.html"><a href="skod32/2025/skoc26-module2.html" title="skod32/2025/skoc26-module2.html">2025/skoc26-module2.html</a></div>
+<div class='item' data-path="skod32/2025/skoc26-wsexam.html"><a href="skod32/2025/skoc26-wsexam.html" title="skod32/2025/skoc26-wsexam.html">2025/skoc26-wsexam.html</a></div>
 </div>
-<div class='group-box'><h2>skoc24</h2>
-<div class='item'><a href="skoc24-webtext.html" title="skoc24-webtext.html">skoc24-webtext.html</a></div>
+<div class='group-box' data-group="skod52"><h2>skod52</h2>
+<div class='item' data-path="skod52-cca01.html"><a href="skod52-cca01.html" title="skod52-cca01.html">skod52-cca01.html</a></div>
+<div class='item' data-path="skod52-cca02.html"><a href="skod52-cca02.html" title="skod52-cca02.html">skod52-cca02.html</a></div>
+<div class='item' data-path="skod52-module3.html"><a href="skod52-module3.html" title="skod52-module3.html">skod52-module3.html</a></div>
+<div class='item' data-path="skod52/2025/skod52-cca01.html"><a href="skod52/2025/skod52-cca01.html" title="skod52/2025/skod52-cca01.html">2025/skod52-cca01.html</a></div>
+<div class='item' data-path="skod52/2025/skod52-cca02.html"><a href="skod52/2025/skod52-cca02.html" title="skod52/2025/skod52-cca02.html">2025/skod52-cca02.html</a></div>
+<div class='item' data-path="skod52/2025/skod52-module3.html"><a href="skod52/2025/skod52-module3.html" title="skod52/2025/skod52-module3.html">2025/skod52-module3.html</a></div>
 </div>
-<div class='group-box'><h2>skoc26</h2>
-<div class='item'><a href="skoc26-digital.html" title="skoc26-digital.html">skoc26-digital.html</a></div>
-<div class='item'><a href="skoc26-module2.html" title="skoc26-module2.html">skoc26-module2.html</a></div>
-<div class='item'><a href="skoc26-wsexam.html" title="skoc26-wsexam.html">skoc26-wsexam.html</a></div>
+<div class='group-box' data-group="skom12"><h2>skom12</h2>
+<div class='item' data-path="skom12-workshop-ai.html"><a href="skom12-workshop-ai.html" title="skom12-workshop-ai.html">skom12-workshop-ai.html</a></div>
 </div>
-<div class='group-box'><h2>skoc39</h2>
-<div class='item'><a href="skoc39-analysis.html" title="skoc39-analysis.html">skoc39-analysis.html</a></div>
-<div class='item'><a href="skoc39-collection.html" title="skoc39-collection.html">skoc39-collection.html</a></div>
+<div class='group-box' data-group="skpm20"><h2>skpm20</h2>
+<div class='item' data-path="skpm20-lecture-lab1.html"><a href="skpm20-lecture-lab1.html" title="skpm20-lecture-lab1.html">skpm20-lecture-lab1.html</a></div>
+<div class='item' data-path="skpm20-lecture-lab2.html"><a href="skpm20-lecture-lab2.html" title="skpm20-lecture-lab2.html">skpm20-lecture-lab2.html</a></div>
+<div class='item' data-path="skpm20-lecture-lab3.html"><a href="skpm20-lecture-lab3.html" title="skpm20-lecture-lab3.html">skpm20-lecture-lab3.html</a></div>
 </div>
-<div class='group-box'><h2>skoc39/2024</h2>
-<div class='item'><a href="skoc39/2024/skoc39-analysis.html" title="skoc39-analysis.html">skoc39-analysis.html</a></div>
-<div class='item'><a href="skoc39/2024/skoc39-collection.html" title="skoc39-collection.html">skoc39-collection.html</a></div>
+<div class='group-box' data-group="smmx21"><h2>smmx21</h2>
+<div class='item' data-path="smmx21-exps.html"><a href="smmx21-exps.html" title="smmx21-exps.html">smmx21-exps.html</a></div>
+<div class='item' data-path="smmx21/2025/smmx21-exps.html"><a href="smmx21/2025/smmx21-exps.html" title="smmx21/2025/smmx21-exps.html">2025/smmx21-exps.html</a></div>
 </div>
-<div class='group-box'><h2>skoc42</h2>
-<div class='item'><a href="skoc42-lecture01.html" title="skoc42-lecture01.html">skoc42-lecture01.html</a></div>
-<div class='item'><a href="skoc42-lecture02.html" title="skoc42-lecture02.html">skoc42-lecture02.html</a></div>
-<div class='item'><a href="skoc42-lecture05.html" title="skoc42-lecture05.html">skoc42-lecture05.html</a></div>
-<div class='item'><a href="skoc42-lecture07.html" title="skoc42-lecture07.html">skoc42-lecture07.html</a></div>
-<div class='item'><a href="skoc42-workshop02.html" title="skoc42-workshop02.html">skoc42-workshop02.html</a></div>
-</div>
-<div class='group-box'><h2>skoc42/2025</h2>
-<div class='item'><a href="skoc42/2025/skoc42-intro.html" title="skoc42-intro.html">skoc42-intro.html</a></div>
-<div class='item'><a href="skoc42/2025/skoc42-mod2-lec1.html" title="skoc42-mod2-lec1.html">skoc42-mod2-lec1.html</a></div>
-<div class='item'><a href="skoc42/2025/skoc42-mod2-lec2.html" title="skoc42-mod2-lec2.html">skoc42-mod2-lec2.html</a></div>
-<div class='item'><a href="skoc42/2025/skoc42-mod2-lec3.html" title="skoc42-mod2-lec3.html">skoc42-mod2-lec3.html</a></div>
-<div class='item'><a href="skoc42/2025/skoc42-mod2-ws1.html" title="skoc42-mod2-ws1.html">skoc42-mod2-ws1.html</a></div>
-</div>
-<div class='group-box'><h2>skoc50</h2>
-<div class='item'><a href="skoc50-intro.html" title="skoc50-intro.html">skoc50-intro.html</a></div>
-</div>
-<div class='group-box'><h2>skoc50/2025</h2>
-<div class='item'><a href="skoc50/2025/skoc50-intro.html" title="skoc50-intro.html">skoc50-intro.html</a></div>
-</div>
-<div class='group-box'><h2>skoc62</h2>
-<div class='item'><a href="skoc62-lecture1.html" title="skoc62-lecture1.html">skoc62-lecture1.html</a></div>
-<div class='item'><a href="skoc62-lecture2.html" title="skoc62-lecture2.html">skoc62-lecture2.html</a></div>
-<div class='item'><a href="skoc62-workshop1.html" title="skoc62-workshop1.html">skoc62-workshop1.html</a></div>
-<div class='item'><a href="skoc62-workshop2.html" title="skoc62-workshop2.html">skoc62-workshop2.html</a></div>
-</div>
-<div class='group-box'><h2>skoc62/2025</h2>
-<div class='item'><a href="skoc62/2025/index.html" title="index.html">index.html</a></div>
-<div class='item'><a href="skoc62/2025/workshop-1.html" title="workshop-1.html">workshop-1.html</a></div>
-<div class='item'><a href="skoc62/2025/workshop-2.html" title="workshop-2.html">workshop-2.html</a></div>
-<div class='item'><a href="skoc62/2025/workshop-3.html" title="workshop-3.html">workshop-3.html</a></div>
-<div class='item'><a href="skoc62/2025/workshop-4.html" title="workshop-4.html">workshop-4.html</a></div>
-</div>
-<div class='group-box'><h2>skoc62/2026/exam</h2>
-<div class='item'><a href="skoc62/2026/exam/index.html" title="index.html">index.html</a></div>
-</div>
-<div class='group-box'><h2>skod32</h2>
-<div class='item'><a href="skod32-lecture01.html" title="skod32-lecture01.html">skod32-lecture01.html</a></div>
-<div class='item'><a href="skod32-workshop01.html" title="skod32-workshop01.html">skod32-workshop01.html</a></div>
-</div>
-<div class='group-box'><h2>skod52</h2>
-<div class='item'><a href="skod52-cca01.html" title="skod52-cca01.html">skod52-cca01.html</a></div>
-<div class='item'><a href="skod52-cca02.html" title="skod52-cca02.html">skod52-cca02.html</a></div>
-<div class='item'><a href="skod52-module3.html" title="skod52-module3.html">skod52-module3.html</a></div>
-</div>
-<div class='group-box'><h2>skod52/2025</h2>
-<div class='item'><a href="skod52/2025/skod52-cca01.html" title="skod52-cca01.html">skod52-cca01.html</a></div>
-<div class='item'><a href="skod52/2025/skod52-cca02.html" title="skod52-cca02.html">skod52-cca02.html</a></div>
-<div class='item'><a href="skod52/2025/skod52-module3.html" title="skod52-module3.html">skod52-module3.html</a></div>
-</div>
-<div class='group-box'><h2>skom12</h2>
-<div class='item'><a href="skom12-workshop-ai.html" title="skom12-workshop-ai.html">skom12-workshop-ai.html</a></div>
-</div>
-<div class='group-box'><h2>skpm20</h2>
-<div class='item'><a href="skpm20-lecture-lab1.html" title="skpm20-lecture-lab1.html">skpm20-lecture-lab1.html</a></div>
-<div class='item'><a href="skpm20-lecture-lab2.html" title="skpm20-lecture-lab2.html">skpm20-lecture-lab2.html</a></div>
-<div class='item'><a href="skpm20-lecture-lab3.html" title="skpm20-lecture-lab3.html">skpm20-lecture-lab3.html</a></div>
-</div>
-<div class='group-box'><h2>smmx21</h2>
-<div class='item'><a href="smmx21-exps.html" title="smmx21-exps.html">smmx21-exps.html</a></div>
-</div>
-<div class='group-box'><h2>smmx21/2025</h2>
-<div class='item'><a href="smmx21/2025/smmx21-exps.html" title="smmx21-exps.html">smmx21-exps.html</a></div>
-</div>
-<div class='group-box'><h2>ssk001f</h2>
-<div class='item'><a href="ssk001f-methods.html" title="ssk001f-methods.html">ssk001f-methods.html</a></div>
+<div class='group-box' data-group="ssk001f"><h2>ssk001f</h2>
+<div class='item' data-path="ssk001f-methods.html"><a href="ssk001f-methods.html" title="ssk001f-methods.html">ssk001f-methods.html</a></div>
 </div>
 </div>
+<script>
+    // Show a page if the search starts its group or any folder or file name in its path.
+    const search = document.getElementById("course-search");
+    const groups = document.querySelectorAll(".group-box");
+    const noResults = document.getElementById("no-results");
+
+    function applyFilter() {
+        const query = search.value.trim().toLowerCase();
+        let anyVisible = false;
+        groups.forEach((group) => {
+            const groupMatches = group.dataset.group.startsWith(query);
+            let groupVisible = false;
+            group.querySelectorAll(".item").forEach((item) => {
+                const matches = groupMatches || ("/" + item.dataset.path).includes("/" + query);
+                item.hidden = !matches;
+                groupVisible = groupVisible || matches;
+            });
+            group.hidden = !groupVisible;
+            anyVisible = anyVisible || groupVisible;
+        });
+        noResults.hidden = anyVisible;
+    }
+
+    search.addEventListener("input", applyFilter);
+    applyFilter();
+</script>
 </body></html>
