@@ -1,0 +1,421 @@
+---
+title: "Getting Started with NLP"
+subtitle: "SKOD52 · Module 3, Lecture-Lab 2 · companion notebook"
+format:
+  html:
+    toc: true
+    code-overflow: wrap
+jupyter: python3
+execute:
+  warning: false
+---
+
+This notebook follows the four stages of the NLP pipeline from the lecture
+slides:
+
+1. **Rich content → plain text**: convert PDF captures of web pages to `.txt`
+2. **Plain text → pandas DataFrame**: one row per text (`df_texts`) and per sentence (`df_sentences`)
+3. **Tokenization and tagging**: spaCy tokens, lemmas, POS and entities (`df_tokens`)
+4. **Aggregation and visualization**: top-20 tokens and word clouds per text
+
+Every output file is written to the data folder with a fixed name and is
+**overwritten** on each run, so you can safely re-run the whole notebook from
+the top.
+
+## 0 · Setup
+
+On Google Colab, we first install the two things that are not preinstalled
+there: the `pypdf` PDF reader and spaCy's medium English model
+(`en_core_web_md`, which has word vectors that we need for out-of-vocabulary
+detection). Locally, these steps are skipped.
+
+```{python}
+import sys, subprocess
+
+IN_COLAB = "google.colab" in sys.modules
+
+if IN_COLAB:
+    subprocess.run([sys.executable, "-m", "pip", "install", "-q", "pypdf"], check=True)
+    subprocess.run([sys.executable, "-m", "spacy", "download", "en_core_web_md", "-q"], check=True)
+
+print("Running on Colab:", IN_COLAB)
+```
+
+```{python}
+import math, re, unicodedata
+from pathlib import Path
+
+import pandas as pd
+import matplotlib.pyplot as plt
+import spacy
+from pypdf import PdfReader
+from wordcloud import WordCloud
+
+pd.set_option("display.max_colwidth", 80)
+```
+
+## 1 · Rich content → plain text
+
+Our content data are PDF captures of an organization's sustainability web
+pages. In this stage we extract the plain text from each PDF and save it as a
+`.txt` file next to the PDF.
+
+### The data folder
+
+The notebook always works with a folder called **`text-data`** next to the
+notebook: `/content/text-data` on Colab. When you run the notebook on your own
+computer, run it from the folder that contains `text-data/` (for example
+`cd materials`).
+
+```{python}
+DATA_DIR = Path("text-data")
+DATA_DIR.mkdir(exist_ok=True)
+print("Data folder:", DATA_DIR.resolve())
+```
+
+### Get the PDFs from Google Drive (on Colab)
+
+1. Open the shared course folder:
+   <https://drive.google.com/drive/folders/1MyDJTsu-_Ou81zdq4Mt9taH6pad1Mj8j>
+2. Add it to your own Drive: right-click the folder → **Organize → Add
+   shortcut** (or make a copy) and place it in **My Drive**, e.g. in a folder
+   called `skod52`.
+3. Edit `DRIVE_DIR` below so it points to that folder, then run the cell.
+   Colab asks for permission to mount your Drive. The PDFs are copied into the
+   local `text-data/` folder.
+4. Later, point `DRIVE_DIR` to your **own** project group's folder of PDFs
+   instead.
+
+```{python}
+#| eval: false
+if IN_COLAB:
+    import shutil
+    from google.colab import drive
+    drive.mount("/content/drive")
+
+    # ← EDIT this path to point to your own folder of PDF files
+    DRIVE_DIR = Path("/content/drive/MyDrive/skod52/text-data")
+
+    if DRIVE_DIR.is_dir():
+        for pdf in DRIVE_DIR.iterdir():
+            if pdf.suffix.lower() == ".pdf":
+                shutil.copy2(pdf, DATA_DIR / pdf.name)     # overwrite
+                print("copied", pdf.name)
+    else:
+        print(f"WARNING: folder not found: {DRIVE_DIR}\n"
+              "Check the path in the Colab file browser (left sidebar).")
+```
+
+### Clean up the file names
+
+File names with spaces, capitals or characters such as å, ä and ö can cause
+trouble later. So we rename every PDF to a simple, safe name, for example
+`Shell Report – 2024 (1).PDF` → `shell-report-2024-1.pdf`. Names that are
+already clean are left as they are.
+
+```{python}
+def safe_name(name: str) -> str:
+    stem = Path(name).stem.translate(str.maketrans({"ø": "o", "Ø": "O", "æ": "ae", "Æ": "AE"}))
+    stem = unicodedata.normalize("NFKD", stem).encode("ascii", "ignore").decode()
+    stem = re.sub(r"[^a-z0-9]+", "-", stem.lower()).strip("-")
+    return f"{stem}.pdf"
+
+
+for pdf in sorted(DATA_DIR.iterdir()):
+    if pdf.suffix.lower() != ".pdf" or pdf.name == safe_name(pdf.name):
+        continue
+    target = DATA_DIR / safe_name(pdf.name)
+    if target.exists():
+        print(f"WARNING: not renaming {pdf.name!r}, {target.name!r} already exists")
+    else:
+        pdf.rename(target)
+        print(f"renamed {pdf.name!r} → {target.name!r}")
+
+pdf_paths = sorted(DATA_DIR.glob("*.pdf"))
+print(f"{len(pdf_paths)} PDF files in {DATA_DIR}")
+if not pdf_paths:
+    print("WARNING: no PDF files found. Copy your PDFs into the text-data folder "
+          "(or run the Google Drive cell above) and run this cell again.")
+```
+
+### Convert PDF to plain text
+
+`pypdf` reads each page's text layer. We join the pages and apply Unicode
+NFKC normalization, which turns typographic ligatures such as `ﬁ` into plain
+`fi`. Each result is saved as `<pdf name>.txt` and overwrites any earlier
+version. PDFs that cannot be read, or that contain no text (e.g. scanned
+images), are skipped with a warning.
+
+```{python}
+def pdf_to_text(pdf_path: Path) -> tuple[str, int]:
+    """Return the plain text of a PDF and its number of pages."""
+    reader = PdfReader(pdf_path)
+    pages = [page.extract_text() or "" for page in reader.pages]
+    text = unicodedata.normalize("NFKC", "\n".join(pages))
+    return text, len(pages)
+
+
+txt_paths = []
+summary = []
+for pdf_path in pdf_paths:
+    try:
+        text, n_pages = pdf_to_text(pdf_path)
+    except Exception as err:
+        print(f"WARNING: skipping {pdf_path.name}, could not read it ({err})")
+        continue
+    if not text.strip():
+        print(f"WARNING: skipping {pdf_path.name}, no text found (scanned image?)")
+        continue
+    txt_path = pdf_path.with_suffix(".txt")
+    txt_path.write_text(text, encoding="utf-8")          # overwrite
+    txt_paths.append(txt_path)
+    summary.append({"file": txt_path.name, "pages": n_pages, "characters": len(text)})
+
+pd.DataFrame(summary)
+```
+
+## 2 · Plain text → pandas DataFrame
+
+Next we read the `.txt` files into a **pandas DataFrame** with one text per
+row. We only read the `.txt` files converted above, so leftover files from
+earlier runs never sneak in.
+
+Line breaks in the PDF text come from the page layout, not from the sentences.
+So we collapse all line breaks and repeated spaces into single spaces before
+splitting the text into sentences.
+
+```{python}
+def clean_whitespace(text: str) -> str:
+    return re.sub(r"\s+", " ", text).strip()
+
+
+rows = []
+for txt_path in txt_paths:
+    text_raw = clean_whitespace(txt_path.read_text(encoding="utf-8"))
+    rows.append({
+        "text_id": txt_path.stem,
+        "text_path": str(txt_path),
+        "text_wordcount": len(text_raw.split()),
+        "text_raw": text_raw,
+    })
+
+df_texts = pd.DataFrame(rows, columns=["text_id", "text_path", "text_wordcount", "text_raw"])
+df_texts.to_csv(DATA_DIR / "df_texts.tsv", sep="\t", index=False)   # overwrite
+df_texts
+```
+
+### Sentences
+
+For a basic sentence split we use spaCy's rule-based **`sentencizer`**. It
+splits on sentence-final punctuation and needs no trained model. We use the
+same component again in stage 3, so the sentence numbers in `df_sentences` and
+`df_tokens` match.
+
+```{python}
+splitter = spacy.blank("en")
+splitter.add_pipe("sentencizer")
+
+rows = []
+for text_id, doc in zip(df_texts["text_id"], splitter.pipe(df_texts["text_raw"])):
+    for sentence_id, sent in enumerate(doc.sents, start=1):
+        rows.append({"text_id": text_id,
+                     "sentence_id": sentence_id,
+                     "sentence_text": sent.text.strip()})
+
+df_sentences = pd.DataFrame(rows, columns=["text_id", "sentence_id", "sentence_text"])
+df_sentences.to_csv(DATA_DIR / "df_sentences.tsv", sep="\t", index=False)   # overwrite
+print(f"{len(df_sentences)} sentences in {df_sentences['text_id'].nunique()} texts")
+df_sentences.head(10)
+```
+
+## 3 · Tokenization, tagging and normalization
+
+Now we run the full spaCy pipeline on each text in `df_texts`. For every token
+we keep its text, lemma (base form), part of speech and named-entity type, plus
+flags that we use to decide which tokens to **keep** for analysis.
+
+### Custom word lists (add your own terms here)
+
+- `CUSTOM_STOPWORDS`: extra words to ignore, for example the organization's
+  own name and web-page navigation text ("menu", "search") that appears on
+  every page.
+- `CUSTOM_VOCAB`: domain terms that the language model does not know
+  (*out-of-vocabulary*, OOV) but that you want to keep anyway.
+
+After running stage 3, look at the "most frequent OOV tokens" table further
+down and add relevant terms to these lists. Then re-run the notebook.
+
+```{python}
+CUSTOM_STOPWORDS = {
+    "equinor", "menu", "search", "home", "en", "no", "read", "more",
+    "page", "cookie", "cookies", "website",
+}
+
+CUSTOM_VOCAB = {
+    "esg", "ccs", "ccus", "decarbonisation", "decarbonization",
+    "renewables", "biodiversity", "net-zero",
+}
+```
+
+```{python}
+nlp = spacy.load("en_core_web_md", exclude=["parser"])   # parser not needed
+nlp.add_pipe("sentencizer")                              # same split as stage 2
+
+# register the custom stop words (lower-, Title- and UPPER-case forms)
+for word in CUSTOM_STOPWORDS:
+    nlp.Defaults.stop_words.add(word)
+    for form in {word, word.title(), word.upper()}:
+        nlp.vocab[form].is_stop = True
+
+print(nlp.pipe_names)
+```
+
+```{python}
+rows = []
+for text_id, doc in zip(df_texts["text_id"], nlp.pipe(df_texts["text_raw"])):
+    for sentence_id, sent in enumerate(doc.sents, start=1):
+        for token_id, tok in enumerate(sent, start=1):
+            is_oov = tok.is_oov and tok.lower_ not in CUSTOM_VOCAB
+            rows.append({
+                "text_id": text_id,
+                "sentence_id": sentence_id,
+                "token_id": token_id,
+                "token_text": tok.text,
+                "token_lower": tok.lower_,
+                "token_lemma": tok.lemma_.lower(),
+                "token_pos": tok.pos_,
+                "token_tag": tok.tag_,
+                "token_ner": tok.ent_type_,
+                "token_is_alpha": tok.is_alpha,
+                "token_is_stop": tok.is_stop,
+                "token_is_oov": is_oov,
+                "token_keep": (tok.is_alpha and not tok.is_stop
+                               and not is_oov and len(tok.text) >= 3),
+            })
+
+df_tokens = pd.DataFrame(rows)
+df_tokens.to_csv(DATA_DIR / "df_tokens.tsv", sep="\t", index=False)   # overwrite
+print(f"{len(df_tokens)} tokens, {df_tokens['token_keep'].sum()} kept for analysis")
+df_tokens.head(15)
+```
+
+### Why were tokens dropped?
+
+Each dropped token is counted once, under the first rule that removed it.
+
+```{python}
+def drop_reason(row) -> str:
+    if row.token_keep:
+        return "kept"
+    if not row.token_is_alpha:
+        return "not alphabetic (punctuation, numbers, symbols)"
+    if row.token_is_stop:
+        return "stop word"
+    if len(row.token_text) < 3:
+        return "shorter than 3 characters"
+    return "out of vocabulary (OOV)"
+
+(df_tokens.apply(drop_reason, axis=1)
+          .value_counts()
+          .rename_axis("reason").reset_index(name="tokens"))
+```
+
+### Most frequent OOV tokens
+
+These are candidates for `CUSTOM_VOCAB` (keep them) or `CUSTOM_STOPWORDS`
+(ignore them).
+
+```{python}
+(df_tokens[df_tokens["token_is_oov"] & df_tokens["token_is_alpha"]]
+    ["token_lower"].value_counts().head(15)
+    .rename_axis("oov_token").reset_index(name="n"))
+```
+
+## 4 · Aggregation and visualization
+
+### Top 20 tokens overall
+
+We count the **lemmas** of the kept tokens across all texts.
+
+```{python}
+kept = df_tokens[df_tokens["token_keep"]]
+
+df_top20 = (kept["token_lemma"].value_counts()
+                .head(20)
+                .rename_axis("token").reset_index(name="n"))
+df_top20["share"] = (df_top20["n"] / len(kept)).round(4)
+df_top20.to_csv(DATA_DIR / "df_top20.tsv", sep="\t", index=False)   # overwrite
+df_top20
+```
+
+```{python}
+fig, ax = plt.subplots(figsize=(7, 6))
+ax.barh(df_top20["token"][::-1], df_top20["n"][::-1], color="#f05a22")
+ax.set_xlabel("Frequency (lemma count)")
+ax.set_title("20 most common tokens across all texts")
+fig.tight_layout()
+fig.savefig(DATA_DIR / "top20_tokens.png", dpi=150)   # overwrite
+plt.show()
+```
+
+### Word clouds per text
+
+One word cloud per input document, built from the frequencies of its kept
+lemmas.
+
+```{python}
+from matplotlib.colors import ListedColormap
+
+# dark orange/brown shades only, so every word stays readable on white
+WC_COLORS = ListedColormap(["#f05a22", "#d9480f", "#b8400e", "#9a3412", "#7c2d12"])
+
+text_ids = df_texts["text_id"].tolist()
+ncols = 3
+nrows = max(1, math.ceil(len(text_ids) / ncols))
+
+fig, axes = plt.subplots(nrows, ncols, figsize=(5 * ncols, 3.2 * nrows), squeeze=False)
+axes = axes.ravel()
+
+for ax, text_id in zip(axes, text_ids):
+    freqs = kept.loc[kept["text_id"] == text_id, "token_lemma"].value_counts().to_dict()
+    if freqs:
+        wc = WordCloud(width=500, height=320, background_color="white",
+                       colormap=WC_COLORS, max_words=60, random_state=42)
+        ax.imshow(wc.generate_from_frequencies(freqs), interpolation="bilinear")
+    ax.set_title(text_id, fontsize=9)
+    ax.axis("off")
+
+for ax in axes[len(text_ids):]:      # hide unused grid cells
+    ax.axis("off")
+
+fig.tight_layout()
+fig.savefig(DATA_DIR / "wordclouds_by_text.png", dpi=150)   # overwrite
+plt.show()
+```
+
+## Output files
+
+All files below are in the data folder and are overwritten on every run.
+
+```{python}
+outputs = ["df_texts.tsv", "df_sentences.tsv", "df_tokens.tsv", "df_top20.tsv",
+           "top20_tokens.png", "wordclouds_by_text.png"]
+pd.DataFrame({"file": outputs,
+              "size_kb": [round((DATA_DIR / f).stat().st_size / 1024, 1) for f in outputs]})
+```
+
+## Download the results (on Colab)
+
+Files in `/content` are deleted when the Colab session ends. This cell packs
+the whole `text-data` folder (PDFs, `.txt`, `.tsv` and `.png` files) into
+`text-data.zip` and downloads it to your computer. Locally, the cell does
+nothing, since the files are already on your disk.
+
+```{python}
+if IN_COLAB:
+    import shutil
+    from google.colab import files
+
+    zip_path = shutil.make_archive("text-data", "zip", root_dir=".", base_dir="text-data")   # overwrite
+    files.download(zip_path)
+```
