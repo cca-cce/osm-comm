@@ -1356,8 +1356,8 @@ nils.holmberg@iko.lu.se
 </div><div class="column" style="width:5%;">
 
 </div><div class="column" style="width:50%;">
-<div id="c0fa141f" class="cell" data-execution_count="2">
-<div class="cell-output cell-output-display" data-execution_count="2">
+<div id="8c695db8" class="cell" data-execution_count="2">
+<div class="cell-output cell-output-display" data-execution_count="21">
 <div>
 <style scoped>
 .dataframe tbody tr th:only-of-type {
@@ -1424,8 +1424,8 @@ text-align: right;
 </div><div class="column" style="width:5%;">
 
 </div><div class="column" style="width:50%;">
-<div id="be88d4e2" class="cell" data-execution_count="3">
-<div class="cell-output cell-output-display" data-execution_count="3">
+<div id="ebef12d3" class="cell" data-execution_count="3">
+<div class="cell-output cell-output-display" data-execution_count="22">
 <div>
 <style scoped>
 .dataframe tbody tr th:only-of-type {
@@ -1498,8 +1498,8 @@ text-align: right;
 </div><div class="column" style="width:5%;">
 
 </div><div class="column" style="width:50%;">
-<div id="6ee90080" class="cell" data-execution_count="4">
-<div class="cell-output cell-output-display" data-execution_count="4">
+<div id="988e1727" class="cell" data-execution_count="4">
+<div class="cell-output cell-output-display" data-execution_count="23">
 <div>
 <style scoped>
 .dataframe tbody tr th:only-of-type {
@@ -1577,8 +1577,8 @@ text-align: right;
 </div><div class="column" style="width:5%;">
 
 </div><div class="column" style="width:50%;">
-<div id="9f6699f1" class="cell" data-execution_count="5">
-<div class="cell-output cell-output-display" data-execution_count="5">
+<div id="43ffd0aa" class="cell" data-execution_count="5">
+<div class="cell-output cell-output-display" data-execution_count="24">
 <div>
 <style scoped>
 .dataframe tbody tr th:only-of-type {
@@ -1649,7 +1649,7 @@ text-align: right;
 </div><div class="column" style="width:5%;">
 
 </div><div class="column" style="width:50%;">
-<div id="b602d900" class="cell" data-execution_count="6">
+<div id="953eeda9" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href aria-label="1"></a>raw <span class="op">=</span> <span class="st">&quot;  Equinor&#39;s 2024 REPORT: CO₂ -50%!</span><span class="ch">\n</span><span class="st">&quot;</span></span>
 <span id="cb1-2"><a href aria-label="2"></a><span class="bu">print</span>(<span class="ss">f&quot;</span><span class="sc">{</span><span class="st">&#39;raw&#39;</span><span class="sc">:10}</span><span class="ss">: </span><span class="sc">{</span>raw<span class="sc">.</span>strip()<span class="sc">}</span><span class="ss">&quot;</span>)</span>
 <span id="cb1-3"><a href aria-label="3"></a><span class="bu">print</span>(<span class="ss">f&quot;</span><span class="sc">{</span><span class="st">&#39;lower&#39;</span><span class="sc">:10}</span><span class="ss">: </span><span class="sc">{</span>raw<span class="sc">.</span>strip()<span class="sc">.</span>lower()<span class="sc">}</span><span class="ss">&quot;</span>)</span>
@@ -1683,13 +1683,13 @@ tokens    : [&#39;equinors&#39;, &#39;report&#39;]</code></pre>
 </div><div class="column" style="width:5%;">
 
 </div><div class="column" style="width:50%;">
-<div id="52cbded8" class="cell" data-execution_count="7">
+<div id="e3c676ed" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href aria-label="1"></a>doc <span class="op">=</span> nlp(<span class="st">&quot;Equinor&#39;s 2024 net-zero target.&quot;</span>)</span>
 <span id="cb3-2"><a href aria-label="2"></a>pd.DataFrame(</span>
 <span id="cb3-3"><a href aria-label="3"></a>    [(i, t.text, t.is_punct) <span class="cf">for</span> i, t <span class="kw">in</span> <span class="bu">enumerate</span>(doc)],</span>
 <span id="cb3-4"><a href aria-label="4"></a>    columns<span class="op">=</span>[<span class="st">&quot;idx&quot;</span>, <span class="st">&quot;token&quot;</span>, <span class="st">&quot;is_punct&quot;</span>]</span>
 <span id="cb3-5"><a href aria-label="5"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="7">
+<div class="cell-output cell-output-display" data-execution_count="26">
 <div>
 <style scoped>
 .dataframe tbody tr th:only-of-type {
@@ -1786,14 +1786,14 @@ text-align: right;
 </div><div class="column" style="width:5%;">
 
 </div><div class="column" style="width:50%;">
-<div id="eb02974d" class="cell" data-execution_count="8">
+<div id="13f42b4b" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href aria-label="1"></a>cases <span class="op">=</span> [<span class="st">&quot;don&#39;t&quot;</span>, <span class="st">&quot;U.S.A.&quot;</span>, <span class="st">&quot;net-zero&quot;</span>, <span class="st">&quot;New York&quot;</span>]</span>
 <span id="cb4-2"><a href aria-label="2"></a>pd.DataFrame({</span>
 <span id="cb4-3"><a href aria-label="3"></a>    <span class="st">&quot;input&quot;</span>:     cases,</span>
 <span id="cb4-4"><a href aria-label="4"></a>    <span class="st">&quot;tokens&quot;</span>:    [[t.text <span class="cf">for</span> t <span class="kw">in</span> nlp(c)] <span class="cf">for</span> c <span class="kw">in</span> cases],</span>
 <span id="cb4-5"><a href aria-label="5"></a>    <span class="st">&quot;challenge&quot;</span>: [<span class="st">&quot;contraction&quot;</span>,<span class="st">&quot;acronym&quot;</span>,<span class="st">&quot;hyphen&quot;</span>,<span class="st">&quot;multi-word&quot;</span>]</span>
 <span id="cb4-6"><a href aria-label="6"></a>})</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="8">
+<div class="cell-output cell-output-display" data-execution_count="27">
 <div>
 <style scoped>
 .dataframe tbody tr th:only-of-type {
@@ -1866,13 +1866,13 @@ text-align: right;
 </div><div class="column" style="width:5%;">
 
 </div><div class="column" style="width:50%;">
-<div id="931afa09" class="cell" data-execution_count="9">
+<div id="395f332f" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href aria-label="1"></a>doc <span class="op">=</span> nlp(<span class="st">&quot;Equinor reduces carbon emissions annually.&quot;</span>)</span>
 <span id="cb5-2"><a href aria-label="2"></a>pd.DataFrame(</span>
 <span id="cb5-3"><a href aria-label="3"></a>    [(t.text, t.pos_, t.tag_) <span class="cf">for</span> t <span class="kw">in</span> doc],</span>
 <span id="cb5-4"><a href aria-label="4"></a>    columns<span class="op">=</span>[<span class="st">&quot;token&quot;</span>, <span class="st">&quot;POS&quot;</span>, <span class="st">&quot;tag&quot;</span>]</span>
 <span id="cb5-5"><a href aria-label="5"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="9">
+<div class="cell-output cell-output-display" data-execution_count="28">
 <div>
 <style scoped>
 .dataframe tbody tr th:only-of-type {
@@ -1957,7 +1957,7 @@ text-align: right;
 </div><div class="column" style="width:5%;">
 
 </div><div class="column" style="width:50%;">
-<div id="fec31c97" class="cell" data-execution_count="10">
+<div id="590c3ccb" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href aria-label="1"></a>doc <span class="op">=</span> nlp(<span class="st">&quot;Equinor operates in Norway and Brazil. &quot;</span></span>
 <span id="cb6-2"><a href aria-label="2"></a>          <span class="st">&quot;CEO Anders Opedal spoke in 2024.&quot;</span>)</span>
 <span id="cb6-3"><a href aria-label="3"></a>pd.DataFrame(</span>
@@ -1965,7 +1965,7 @@ text-align: right;
 <span id="cb6-5"><a href aria-label="5"></a>     <span class="cf">for</span> e <span class="kw">in</span> doc.ents],</span>
 <span id="cb6-6"><a href aria-label="6"></a>    columns<span class="op">=</span>[<span class="st">&quot;entity&quot;</span>, <span class="st">&quot;label&quot;</span>, <span class="st">&quot;meaning&quot;</span>]</span>
 <span id="cb6-7"><a href aria-label="7"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="10">
+<div class="cell-output cell-output-display" data-execution_count="29">
 <div>
 <style scoped>
 .dataframe tbody tr th:only-of-type {
@@ -2038,13 +2038,13 @@ text-align: right;
 </div><div class="column" style="width:5%;">
 
 </div><div class="column" style="width:50%;">
-<div id="4fafe383" class="cell" data-execution_count="11">
+<div id="45b5a042" class="cell" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href aria-label="1"></a>doc <span class="op">=</span> nlp(<span class="st">&quot;The company is reducing its carbon emissions.&quot;</span>)</span>
 <span id="cb7-2"><a href aria-label="2"></a>pd.DataFrame(</span>
 <span id="cb7-3"><a href aria-label="3"></a>    [(t.text, t.is_stop, t.lemma_) <span class="cf">for</span> t <span class="kw">in</span> doc],</span>
 <span id="cb7-4"><a href aria-label="4"></a>    columns<span class="op">=</span>[<span class="st">&quot;token&quot;</span>, <span class="st">&quot;stop?&quot;</span>, <span class="st">&quot;lemma&quot;</span>]</span>
 <span id="cb7-5"><a href aria-label="5"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="11">
+<div class="cell-output cell-output-display" data-execution_count="30">
 <div>
 <style scoped>
 .dataframe tbody tr th:only-of-type {
@@ -2141,7 +2141,7 @@ text-align: right;
 </div><div class="column" style="width:5%;">
 
 </div><div class="column" style="width:50%;">
-<div id="05abc258" class="cell" data-execution_count="12">
+<div id="dcc6783e" class="cell" data-execution_count="12">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href aria-label="1"></a>raw <span class="op">=</span> <span class="st">&quot;Equinor&#39;s Emissions REPORT, 2024!&quot;</span></span>
 <span id="cb8-2"><a href aria-label="2"></a>pd.DataFrame({</span>
 <span id="cb8-3"><a href aria-label="3"></a>    <span class="st">&quot;step&quot;</span>:   [<span class="st">&quot;raw&quot;</span>, <span class="st">&quot;lowercase&quot;</span>, <span class="st">&quot;alpha only&quot;</span>, <span class="st">&quot;len ≥ 3&quot;</span>],</span>
@@ -2152,7 +2152,7 @@ text-align: right;
 <span id="cb8-8"><a href aria-label="8"></a>        <span class="st">&quot; &quot;</span>.join(w <span class="cf">for</span> w <span class="kw">in</span> re.sub(<span class="vs">r&quot;</span><span class="pp">[^a-z</span><span class="dv">\s</span><span class="pp">]</span><span class="vs">&quot;</span>,<span class="st">&quot;&quot;</span>,</span>
 <span id="cb8-9"><a href aria-label="9"></a>                 raw.lower()).split() <span class="cf">if</span> <span class="bu">len</span>(w) <span class="op">&gt;=</span> <span class="dv">3</span>)]</span>
 <span id="cb8-10"><a href aria-label="10"></a>})</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="12">
+<div class="cell-output cell-output-display" data-execution_count="31">
 <div>
 <style scoped>
 .dataframe tbody tr th:only-of-type {
@@ -2220,7 +2220,7 @@ text-align: right;
 </div><div class="column" style="width:5%;">
 
 </div><div class="column" style="width:50%;">
-<div id="8a48bbd2" class="cell" data-execution_count="13">
+<div id="dc59f2fb" class="cell" data-execution_count="13">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href aria-label="1"></a>words <span class="op">=</span> [<span class="st">&quot;running&quot;</span>, <span class="st">&quot;policies&quot;</span>, <span class="st">&quot;accelerated&quot;</span>,</span>
 <span id="cb9-2"><a href aria-label="2"></a>         <span class="st">&quot;transitions&quot;</span>, <span class="st">&quot;increasingly&quot;</span>]</span>
 <span id="cb9-3"><a href aria-label="3"></a>pd.DataFrame({</span>
@@ -2228,7 +2228,7 @@ text-align: right;
 <span id="cb9-5"><a href aria-label="5"></a>    <span class="st">&quot;Porter&quot;</span>: [porter.stem(w) <span class="cf">for</span> w <span class="kw">in</span> words],</span>
 <span id="cb9-6"><a href aria-label="6"></a>    <span class="st">&quot;Regexp&quot;</span>: [regexp.stem(w) <span class="cf">for</span> w <span class="kw">in</span> words]</span>
 <span id="cb9-7"><a href aria-label="7"></a>})</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="13">
+<div class="cell-output cell-output-display" data-execution_count="32">
 <div>
 <style scoped>
 .dataframe tbody tr th:only-of-type {
@@ -2307,7 +2307,7 @@ text-align: right;
 </div><div class="column" style="width:5%;">
 
 </div><div class="column" style="width:50%;">
-<div id="65214284" class="cell" data-execution_count="14">
+<div id="16626583" class="cell" data-execution_count="14">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href aria-label="1"></a>sents <span class="op">=</span> [<span class="st">&quot;She reported the findings.&quot;</span>,</span>
 <span id="cb10-2"><a href aria-label="2"></a>         <span class="st">&quot;The policies were announced.&quot;</span>,</span>
 <span id="cb10-3"><a href aria-label="3"></a>         <span class="st">&quot;Emissions are rising rapidly.&quot;</span>]</span>
@@ -2318,7 +2318,7 @@ text-align: right;
 <span id="cb10-8"><a href aria-label="8"></a>            rows.append({<span class="st">&quot;token&quot;</span>: t.text,</span>
 <span id="cb10-9"><a href aria-label="9"></a>                         <span class="st">&quot;lemma&quot;</span>: t.lemma_, <span class="st">&quot;POS&quot;</span>: t.pos_})</span>
 <span id="cb10-10"><a href aria-label="10"></a>pd.DataFrame(rows)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="14">
+<div class="cell-output cell-output-display" data-execution_count="33">
 <div>
 <style scoped>
 .dataframe tbody tr th:only-of-type {
@@ -2409,7 +2409,7 @@ text-align: right;
 </div><div class="column" style="width:5%;">
 
 </div><div class="column" style="width:50%;">
-<div id="d425f94c" class="cell" data-execution_count="15">
+<div id="a05fae5a" class="cell" data-execution_count="15">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href aria-label="1"></a>words <span class="op">=</span> [<span class="st">&quot;reducing&quot;</span>, <span class="st">&quot;emissions&quot;</span>, <span class="st">&quot;strategies&quot;</span>,</span>
 <span id="cb11-2"><a href aria-label="2"></a>         <span class="st">&quot;accelerating&quot;</span>, <span class="st">&quot;reported&quot;</span>]</span>
 <span id="cb11-3"><a href aria-label="3"></a>pd.DataFrame({</span>
@@ -2417,7 +2417,7 @@ text-align: right;
 <span id="cb11-5"><a href aria-label="5"></a>    <span class="st">&quot;lemma&quot;</span>: [nlp(w)[<span class="dv">0</span>].lemma_ <span class="cf">for</span> w <span class="kw">in</span> words],</span>
 <span id="cb11-6"><a href aria-label="6"></a>    <span class="st">&quot;stem&quot;</span>:  [porter.stem(w)   <span class="cf">for</span> w <span class="kw">in</span> words]</span>
 <span id="cb11-7"><a href aria-label="7"></a>})</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="15">
+<div class="cell-output cell-output-display" data-execution_count="34">
 <div>
 <style scoped>
 .dataframe tbody tr th:only-of-type {
@@ -2496,7 +2496,7 @@ text-align: right;
 </div><div class="column" style="width:5%;">
 
 </div><div class="column" style="width:50%;">
-<div id="3eb80dfd" class="cell" data-execution_count="16">
+<div id="8e87da70" class="cell" data-execution_count="16">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href aria-label="1"></a>mini  <span class="op">=</span> {<span class="st">&quot;d1&quot;</span>: <span class="st">&quot;energy transition energy&quot;</span>,</span>
 <span id="cb12-2"><a href aria-label="2"></a>         <span class="st">&quot;d2&quot;</span>: <span class="st">&quot;carbon emissions energy&quot;</span>,</span>
 <span id="cb12-3"><a href aria-label="3"></a>         <span class="st">&quot;d3&quot;</span>: <span class="st">&quot;transition carbon policy&quot;</span>}</span>
@@ -2506,7 +2506,7 @@ text-align: right;
 <span id="cb12-7"><a href aria-label="7"></a>     <span class="cf">for</span> d, t <span class="kw">in</span> mini.items()},</span>
 <span id="cb12-8"><a href aria-label="8"></a>    index<span class="op">=</span>vocab</span>
 <span id="cb12-9"><a href aria-label="9"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="16">
+<div class="cell-output cell-output-display" data-execution_count="35">
 <div>
 <style scoped>
 .dataframe tbody tr th:only-of-type {
@@ -2585,7 +2585,7 @@ text-align: right;
 </div><div class="column" style="width:5%;">
 
 </div><div class="column" style="width:50%;">
-<div id="2b0b8249" class="cell" data-fig-height="3.2" data-fig-width="4" data-execution_count="17">
+<div id="a00b8b45" class="cell" data-fig-height="3.2" data-fig-width="4" data-execution_count="17">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href aria-label="1"></a>cf <span class="op">=</span> corpus_freq.copy().reset_index(drop<span class="op">=</span><span class="va">True</span>)</span>
 <span id="cb13-2"><a href aria-label="2"></a>cf[<span class="st">&quot;rank&quot;</span>] <span class="op">=</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="bu">len</span>(cf) <span class="op">+</span> <span class="dv">1</span>)</span>
 <span id="cb13-3"><a href aria-label="3"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">4</span>, <span class="fl">3.2</span>))</span>
@@ -2621,8 +2621,8 @@ text-align: right;
 </div><div class="column" style="width:5%;">
 
 </div><div class="column" style="width:50%;">
-<div id="4e9c1a13" class="cell" data-execution_count="18">
-<div class="cell-output cell-output-display" data-execution_count="18">
+<div id="f80e32bf" class="cell" data-execution_count="18">
+<div class="cell-output cell-output-display" data-execution_count="37">
 <div>
 <style scoped>
 .dataframe tbody tr th:only-of-type {
@@ -2697,7 +2697,7 @@ text-align: right;
 </div><div class="column" style="width:5%;">
 
 </div><div class="column" style="width:50%;">
-<div id="bb5b08d7" class="cell" data-fig-height="3.2" data-fig-width="4" data-execution_count="19">
+<div id="001a70f5" class="cell" data-fig-height="3.2" data-fig-width="4" data-execution_count="19">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -2716,14 +2716,13 @@ text-align: right;
 <section id="next-steps" class="slide level2 smaller scrollable">
 <h2>Next steps</h2>
 <p><br></p>
-<p><strong>Lecture, lab 1</strong></p>
+<div style="font-size: 85%;">
+<p><strong>Lecture-Lab 2</strong></p>
 <ul>
-<li>Lecture notes: <a href="https://cca-cce.github.io/osm-comm/web/edu/simm59-lecture1-nlp.html" target="_blank">available on github!</a></li>
-<li>Lab notebook: <a href="https://canvas.education.lu.se/courses/38917" target="_blank">check canvas page!</a></li>
+<li>Lecture notes: <a href="https://cca-cce.github.io/osm-comm/web/edu/skod52-cca01.html" target="_blank">available on github!</a></li>
+<li>Lab notebook: <a href="https://colab.research.google.com/github/cca-cce/osm-comm/blob/main/jnb/skod52/lecture_lab_2.ipynb" target="_blank">available on colab!</a></li>
 </ul>
-<!--
-https://colab.research.google.com/github/cca-cce/osm-comm/blob/main/jnb/simm59/simm59_lab1.ipynb
--->
+<p><br></p>
 <p><strong>References</strong></p>
 <div id="refs" class="references csl-bib-body hanging-indent" role="list">
 <div id="ref-ghosh2019natural" class="csl-entry" role="listitem">
@@ -2734,6 +2733,7 @@ Holmberg, Nils. 2026. <em><span>AI</span>-Aided Content Analysis of Sustainabili
 </div>
 <div id="ref-hou2025natural" class="csl-entry" role="listitem">
 Hou, Yuxin, and Junming Huang. 2025. <span>“Natural Language Processing for Social Science Research: A Comprehensive Review.”</span> <em>Chinese Journal of Sociology</em> 11 (1): 121–57.
+</div>
 </div>
 </div>
 
