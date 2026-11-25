@@ -1,0 +1,2117 @@
+{
+  "source_pdf": "../ding2025information.pdf",
+  "source_title": "Information Architecture and UX Design: The Integration of Information Spaces",
+  "authors": [
+    "Wei Ding",
+    "Xia Lin",
+    "Michael Zarro"
+  ],
+  "edition": 3,
+  "year": 2025,
+  "doi": "10.1007/978-3-031-72138-0",
+  "figure_count": 46,
+  "notes": "All numbered figures included. Chapter 10 has no numbered figures. Page is the printed book page; pdf_page is one-based.",
+  "render_command": "source ~/lib/python/uv-osm/bin/activate && XDG_CACHE_HOME=/tmp/ding-quarto-cache quarto render refs/ding2025figs.qmd --to revealjs",
+  "figures": [
+    {
+      "number": "1.1",
+      "pdf_page": 21,
+      "caption": "Fig.1.1   Disciplines related to IA and UX design",
+      "caption_bbox": [
+        60.09299850463867,
+        576.4718017578125,
+        239.6038055419922,
+        585.5271606445312
+      ],
+      "images": [
+        [
+          [
+            96.7,
+            520.6,
+            380.5,
+            564.8
+          ],
+          1183,
+          184
+        ]
+      ],
+      "extraction": "Embedded raster image extracted at original resolution",
+      "artwork_bbox": [
+        96.65699768066406,
+        520.592041015625,
+        380.60302734375,
+        564.7880249023438
+      ],
+      "page": "5",
+      "file": "fig-1-1.png",
+      "width": 1183,
+      "height": 184,
+      "chapter": 1,
+      "chapter_title": "Information Architecture and UX Design: Definitions and Scope",
+      "title": "Disciplines supporting IA and UX",
+      "bullets": [
+        "IA and UX draw on usability, information science, human factors, interaction, and visual design.",
+        "Information structure and interface behavior jointly shape the experience.",
+        "Coordinate these disciplines so people can find information and complete tasks."
+      ]
+    },
+    {
+      "number": "2.1",
+      "pdf_page": 31,
+      "caption": "Fig.2.1   A photo of the author’s desk in the Web1.0 era",
+      "caption_bbox": [
+        60.092994689941406,
+        386.5177917480469,
+        173.4712677001953,
+        406.53546142578125
+      ],
+      "images": [
+        [
+          [
+            215.3,
+            384.9,
+            416.5,
+            581.3
+          ],
+          838,
+          820
+        ]
+      ],
+      "extraction": "Embedded raster image extracted at original resolution",
+      "artwork_bbox": [
+        215.2469940185547,
+        384.87200927734375,
+        416.59197998046875,
+        581.3179931640625
+      ],
+      "page": "16",
+      "file": "fig-2-1.png",
+      "width": 838,
+      "height": 820,
+      "chapter": 2,
+      "chapter_title": "Information Architecture and Evolving Information Spaces",
+      "title": "The Web1.0 desktop",
+      "bullets": [
+        "The desktop, wired peripherals, and desk phone show a place-bound computing experience.",
+        "Early web access was intermittent; people were often disconnected away from the desk.",
+        "This historical baseline helps explain the shift toward continuous, cross-device access."
+      ]
+    },
+    {
+      "number": "2.2",
+      "pdf_page": 33,
+      "caption": "Fig.2.2   Diagram   for   a   mashup   of   the   US   Government’s   publicly   accessible   MedlinePlus   web service   and   a   consumer   health   site’s   API,   both   providing   search   results   for   the   query   “diabetes.” MedlinePlus also contributes medical subject headings (MeSH) while the consumer site contributes social tags. The user sees a single search results page with the combined result set",
+      "caption_bbox": [
+        60.092994689941406,
+        364.998779296875,
+        417.24798583984375,
+        406.93212890625
+      ],
+      "images": [
+        [
+          [
+            96.7,
+            73.5,
+            380.4,
+            353.3
+          ],
+          1182,
+          1166
+        ]
+      ],
+      "extraction": "Embedded raster image extracted at original resolution",
+      "artwork_bbox": [
+        96.65699768066406,
+        73.44198608398438,
+        380.37298583984375,
+        353.3179931640625
+      ],
+      "page": "18",
+      "file": "fig-2-2.png",
+      "width": 1182,
+      "height": 1166,
+      "chapter": 2,
+      "chapter_title": "Information Architecture and Evolving Information Spaces",
+      "title": "Combining information with a mashup",
+      "bullets": [
+        "One search draws on MedlinePlus and a consumer health service through APIs.",
+        "Medical subject headings and social tags provide complementary filters.",
+        "The interface presents a unified result set while the underlying sources remain separate."
+      ]
+    },
+    {
+      "number": "2.3",
+      "pdf_page": 34,
+      "caption": "Fig.2.3   Results   in   XML   format   for   the   API   query   used   in   the   health   mashup   diagrammed   in Fig.  2.3 .  https://wsearch.nlm.nih.gov/ws/query?db=healthTopics&term=%22diabetes",
+      "caption_bbox": [
+        60.092994689941406,
+        335.0018005371094,
+        417.2354736328125,
+        355.01947021484375
+      ],
+      "images": [
+        [
+          [
+            64.2,
+            73.7,
+            412.8,
+            323.3
+          ],
+          1453,
+          1040
+        ]
+      ],
+      "extraction": "Embedded raster image extracted at original resolution",
+      "artwork_bbox": [
+        64.16699981689453,
+        73.65199279785156,
+        413.0780029296875,
+        323.3179931640625
+      ],
+      "page": "19",
+      "file": "fig-2-3.png",
+      "width": 1453,
+      "height": 1040,
+      "chapter": 2,
+      "chapter_title": "Information Architecture and Evolving Information Spaces",
+      "title": "Structured data behind the interface",
+      "bullets": [
+        "The XML response contains structured health-topic results for a diabetes query.",
+        "An API transfers reusable content independently of its eventual visual presentation.",
+        "This is the data layer supporting the mashup in Figure 2.2."
+      ]
+    },
+    {
+      "number": "2.4",
+      "pdf_page": 35,
+      "caption": "Fig.2.4   Hashtags allow for access to related topics (#ia, #library, etc.). Note the repetition of user contributed tags that mean the same thing, like “#ux” and “#userexperience”",
+      "caption_bbox": [
+        60.092994689941406,
+        534.1088256835938,
+        417.2452087402344,
+        554.12646484375
+      ],
+      "images": [
+        [
+          [
+            96.2,
+            351.5,
+            380.3,
+            522.4
+          ],
+          1184,
+          713
+        ]
+      ],
+      "extraction": "Embedded raster image extracted at original resolution",
+      "artwork_bbox": [
+        96.14700317382812,
+        351.45196533203125,
+        380.3609924316406,
+        522.427978515625
+      ],
+      "page": "20",
+      "file": "fig-2-4.png",
+      "width": 1184,
+      "height": 713,
+      "chapter": 2,
+      "chapter_title": "Information Architecture and Evolving Information Spaces",
+      "title": "Hashtags as access points",
+      "bullets": [
+        "User-contributed hashtags link a post to related topics and communities.",
+        "The example uses both #ux and #userexperience for a similar concept.",
+        "Free tagging supports discovery but can fragment retrieval across synonymous labels."
+      ]
+    },
+    {
+      "number": "2.5",
+      "pdf_page": 37,
+      "caption": "Fig.2.5   Integrated information spaces",
+      "caption_bbox": [
+        60.092994689941406,
+        69.55574035644531,
+        130.66842651367188,
+        89.57341766357422
+      ],
+      "images": [
+        [
+          [
+            215.3,
+            68.3,
+            417.1,
+            217.3
+          ],
+          842,
+          621
+        ]
+      ],
+      "extraction": "Embedded raster image extracted at original resolution",
+      "artwork_bbox": [
+        215.2469940185547,
+        68.28199768066406,
+        417.3450012207031,
+        217.35800170898438
+      ],
+      "page": "22",
+      "file": "fig-2-5.png",
+      "width": 842,
+      "height": 621,
+      "chapter": 2,
+      "chapter_title": "Information Architecture and Evolving Information Spaces",
+      "title": "Integrated information spaces",
+      "bullets": [
+        "Desktop, mobile, wearables, sensors, and automobiles connect to shared information spaces.",
+        "Cloud services and wireless connectivity let activities span devices and locations.",
+        "IA must support continuity across this connected ecosystem."
+      ]
+    },
+    {
+      "number": "3.1",
+      "pdf_page": 44,
+      "caption": "Fig.3.1   Human-centered design components: IAs should look to balance what people want or need, with the business’ ability to provide it and the technical ability to create it",
+      "caption_bbox": [
+        60.092994689941406,
+        69.55574035644531,
+        173.4982147216797,
+        144.36717224121094
+      ],
+      "images": [
+        [
+          [
+            215.3,
+            68.3,
+            416.5,
+            258.3
+          ],
+          840,
+          793
+        ]
+      ],
+      "extraction": "Embedded raster image extracted at original resolution",
+      "artwork_bbox": [
+        215.2469940185547,
+        68.28201293945312,
+        416.791015625,
+        258.3380126953125
+      ],
+      "page": "30",
+      "file": "fig-3-1.png",
+      "width": 840,
+      "height": 793,
+      "chapter": 3,
+      "chapter_title": "Human-Centered Design",
+      "title": "Balancing people, business, and technology",
+      "bullets": [
+        "Human-centered design balances human desirability, business viability, and technical feasibility.",
+        "The overlapping circles show that useful solutions must address all three concerns.",
+        "Make competing priorities and tradeoffs explicit during design."
+      ]
+    },
+    {
+      "number": "3.2",
+      "pdf_page": 45,
+      "caption": "Fig.3.2   Three clouds of the HCD research",
+      "caption_bbox": [
+        60.09299850463867,
+        592.3297729492188,
+        218.21994018554688,
+        601.3851318359375
+      ],
+      "images": [
+        [
+          [
+            64.2,
+            318.2,
+            412.8,
+            580.6
+          ],
+          1453,
+          1094
+        ]
+      ],
+      "extraction": "Embedded raster image extracted at original resolution",
+      "artwork_bbox": [
+        64.16699981689453,
+        318.1520080566406,
+        413.052001953125,
+        580.6580200195312
+      ],
+      "page": "31",
+      "file": "fig-3-2.png",
+      "width": 1453,
+      "height": 1094,
+      "chapter": 3,
+      "chapter_title": "Human-Centered Design",
+      "title": "Research, design, and evaluation",
+      "bullets": [
+        "Research identifies problems and gathers evidence about people and their needs.",
+        "Design turns those findings into structures, flows, wireframes, and solutions.",
+        "Evaluation checks the design; the three activities recur throughout development."
+      ]
+    },
+    {
+      "number": "3.3",
+      "pdf_page": 47,
+      "caption": "Fig.3.3   Help section on an e-Commerce site with help categories and no easy “contact us” option—but links to answer common questions",
+      "caption_bbox": [
+        60.092994689941406,
+        69.55574035644531,
+        173.47216796875,
+        122.45146942138672
+      ],
+      "images": [
+        [
+          [
+            215.3,
+            68.1,
+            416.6,
+            190.3
+          ],
+          839,
+          510
+        ]
+      ],
+      "extraction": "Embedded raster image extracted at original resolution",
+      "artwork_bbox": [
+        215.2469940185547,
+        68.04199981689453,
+        416.6510009765625,
+        190.35800170898438
+      ],
+      "page": "33",
+      "file": "fig-3-3.png",
+      "width": 839,
+      "height": 510,
+      "chapter": 3,
+      "chapter_title": "Human-Centered Design",
+      "title": "Self-service help and competing goals",
+      "bullets": [
+        "The help page organizes common questions into recognizable support categories.",
+        "Self-service can reduce support costs, while users may still need direct human help.",
+        "The example illustrates a design tradeoff that depends on business priorities and user needs."
+      ]
+    },
+    {
+      "number": "3.4",
+      "pdf_page": 51,
+      "caption": "Fig.3.4   Detailed view of the design process with two parallel processes, front end and behind the scenes",
+      "caption_bbox": [
+        60.092994689941406,
+        565.2578125,
+        417.2425537109375,
+        585.2664794921875
+      ],
+      "images": [
+        [
+          [
+            96.2,
+            338.7,
+            380.4,
+            553.6
+          ],
+          1185,
+          896
+        ]
+      ],
+      "extraction": "Embedded raster image extracted at original resolution",
+      "artwork_bbox": [
+        96.14700317382812,
+        338.7019958496094,
+        380.5769958496094,
+        553.5679931640625
+      ],
+      "page": "37",
+      "file": "fig-3-4.png",
+      "width": 1185,
+      "height": 896,
+      "chapter": 3,
+      "chapter_title": "Human-Centered Design",
+      "title": "Two parallel design processes",
+      "bullets": [
+        "Front-end work progresses from conceptual design to logical design and documentation.",
+        "Metadata, content models, and controlled vocabularies develop alongside the interface.",
+        "Usability testing feeds back into both levels; visible search depends on underlying structure."
+      ]
+    },
+    {
+      "number": "3.5",
+      "pdf_page": 53,
+      "caption": "Fig.3.5   Example low-ﬁdelity wireframe showing a simple product page. On the right are annota- tions that describe the functionality called out in the screen (#1, 2, 3, etc.)",
+      "caption_bbox": [
+        60.092994689941406,
+        324.0037841796875,
+        417.2237243652344,
+        344.01251220703125
+      ],
+      "images": [
+        [
+          [
+            64.2,
+            74.2,
+            412.8,
+            312.3
+          ],
+          1454,
+          993
+        ]
+      ],
+      "extraction": "Embedded raster image extracted at original resolution",
+      "artwork_bbox": [
+        64.16699981689453,
+        74.1920166015625,
+        413.05499267578125,
+        312.3380126953125
+      ],
+      "page": "39",
+      "file": "fig-3-5.png",
+      "width": 1454,
+      "height": 993,
+      "chapter": 3,
+      "chapter_title": "Human-Centered Design",
+      "title": "An annotated wireframe",
+      "bullets": [
+        "The low-fidelity product page emphasizes layout, filters, search, and navigation.",
+        "Numbered callouts connect interface elements to descriptions of their behavior.",
+        "Wireframes let teams discuss and test structure before committing to visual detail."
+      ]
+    },
+    {
+      "number": "3.6",
+      "pdf_page": 54,
+      "caption": "Fig.3.6   Example user ﬂow showing the path from a search form. The user enters a search term, and the system logic takes them to a search results page, unless the keyword is an exact content match, in which case the system takes them to the content page",
+      "caption_bbox": [
+        60.092994689941406,
+        182.00181579589844,
+        417.2516174316406,
+        212.9728240966797
+      ],
+      "images": [
+        [
+          [
+            137.2,
+            73.7,
+            339.4,
+            170.3
+          ],
+          843,
+          403
+        ]
+      ],
+      "extraction": "Embedded raster image extracted at original resolution",
+      "artwork_bbox": [
+        137.15699768066406,
+        73.65199279785156,
+        339.50701904296875,
+        170.3179931640625
+      ],
+      "page": "40",
+      "file": "fig-3-6.png",
+      "width": 843,
+      "height": 403,
+      "chapter": 3,
+      "chapter_title": "Human-Centered Design",
+      "title": "A conditional search flow",
+      "bullets": [
+        "The diagram starts with a search form and branches on an exact content match.",
+        "An exact match leads directly to content; otherwise the user sees search results.",
+        "User flows make routing decisions and expected system behavior explicit."
+      ]
+    },
+    {
+      "number": "3.7",
+      "pdf_page": 55,
+      "caption": "Fig.3.7   Examples of IA deliverables,  a  Blueprint and  b  Logical navigation",
+      "caption_bbox": [
+        60.09299850463867,
+        581.9959106445312,
+        335.60540771484375,
+        591.0531616210938
+      ],
+      "images": [
+        [
+          [
+            68.2,
+            74.2,
+            408.7,
+            570.3
+          ],
+          1420,
+          2068
+        ]
+      ],
+      "extraction": "Embedded raster image extracted at original resolution",
+      "artwork_bbox": [
+        68.15699768066406,
+        74.22198486328125,
+        408.864013671875,
+        570.3079833984375
+      ],
+      "page": "41",
+      "file": "fig-3-7.png",
+      "width": 1420,
+      "height": 2068,
+      "chapter": 3,
+      "chapter_title": "Human-Centered Design",
+      "title": "Blueprint and logical navigation",
+      "bullets": [
+        "Panel A maps high-level site structure; Panel B develops a more detailed navigation view.",
+        "Both diagrams communicate relationships among pages and content areas.",
+        "Use these deliverables to align the team before implementation."
+      ]
+    },
+    {
+      "number": "4.1",
+      "pdf_page": 59,
+      "caption": "Fig.4.1   An iterative research and evaluation process",
+      "caption_bbox": [
+        60.09299850463867,
+        209.00181579589844,
+        253.26051330566406,
+        218.05714416503906
+      ],
+      "images": [
+        [
+          [
+            96.2,
+            73.3,
+            380.6,
+            197.3
+          ],
+          1185,
+          517
+        ]
+      ],
+      "extraction": "Embedded raster image extracted at original resolution",
+      "artwork_bbox": [
+        96.14700317382812,
+        73.2919921875,
+        380.5830078125,
+        197.3179931640625
+      ],
+      "page": "46",
+      "file": "fig-4-1.png",
+      "width": 1185,
+      "height": 517,
+      "chapter": 4,
+      "chapter_title": "Research and Evaluation",
+      "title": "Research and evaluation as a cycle",
+      "bullets": [
+        "The process moves through research, design, evaluation, delivery, and monitoring.",
+        "Feedback loops return later findings to earlier stages of the work.",
+        "Research continues after launch as the team learns from actual use."
+      ]
+    },
+    {
+      "number": "4.2",
+      "pdf_page": 69,
+      "caption": "Fig.4.2   SUS score reporting over a series of benchmarking studies on a website. 68 is the SUS average score across hundreds of sites. When do you think the redesign happened?",
+      "caption_bbox": [
+        60.092994689941406,
+        69.55574035644531,
+        173.4784698486328,
+        133.41380310058594
+      ],
+      "images": [
+        [
+          [
+            215.3,
+            68.0,
+            416.9,
+            202.3
+          ],
+          840,
+          560
+        ]
+      ],
+      "extraction": "Embedded raster image extracted at original resolution",
+      "artwork_bbox": [
+        215.2469940185547,
+        67.95199584960938,
+        416.88299560546875,
+        202.3280029296875
+      ],
+      "page": "56",
+      "file": "fig-4-2.png",
+      "width": 840,
+      "height": 560,
+      "chapter": 4,
+      "chapter_title": "Research and Evaluation",
+      "title": "Tracking perceived usability with SUS",
+      "bullets": [
+        "Scores move from 66 and 63 to 68, 72, and 80 across five benchmarking rounds.",
+        "The figure uses 68 as a reference average; SUS scores are scale scores, not percentages.",
+        "The later rise suggests improvement, but the chart alone does not establish its cause."
+      ]
+    },
+    {
+      "number": "4.3",
+      "pdf_page": 73,
+      "caption": "Fig.4.3   Framework for a basic persona",
+      "caption_bbox": [
+        60.09299850463867,
+        260.0047912597656,
+        206.0050048828125,
+        269.0601501464844
+      ],
+      "images": [
+        [
+          [
+            96.2,
+            73.6,
+            380.4,
+            248.3
+          ],
+          1185,
+          728
+        ]
+      ],
+      "extraction": "Embedded raster image extracted at original resolution",
+      "artwork_bbox": [
+        96.14700317382812,
+        73.62199401855469,
+        380.5769958496094,
+        248.3179931640625
+      ],
+      "page": "60",
+      "file": "fig-4-3.png",
+      "width": 1185,
+      "height": 728,
+      "chapter": 4,
+      "chapter_title": "Research and Evaluation",
+      "title": "A research-based persona",
+      "bullets": [
+        "The template combines a biography, motivations, goals, frustrations, and technology use.",
+        "A persona represents a pattern found in research rather than an invented stereotype.",
+        "Use it to discuss audience needs and prioritize design decisions."
+      ]
+    },
+    {
+      "number": "4.4",
+      "pdf_page": 74,
+      "caption": "Fig.4.4   Framework for a basic user journey",
+      "caption_bbox": [
+        60.09299850463867,
+        307.0027770996094,
+        222.7533416748047,
+        316.0581359863281
+      ],
+      "images": [
+        [
+          [
+            96.7,
+            73.4,
+            380.6,
+            295.3
+          ],
+          1184,
+          925
+        ]
+      ],
+      "extraction": "Embedded raster image extracted at original resolution",
+      "artwork_bbox": [
+        96.65699768066406,
+        73.38200378417969,
+        380.864990234375,
+        295.3280029296875
+      ],
+      "page": "61",
+      "file": "fig-4-4.png",
+      "width": 1184,
+      "height": 925,
+      "chapter": 4,
+      "chapter_title": "Research and Evaluation",
+      "title": "Mapping a user journey",
+      "bullets": [
+        "Stages organize the persona's actions and experience over time and across touchpoints.",
+        "Quotes, emotions, and pain points connect the map to research evidence.",
+        "An opportunities row turns observed problems into potential improvements."
+      ]
+    },
+    {
+      "number": "4.5",
+      "pdf_page": 77,
+      "caption": "Fig.4.5   AI summarization of a recorded user interview in a user research tool",
+      "caption_bbox": [
+        60.092994689941406,
+        69.55574035644531,
+        169.57359313964844,
+        100.53575897216797
+      ],
+      "images": [
+        [
+          [
+            215.3,
+            67.5,
+            416.5,
+            152.3
+          ],
+          839,
+          354
+        ],
+        [
+          [
+            215.3,
+            175.4,
+            417.1,
+            245.2
+          ],
+          842,
+          291
+        ]
+      ],
+      "extraction": "Embedded raster image extracted at original resolution",
+      "artwork_bbox": [
+        215.2469940185547,
+        67.53202056884766,
+        416.7239990234375,
+        152.3480224609375
+      ],
+      "page": "64",
+      "file": "fig-4-5.png",
+      "width": 839,
+      "height": 354,
+      "chapter": 4,
+      "chapter_title": "Research and Evaluation",
+      "title": "AI-assisted interview summaries",
+      "bullets": [
+        "The tool condenses a recorded session into a short account of the main issues.",
+        "Automated summaries can help researchers review material sooner.",
+        "Check the summary against the recording or transcript before treating it as evidence."
+      ]
+    },
+    {
+      "number": "4.6",
+      "pdf_page": 77,
+      "caption": "Fig.4.6   AI powered interview transcription and sentiment analysis in a user research tool. Notice Yes/No to give feedback on the accuracy",
+      "caption_bbox": [
+        60.092994689941406,
+        177.4748077392578,
+        173.1448974609375,
+        230.3704376220703
+      ],
+      "images": [
+        [
+          [
+            215.3,
+            67.5,
+            416.5,
+            152.3
+          ],
+          839,
+          354
+        ],
+        [
+          [
+            215.3,
+            175.4,
+            417.1,
+            245.2
+          ],
+          842,
+          291
+        ]
+      ],
+      "extraction": "Embedded raster image extracted at original resolution",
+      "artwork_bbox": [
+        215.2469940185547,
+        175.38198852539062,
+        417.3450012207031,
+        245.25799560546875
+      ],
+      "page": "64",
+      "file": "fig-4-6.png",
+      "width": 842,
+      "height": 291,
+      "chapter": 4,
+      "chapter_title": "Research and Evaluation",
+      "title": "Transcription and sentiment analysis",
+      "bullets": [
+        "The transcript highlights negative and positive statements from an interview.",
+        "Automated transcription and coding can speed up an initial research review.",
+        "Accuracy feedback and researcher correction remain part of the workflow."
+      ]
+    },
+    {
+      "number": "5.1",
+      "pdf_page": 82,
+      "caption": "Fig.5.1   A   list   of   graduate   programs.   Notice   how   the   organization   is   alphabetical,   making   the   list easily scannable",
+      "caption_bbox": [
+        60.092994689941406,
+        468.6427917480469,
+        417.2541809082031,
+        488.66046142578125
+      ],
+      "images": [
+        [
+          [
+            96.7,
+            381.9,
+            380.4,
+            456.9
+          ],
+          1182,
+          313
+        ]
+      ],
+      "extraction": "Embedded raster image extracted at original resolution",
+      "artwork_bbox": [
+        96.65699768066406,
+        381.9020080566406,
+        380.37298583984375,
+        456.968017578125
+      ],
+      "page": "69",
+      "file": "fig-5-1.png",
+      "width": 1182,
+      "height": 313,
+      "chapter": 5,
+      "chapter_title": "Information Organization and Navigation Design",
+      "title": "Alphabetical organization",
+      "bullets": [
+        "The graduate-program list follows an alphabetical order that users can recognize.",
+        "Predictable ordering helps people scan for a known item.",
+        "Choose an ordering method that fits the content and the user's task."
+      ]
+    },
+    {
+      "number": "5.2",
+      "pdf_page": 83,
+      "caption": "Fig.5.2   Sorting options often seen in e-commerce. Users may personalize the organization by selecting different items in the menu. The set of results remains the same, only the ordering changes when a new selection is made",
+      "caption_bbox": [
+        60.092994689941406,
+        69.55574035644531,
+        170.59222412109375,
+        166.29185485839844
+      ],
+      "images": [
+        [
+          [
+            246.3,
+            68.2,
+            416.9,
+            270.3
+          ],
+          711,
+          843
+        ]
+      ],
+      "extraction": "Embedded raster image extracted at original resolution",
+      "artwork_bbox": [
+        246.23699951171875,
+        68.13201904296875,
+        416.9129943847656,
+        270.3380126953125
+      ],
+      "page": "70",
+      "file": "fig-5-2.png",
+      "width": 711,
+      "height": 843,
+      "chapter": 5,
+      "chapter_title": "Information Organization and Navigation Design",
+      "title": "Sorting a result set",
+      "bullets": [
+        "The menu offers price, brand, review, and recency as alternative ordering rules.",
+        "Changing the sort rearranges the same set of products.",
+        "Sorting supports different shopping goals without excluding items as a filter would."
+      ]
+    },
+    {
+      "number": "5.3",
+      "pdf_page": 85,
+      "caption": "Fig.5.3   A common translation feature powered by the metadata language ﬁeld",
+      "caption_bbox": [
+        60.092994689941406,
+        69.55574035644531,
+        169.78253173828125,
+        100.53575897216797
+      ],
+      "images": [
+        [
+          [
+            275.3,
+            68.1,
+            416.9,
+            100.3
+          ],
+          591,
+          135
+        ]
+      ],
+      "extraction": "Embedded raster image extracted at original resolution",
+      "artwork_bbox": [
+        275.24700927734375,
+        68.10203552246094,
+        417.10198974609375,
+        100.3580322265625
+      ],
+      "page": "72",
+      "file": "fig-5-3.png",
+      "width": 591,
+      "height": 135,
+      "chapter": 5,
+      "chapter_title": "Information Organization and Navigation Design",
+      "title": "Metadata enabling translation",
+      "bullets": [
+        "A language field can help the interface offer an appropriate translation action.",
+        "The visible control depends on information describing the underlying content.",
+        "Consistent metadata connects content management to useful interface behavior."
+      ]
+    },
+    {
+      "number": "5.4",
+      "pdf_page": 86,
+      "caption": "Fig.5.4   Element from a metadata standard (left), and the value from a controlled vocabulary (right). Only values that are in the controlled vocabulary can be assigned to an element",
+      "caption_bbox": [
+        60.092994689941406,
+        145.00282287597656,
+        417.2362365722656,
+        165.02049255371094
+      ],
+      "images": [
+        [
+          [
+            137.7,
+            73.4,
+            338.9,
+            133.3
+          ],
+          838,
+          251
+        ]
+      ],
+      "extraction": "Embedded raster image extracted at original resolution",
+      "artwork_bbox": [
+        137.66700744628906,
+        73.35200500488281,
+        338.989990234375,
+        133.3280029296875
+      ],
+      "page": "73",
+      "file": "fig-5-4.png",
+      "width": 838,
+      "height": 251,
+      "chapter": 5,
+      "chapter_title": "Information Organization and Navigation Design",
+      "title": "Metadata fields and controlled values",
+      "bullets": [
+        "A metadata standard defines fields such as subject, date, and creator.",
+        "A controlled vocabulary supplies approved terms, such as Shirts for the subject field.",
+        "Consistent fields and values make resources easier to index and retrieve."
+      ]
+    },
+    {
+      "number": "5.5",
+      "pdf_page": 88,
+      "caption": "Fig.5.5   Facets on the left side of the screen (Brands and size) help the user ﬁnd their desired results",
+      "caption_bbox": [
+        60.092994689941406,
+        69.55574035644531,
+        173.3332061767578,
+        111.48912811279297
+      ],
+      "images": [
+        [
+          [
+            215.3,
+            67.8,
+            416.5,
+            235.3
+          ],
+          840,
+          700
+        ]
+      ],
+      "extraction": "Embedded raster image extracted at original resolution",
+      "artwork_bbox": [
+        215.2469940185547,
+        67.77200317382812,
+        416.59698486328125,
+        235.35800170898438
+      ],
+      "page": "75",
+      "file": "fig-5-5.png",
+      "width": 840,
+      "height": 700,
+      "chapter": 5,
+      "chapter_title": "Information Organization and Navigation Design",
+      "title": "Faceted search",
+      "bullets": [
+        "Brand and size are separate facets for narrowing a product collection.",
+        "Users combine attribute choices to reduce a large result set.",
+        "Clear metadata and consistent facet labels support this targeted navigation."
+      ]
+    },
+    {
+      "number": "5.6",
+      "pdf_page": 89,
+      "caption": "Fig.5.6   Tags or hashtags added to a user’s post. Notice the terms preceded by the hash symbol (#) are hyperlinks. Clicking them will open a results page that have similar tags",
+      "caption_bbox": [
+        60.092994689941406,
+        147.9998321533203,
+        417.2551574707031,
+        168.0175018310547
+      ],
+      "images": [
+        [
+          [
+            137.7,
+            73.4,
+            338.9,
+            136.3
+          ],
+          840,
+          263
+        ]
+      ],
+      "extraction": "Embedded raster image extracted at original resolution",
+      "artwork_bbox": [
+        137.66700744628906,
+        73.41200256347656,
+        339.0450134277344,
+        136.3280029296875
+      ],
+      "page": "76",
+      "file": "fig-5-6.png",
+      "width": 840,
+      "height": 263,
+      "chapter": 5,
+      "chapter_title": "Information Organization and Navigation Design",
+      "title": "Tags and social classification",
+      "bullets": [
+        "Hashtags turn user-chosen labels into links to other similarly tagged resources.",
+        "Collective tagging can add vocabulary beyond a centrally managed taxonomy.",
+        "Misspellings, personal labels, and synonyms can also make these collections messy."
+      ]
+    },
+    {
+      "number": "5.7",
+      "pdf_page": 90,
+      "caption": "Fig.5.7   Website navigation types and typical locations",
+      "caption_bbox": [
+        60.092994689941406,
+        451.2727966308594,
+        163.1967315673828,
+        471.29046630859375
+      ],
+      "images": [
+        [
+          [
+            215.3,
+            449.9,
+            416.5,
+            594.0
+          ],
+          839,
+          601
+        ]
+      ],
+      "extraction": "Embedded raster image extracted at original resolution",
+      "artwork_bbox": [
+        215.2469940185547,
+        449.9119873046875,
+        416.56597900390625,
+        594.0679931640625
+      ],
+      "page": "77",
+      "file": "fig-5-7.png",
+      "width": 839,
+      "height": 601,
+      "chapter": 5,
+      "chapter_title": "Information Organization and Navigation Design",
+      "title": "Navigation types and locations",
+      "bullets": [
+        "Global navigation provides access across the site; local navigation supports a section.",
+        "Process navigation shows progress through steps; supplemental links offer additional routes.",
+        "Together these elements help people understand their location and next actions."
+      ]
+    },
+    {
+      "number": "5.8",
+      "pdf_page": 93,
+      "caption": "Fig.5.8   An AI agent providing assistance for potential fraud",
+      "caption_bbox": [
+        60.092994689941406,
+        69.55574035644531,
+        146.02696228027344,
+        100.53575897216797
+      ],
+      "images": [
+        [
+          [
+            215.3,
+            67.7,
+            416.9,
+            294.3
+          ],
+          840,
+          945
+        ]
+      ],
+      "extraction": "Embedded raster image extracted at original resolution",
+      "artwork_bbox": [
+        215.2469940185547,
+        67.65200805664062,
+        416.88299560546875,
+        294.3380126953125
+      ],
+      "page": "80",
+      "file": "fig-5-8.png",
+      "width": 840,
+      "height": 945,
+      "chapter": 5,
+      "chapter_title": "Information Organization and Navigation Design",
+      "title": "An agent escalating a support task",
+      "bullets": [
+        "The conversation begins with a question about a specific account charge.",
+        "The agent retains context when the user reports possible fraud.",
+        "Escalating to a human representative supports tasks requiring additional assistance."
+      ]
+    },
+    {
+      "number": "6.1",
+      "pdf_page": 105,
+      "caption": "Fig.6.1   The “F” shaped reading pattern, observed with eye-tracking tools in one of the author’s studies",
+      "caption_bbox": [
+        60.092994689941406,
+        69.55574035644531,
+        172.77371215820312,
+        111.48912811279297
+      ],
+      "images": [
+        [
+          [
+            215.3,
+            67.4,
+            416.5,
+            317.3
+          ],
+          839,
+          1042
+        ]
+      ],
+      "extraction": "Embedded raster image extracted at original resolution",
+      "artwork_bbox": [
+        215.2469940185547,
+        67.38198852539062,
+        416.63299560546875,
+        317.3479919433594
+      ],
+      "page": "93",
+      "file": "fig-6-1.png",
+      "width": 839,
+      "height": 1042,
+      "chapter": 6,
+      "chapter_title": "Human Information Behavior and Design Implications",
+      "title": "An F-shaped scanning pattern",
+      "bullets": [
+        "The heatmap shows concentrated attention near the top and along the left side.",
+        "In this example, people scan selected areas rather than read every line.",
+        "Use clear headings and informative opening words; reading patterns vary with task and layout."
+      ]
+    },
+    {
+      "number": "6.2",
+      "pdf_page": 107,
+      "caption": "Fig.6.2   An Intranet site with two search boxes. Can we be sure users know which to search?",
+      "caption_bbox": [
+        60.092994689941406,
+        69.55574035644531,
+        169.02218627929688,
+        111.48912811279297
+      ],
+      "images": [
+        [
+          [
+            215.3,
+            67.8,
+            417.1,
+            205.3
+          ],
+          842,
+          573
+        ]
+      ],
+      "extraction": "Embedded raster image extracted at original resolution",
+      "artwork_bbox": [
+        215.2469940185547,
+        67.77200317382812,
+        417.3450012207031,
+        205.3280029296875
+      ],
+      "page": "95",
+      "file": "fig-6-2.png",
+      "width": 842,
+      "height": 573,
+      "chapter": 6,
+      "chapter_title": "Human Information Behavior and Design Implications",
+      "title": "Ambiguous search scope",
+      "bullets": [
+        "The intranet separates website search from a university phonebook search.",
+        "Users must decide which box covers the information they need.",
+        "Clear scope labels or a combined search with filters can reduce that uncertainty."
+      ]
+    },
+    {
+      "number": "7.1",
+      "pdf_page": 111,
+      "caption": "Fig.7.1   Intersection of UI design and information organization",
+      "caption_bbox": [
+        60.092994689941406,
+        69.55574035644531,
+        158.6077117919922,
+        100.53575897216797
+      ],
+      "images": [
+        [
+          [
+            215.3,
+            67.8,
+            416.4,
+            187.3
+          ],
+          839,
+          499
+        ],
+        [
+          [
+            275.3,
+            486.6,
+            417.1,
+            558.2
+          ],
+          591,
+          299
+        ]
+      ],
+      "extraction": "Embedded raster image extracted at original resolution",
+      "artwork_bbox": [
+        215.2469940185547,
+        67.74200439453125,
+        416.64300537109375,
+        187.3280029296875
+      ],
+      "page": "100",
+      "file": "fig-7-1.png",
+      "width": 839,
+      "height": 499,
+      "chapter": 7,
+      "chapter_title": "Interaction Design and Design Patterns",
+      "title": "Interface and information organization",
+      "bullets": [
+        "UI design addresses user controls and the system's responses.",
+        "Information organization addresses information elements and their connections.",
+        "The overlap shows why interaction design and IA need to work together."
+      ]
+    },
+    {
+      "number": "7.2",
+      "pdf_page": 111,
+      "caption": "Fig.7.2   Pagination examples demonstrating Fitts’ law",
+      "caption_bbox": [
+        60.092994689941406,
+        488.44281005859375,
+        168.8446502685547,
+        508.4515075683594
+      ],
+      "images": [
+        [
+          [
+            215.3,
+            67.8,
+            416.4,
+            187.3
+          ],
+          839,
+          499
+        ],
+        [
+          [
+            275.3,
+            486.6,
+            417.1,
+            558.2
+          ],
+          591,
+          299
+        ]
+      ],
+      "extraction": "Embedded raster image extracted at original resolution",
+      "artwork_bbox": [
+        275.24700927734375,
+        486.63201904296875,
+        417.1230163574219,
+        558.218017578125
+      ],
+      "page": "100",
+      "file": "fig-7-2.png",
+      "width": 591,
+      "height": 299,
+      "chapter": 7,
+      "chapter_title": "Interaction Design and Design Patterns",
+      "title": "Pagination and Fitts' law",
+      "bullets": [
+        "The examples give the same page choices progressively larger visual targets.",
+        "Larger clickable areas can be easier to acquire and require less precise movement.",
+        "Design target size and spacing to reduce effort and accidental selections."
+      ]
+    },
+    {
+      "number": "7.3",
+      "pdf_page": 113,
+      "caption": "Fig.7.3   Typeahead functionality saves time and reduces error (misspellings)",
+      "caption_bbox": [
+        60.092994689941406,
+        69.55574035644531,
+        161.24923706054688,
+        100.53575897216797
+      ],
+      "images": [
+        [
+          [
+            215.3,
+            68.1,
+            416.7,
+            146.3
+          ],
+          840,
+          326
+        ],
+        [
+          [
+            216.3,
+            461.0,
+            417.1,
+            548.3
+          ],
+          837,
+          364
+        ]
+      ],
+      "extraction": "Embedded raster image extracted at original resolution",
+      "artwork_bbox": [
+        215.2469940185547,
+        68.072021484375,
+        416.89300537109375,
+        146.3480224609375
+      ],
+      "page": "102",
+      "file": "fig-7-3.png",
+      "width": 840,
+      "height": 326,
+      "chapter": 7,
+      "chapter_title": "Interaction Design and Design Patterns",
+      "title": "Typeahead for efficient input",
+      "bullets": [
+        "Suggestions appear as the user begins entering a search query.",
+        "Choosing a suggestion reduces typing and can prevent misspellings.",
+        "The control helps connect the user's input to recognized destinations or terms."
+      ]
+    },
+    {
+      "number": "7.4",
+      "pdf_page": 113,
+      "caption": "Fig.7.4   Dialog box prevents a potential catastrophic error",
+      "caption_bbox": [
+        60.092994689941406,
+        462.53179931640625,
+        173.47933959960938,
+        482.5494689941406
+      ],
+      "images": [
+        [
+          [
+            215.3,
+            68.1,
+            416.7,
+            146.3
+          ],
+          840,
+          326
+        ],
+        [
+          [
+            216.3,
+            461.0,
+            417.1,
+            548.3
+          ],
+          837,
+          364
+        ]
+      ],
+      "extraction": "Embedded raster image extracted at original resolution",
+      "artwork_bbox": [
+        216.23699951171875,
+        461.0119934082031,
+        417.15301513671875,
+        548.3179931640625
+      ],
+      "page": "102",
+      "file": "fig-7-4.png",
+      "width": 837,
+      "height": 364,
+      "chapter": 7,
+      "chapter_title": "Interaction Design and Design Patterns",
+      "title": "Protecting unsaved work",
+      "bullets": [
+        "The dialog interrupts closing a document that contains unsaved changes.",
+        "Save, Don't Save, and Cancel make the available outcomes explicit.",
+        "A small interruption can be justified when it prevents a costly, irreversible mistake."
+      ]
+    },
+    {
+      "number": "7.5",
+      "pdf_page": 114,
+      "caption": "Fig.7.5   A form with instructions to help prevent errors in the password ﬁeld",
+      "caption_bbox": [
+        60.092994689941406,
+        69.55574035644531,
+        158.43739318847656,
+        100.53575897216797
+      ],
+      "images": [
+        [
+          [
+            215.3,
+            67.8,
+            416.4,
+            170.3
+          ],
+          838,
+          428
+        ],
+        [
+          [
+            275.3,
+            193.7,
+            417.0,
+            222.2
+          ],
+          591,
+          119
+        ]
+      ],
+      "extraction": "Embedded raster image extracted at original resolution",
+      "artwork_bbox": [
+        215.2469940185547,
+        67.74198913574219,
+        416.40301513671875,
+        170.34799194335938
+      ],
+      "page": "103",
+      "file": "fig-7-5.png",
+      "width": 838,
+      "height": 428,
+      "chapter": 7,
+      "chapter_title": "Interaction Design and Design Patterns",
+      "title": "Instructions before errors occur",
+      "bullets": [
+        "The example places password requirements next to the input fields.",
+        "Giving constraints before submission helps users avoid invalid entries.",
+        "The design lesson is timely guidance; the pictured rules are a historical example."
+      ]
+    },
+    {
+      "number": "7.6",
+      "pdf_page": 114,
+      "caption": "Fig.7.6   An error message that does not help recovery",
+      "caption_bbox": [
+        60.092994689941406,
+        195.4748077392578,
+        158.09933471679688,
+        215.49244689941406
+      ],
+      "images": [
+        [
+          [
+            215.3,
+            67.8,
+            416.4,
+            170.3
+          ],
+          838,
+          428
+        ],
+        [
+          [
+            275.3,
+            193.7,
+            417.0,
+            222.2
+          ],
+          591,
+          119
+        ]
+      ],
+      "extraction": "Embedded raster image extracted at original resolution",
+      "artwork_bbox": [
+        275.24700927734375,
+        193.71202087402344,
+        417.15301513671875,
+        222.24801635742188
+      ],
+      "page": "103",
+      "file": "fig-7-6.png",
+      "width": 591,
+      "height": 119,
+      "chapter": 7,
+      "chapter_title": "Interaction Design and Design Patterns",
+      "title": "An unhelpful error message",
+      "bullets": [
+        "Something went wrong tells the user that an action failed without explaining why.",
+        "The message provides no specific instruction for recovery.",
+        "A useful error identifies the problem and gives a clear next step."
+      ]
+    },
+    {
+      "number": "7.7",
+      "pdf_page": 117,
+      "caption": "Fig.7.7   Examples of the ﬁve dimensions: 1D—The text labels; 2D—Submit button; 3D—The physical mobile device; 4D—Submitting the form, waiting for response; 5D—“Thank you!” response",
+      "caption_bbox": [
+        60.092994689941406,
+        69.55574035644531,
+        168.89755249023438,
+        144.36717224121094
+      ],
+      "images": [
+        [
+          [
+            215.3,
+            68.0,
+            416.9,
+            202.3
+          ],
+          840,
+          560
+        ]
+      ],
+      "extraction": "Embedded raster image extracted at original resolution",
+      "artwork_bbox": [
+        215.2469940185547,
+        67.95199584960938,
+        416.88299560546875,
+        202.3280029296875
+      ],
+      "page": "106",
+      "file": "fig-7-7.png",
+      "width": 840,
+      "height": 560,
+      "chapter": 7,
+      "chapter_title": "Interaction Design and Design Patterns",
+      "title": "Five dimensions of interaction",
+      "bullets": [
+        "Words and visual representations shape how the contact form is understood.",
+        "The physical device and time shape how the interaction unfolds.",
+        "Behavior connects the action to a visible response, here a submission confirmation."
+      ]
+    },
+    {
+      "number": "7.8",
+      "pdf_page": 118,
+      "caption": "Fig.7.8   Hub structure",
+      "caption_bbox": [
+        60.09299850463867,
+        69.55574035644531,
+        143.7279815673828,
+        78.61107635498047
+      ],
+      "images": [
+        [
+          [
+            215.3,
+            68.2,
+            416.9,
+            178.3
+          ],
+          840,
+          459
+        ],
+        [
+          [
+            215.3,
+            202.0,
+            416.7,
+            251.2
+          ],
+          840,
+          206
+        ]
+      ],
+      "extraction": "Embedded raster image extracted at original resolution",
+      "artwork_bbox": [
+        215.2469940185547,
+        68.19200134277344,
+        416.88299560546875,
+        178.3280029296875
+      ],
+      "page": "107",
+      "file": "fig-7-8.png",
+      "width": 840,
+      "height": 459,
+      "chapter": 7,
+      "chapter_title": "Interaction Design and Design Patterns",
+      "title": "A hub workflow",
+      "bullets": [
+        "A central view links to several independent forms and receives the user back.",
+        "Users choose which item or task to edit instead of following a fixed sequence.",
+        "This structure suits collections such as calendars, messages, or editable records."
+      ]
+    },
+    {
+      "number": "7.9",
+      "pdf_page": 118,
+      "caption": "Fig.7.9   Wizard structure",
+      "caption_bbox": [
+        60.09299850463867,
+        203.47581481933594,
+        154.31729125976562,
+        212.53114318847656
+      ],
+      "images": [
+        [
+          [
+            215.3,
+            68.2,
+            416.9,
+            178.3
+          ],
+          840,
+          459
+        ],
+        [
+          [
+            215.3,
+            202.0,
+            416.7,
+            251.2
+          ],
+          840,
+          206
+        ]
+      ],
+      "extraction": "Embedded raster image extracted at original resolution",
+      "artwork_bbox": [
+        215.2469940185547,
+        201.9619903564453,
+        416.87701416015625,
+        251.25799560546875
+      ],
+      "page": "107",
+      "file": "fig-7-9.png",
+      "width": 840,
+      "height": 206,
+      "chapter": 7,
+      "chapter_title": "Interaction Design and Design Patterns",
+      "title": "A wizard workflow",
+      "bullets": [
+        "Forms guide the user through an ordered sequence, with a possible branch.",
+        "Verification and confirmation provide checkpoints before completion.",
+        "Wizards break complex tasks into smaller steps, as in a checkout process."
+      ]
+    },
+    {
+      "number": "7.10",
+      "pdf_page": 120,
+      "caption": "Fig.7.10   Example page grid. As the page resizes, each container in the grid can adapt to the new screen size",
+      "caption_bbox": [
+        60.092994689941406,
+        493.122802734375,
+        169.9188232421875,
+        535.05615234375
+      ],
+      "images": [
+        [
+          [
+            215.3,
+            491.6,
+            417.0,
+            598.9
+          ],
+          841,
+          447
+        ]
+      ],
+      "extraction": "Embedded raster image extracted at original resolution",
+      "artwork_bbox": [
+        215.2469940185547,
+        491.5820007324219,
+        417.1289978027344,
+        598.8980102539062
+      ],
+      "page": "109",
+      "file": "fig-7-10.png",
+      "width": 841,
+      "height": 447,
+      "chapter": 7,
+      "chapter_title": "Interaction Design and Design Patterns",
+      "title": "Responsive grids",
+      "bullets": [
+        "The desktop grid places containers side by side; the phone view stacks them.",
+        "Breakpoints determine when the same content adopts a different arrangement.",
+        "Plan content order and grouping so the layout remains usable at each screen size."
+      ]
+    },
+    {
+      "number": "7.11",
+      "pdf_page": 121,
+      "caption": "Fig.7.11   An interactive element created in minutes with Bootstrap",
+      "caption_bbox": [
+        60.09299850463867,
+        582.7717895507812,
+        305.44854736328125,
+        591.8271484375
+      ],
+      "images": [
+        [
+          [
+            64.2,
+            468.9,
+            412.8,
+            571.1
+          ],
+          1455,
+          427
+        ]
+      ],
+      "extraction": "Embedded raster image extracted at original resolution",
+      "artwork_bbox": [
+        64.16699981689453,
+        468.87200927734375,
+        413.01300048828125,
+        571.0880126953125
+      ],
+      "page": "110",
+      "file": "fig-7-11.png",
+      "width": 1455,
+      "height": 427,
+      "chapter": 7,
+      "chapter_title": "Interaction Design and Design Patterns",
+      "title": "Reusable interface patterns",
+      "bullets": [
+        "The example uses Bootstrap components for familiar tabs and a dropdown menu.",
+        "A component framework can speed implementation and support visual consistency.",
+        "Established patterns give designers a starting point that still needs to fit the task."
+      ]
+    },
+    {
+      "number": "8.1",
+      "pdf_page": 133,
+      "caption": "Fig.8.1   The human-centered mindset is central to human-centered design, design thinking, and systems thinking",
+      "caption_bbox": [
+        60.09299850463867,
+        69.55574035644531,
+        171.7999725341797,
+        111.48906707763672
+      ],
+      "images": [],
+      "extraction": "Vector artwork rendered at 360 dpi",
+      "artwork_bbox": [
+        212.0,
+        65.0,
+        420.0,
+        282.0
+      ],
+      "page": "122",
+      "file": "fig-8-1.png",
+      "width": 1040,
+      "height": 1085,
+      "chapter": 8,
+      "chapter_title": "Design Thinking to Systems Thinking",
+      "title": "A shared human-centered mindset",
+      "bullets": [
+        "Human-centered design, design thinking, and systems thinking share concern for people.",
+        "Zooming in helps develop specific solutions; zooming out reveals wider relationships.",
+        "Consider everyone affected by the system, including people behind the visible interface."
+      ]
+    },
+    {
+      "number": "8.2",
+      "pdf_page": 136,
+      "caption": "Fig.8.2   The design thinking process from stanford’s d.school, with an Implement stage added",
+      "caption_bbox": [
+        60.09299850463867,
+        115.00569152832031,
+        403.7158203125,
+        124.06102752685547
+      ],
+      "images": [],
+      "extraction": "Vector artwork rendered at 360 dpi",
+      "artwork_bbox": [
+        60.0,
+        71.0,
+        418.0,
+        106.0
+      ],
+      "page": "125",
+      "file": "fig-8-2.png",
+      "width": 1790,
+      "height": 175,
+      "chapter": 8,
+      "chapter_title": "Design Thinking to Systems Thinking",
+      "title": "From empathy to implementation",
+      "bullets": [
+        "The sequence covers Empathize, Define, Ideate, Prototype, Test, and Implement.",
+        "The authors add implementation to show that the outcome must work in practice.",
+        "Although drawn as a line, the process repeatedly revisits earlier stages."
+      ]
+    },
+    {
+      "number": "8.3",
+      "pdf_page": 139,
+      "caption": "Fig.8.3   The system mapping team. Core team members do most of the work, with extended stepping in from time to time. Participants are called in more infrequently, at key moments",
+      "caption_bbox": [
+        60.09299850463867,
+        464.2417907714844,
+        172.8337860107422,
+        539.0531005859375
+      ],
+      "images": [],
+      "extraction": "Vector artwork rendered at 360 dpi",
+      "artwork_bbox": [
+        212.0,
+        459.0,
+        420.0,
+        600.0
+      ],
+      "page": "128",
+      "file": "fig-8-3.png",
+      "width": 1040,
+      "height": 705,
+      "chapter": 8,
+      "chapter_title": "Design Thinking to Systems Thinking",
+      "title": "A system-mapping team",
+      "bullets": [
+        "The core team performs the day-to-day mapping work.",
+        "Extended team members contribute subject expertise on a regular basis.",
+        "Other participants join at key moments to supply additional perspectives."
+      ]
+    },
+    {
+      "number": "8.4",
+      "pdf_page": 144,
+      "caption": "Fig.8.4   The   knowledge   talent   acquisition   system   map.   The   map   gives   a   clear   view   of   the   system for   leaders   and   individual   contributors.   Taking   a   human-centered   approach,   the   blue   lines   on   this map   highlight   AI,   automation,   and   usability   components   that   directly   inﬂuence   the   work   practices of people in the system",
+      "caption_bbox": [
+        60.092994689941406,
+        397.0027770996094,
+        417.2686462402344,
+        438.9361267089844
+      ],
+      "images": [
+        [
+          [
+            64.2,
+            73.3,
+            412.8,
+            385.3
+          ],
+          1453,
+          1300
+        ]
+      ],
+      "extraction": "Embedded raster image extracted at original resolution",
+      "artwork_bbox": [
+        64.16699981689453,
+        73.2919921875,
+        412.9129943847656,
+        385.3280029296875
+      ],
+      "page": "133",
+      "file": "fig-8-4.png",
+      "width": 1453,
+      "height": 1300,
+      "chapter": 8,
+      "chapter_title": "Design Thinking to Systems Thinking",
+      "title": "A talent-acquisition system map",
+      "bullets": [
+        "The central concern is the efficiency of hiring the best-fit candidate.",
+        "Connected elements show dependencies across candidate, recruiter, and organizational activities.",
+        "Blue links highlight AI, automation, and usability contributions; the map helps locate leverage points."
+      ]
+    },
+    {
+      "number": "9.1",
+      "pdf_page": 147,
+      "caption": "Fig.9.1   User experience design disciplines peaks and valleys in the HCD process",
+      "caption_bbox": [
+        60.09299850463867,
+        523.0568237304688,
+        358.4364013671875,
+        532.1121826171875
+      ],
+      "images": [
+        [
+          [
+            96.7,
+            365.0,
+            380.3,
+            511.4
+          ],
+          1182,
+          610
+        ]
+      ],
+      "extraction": "Embedded raster image extracted at original resolution",
+      "artwork_bbox": [
+        96.65699768066406,
+        364.9519958496094,
+        380.37298583984375,
+        511.38800048828125
+      ],
+      "page": "136",
+      "file": "fig-9-1.png",
+      "width": 1182,
+      "height": 610,
+      "chapter": 9,
+      "chapter_title": "IA in Practice",
+      "title": "Changing effort across the HCD process",
+      "bullets": [
+        "The curves illustrate changing involvement by IA, research, visual, and interaction design.",
+        "IA effort is strongest early; researchers return for successive rounds of testing.",
+        "These overlapping patterns support coordination rather than rigid handoffs between roles."
+      ]
+    },
+    {
+      "number": "9.2",
+      "pdf_page": 150,
+      "caption": "Fig.9.2   Teams and roles in the HCD process",
+      "caption_bbox": [
+        60.09299850463867,
+        69.55574035644531,
+        162.42381286621094,
+        89.57341766357422
+      ],
+      "images": [],
+      "extraction": "Vector artwork rendered at 360 dpi",
+      "artwork_bbox": [
+        212.0,
+        64.0,
+        420.0,
+        261.0
+      ],
+      "page": "139",
+      "file": "fig-9-2.png",
+      "width": 1040,
+      "height": 985,
+      "chapter": 9,
+      "chapter_title": "IA in Practice",
+      "title": "Connecting users, technology, and business",
+      "bullets": [
+        "The UX team represents user concerns alongside technology and business stakeholders.",
+        "Developers, IT teams, product owners, analysts, and executives bring different priorities.",
+        "Explain design decisions in terms that connect user outcomes to technical and business goals."
+      ]
+    }
+  ],
+  "chapters": [
+    {
+      "chapter": 1,
+      "title": "Information Architecture and UX Design: Definitions and Scope",
+      "figure_count": 1,
+      "figure_index": [
+        "1.1"
+      ]
+    },
+    {
+      "chapter": 2,
+      "title": "Information Architecture and Evolving Information Spaces",
+      "figure_count": 5,
+      "figure_index": [
+        "2.1",
+        "2.2",
+        "2.3",
+        "2.4",
+        "2.5"
+      ]
+    },
+    {
+      "chapter": 3,
+      "title": "Human-Centered Design",
+      "figure_count": 7,
+      "figure_index": [
+        "3.1",
+        "3.2",
+        "3.3",
+        "3.4",
+        "3.5",
+        "3.6",
+        "3.7"
+      ]
+    },
+    {
+      "chapter": 4,
+      "title": "Research and Evaluation",
+      "figure_count": 6,
+      "figure_index": [
+        "4.1",
+        "4.2",
+        "4.3",
+        "4.4",
+        "4.5",
+        "4.6"
+      ]
+    },
+    {
+      "chapter": 5,
+      "title": "Information Organization and Navigation Design",
+      "figure_count": 8,
+      "figure_index": [
+        "5.1",
+        "5.2",
+        "5.3",
+        "5.4",
+        "5.5",
+        "5.6",
+        "5.7",
+        "5.8"
+      ]
+    },
+    {
+      "chapter": 6,
+      "title": "Human Information Behavior and Design Implications",
+      "figure_count": 2,
+      "figure_index": [
+        "6.1",
+        "6.2"
+      ]
+    },
+    {
+      "chapter": 7,
+      "title": "Interaction Design and Design Patterns",
+      "figure_count": 11,
+      "figure_index": [
+        "7.1",
+        "7.2",
+        "7.3",
+        "7.4",
+        "7.5",
+        "7.6",
+        "7.7",
+        "7.8",
+        "7.9",
+        "7.10",
+        "7.11"
+      ]
+    },
+    {
+      "chapter": 8,
+      "title": "Design Thinking to Systems Thinking",
+      "figure_count": 4,
+      "figure_index": [
+        "8.1",
+        "8.2",
+        "8.3",
+        "8.4"
+      ]
+    },
+    {
+      "chapter": 9,
+      "title": "IA in Practice",
+      "figure_count": 2,
+      "figure_index": [
+        "9.1",
+        "9.2"
+      ]
+    }
+  ],
+  "slide_count": 56
+}
